@@ -39,8 +39,8 @@ public class PlayerCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// 左右入力で移動
-		Velocity.x = Input.GetAxis ("Horizontal") * Speed;
 		pawer = Input.GetAxis("Jump") * jumpPawer;
+		Velocity.x = Input.GetAxis ("Horizontal") * Speed;
 		Velocity.y += Physics.gravity.y * Time.deltaTime;
 		Col.Move (Velocity * Time.deltaTime);
 
