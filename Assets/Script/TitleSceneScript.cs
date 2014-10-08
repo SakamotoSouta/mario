@@ -12,6 +12,7 @@ public class TitleSceneScript : MonoBehaviour {
 	void Update () {
 		// エンターで画面遷移
 		if(Input.GetKey(KeyCode.Return)){
+			GameRule.InitGame();
 			Application.LoadLevel("Game");
 		}
 	}

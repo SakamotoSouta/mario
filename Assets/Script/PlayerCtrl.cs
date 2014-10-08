@@ -20,6 +20,7 @@ public class PlayerCtrl : MonoBehaviour {
 	public float Speed;
 	public Vector3 Velocity;
 	public bool Jump = false;
+	public GameRule rule;
 
 	private float pawer;
 	private CharacterController Col;
@@ -69,6 +70,11 @@ public class PlayerCtrl : MonoBehaviour {
 
 		if (Jump) {
 			CheckLanding ();
+		}
+
+		// 穴判定
+		if(transform.position.y < -5){
+			StartCoroutine(rule.Restart());
 		}
 		// アニメーションの設定
 		AnimSet ();
