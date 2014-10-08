@@ -44,7 +44,6 @@ public class ItemShoot : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "NotBreakObject") {
-			
 			Velocity = Vector3.Reflect(Velocity, new Vector3(-1f, 0f, 0f));
 		}// if
 		if(other.tag == "Player"){
@@ -55,7 +54,8 @@ public class ItemShoot : MonoBehaviour {
 			}
 		}
 		if (other.tag == "Enemy" && State == ITEM_SHOOT_STATE.SHOOT) {
-			Destroy(other);
+			enemyCtrl ec = other.GetComponent("enemyCtrl")as enemyCtrl;
+			ec.Velocity = new Vector3(0f, 0f, -0.1f);
 		}
 	}
 }

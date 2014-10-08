@@ -14,10 +14,9 @@ public class enemyCtrl : MonoBehaviour {
 	}
 	public ENEMY_TYPE Type;
 	public ENEMY_STATE State;
-	private Vector3 Velocity;
+	public Vector3 Velocity;
 	public float Speed;
 	public GameObject Type2Item;
-	private Vector3 oldPosition;
 
 
 	// Use this for initialization
@@ -32,9 +31,7 @@ public class enemyCtrl : MonoBehaviour {
 			if(Input.GetKey(KeyCode.Q)){
 				State = ENEMY_STATE.DEAD;
 			}
-			oldPosition = transform.position;
 			transform.Translate (Velocity);
-			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 			
 			if(transform.position.y < -5){
 				Destroy(gameObject);
@@ -42,6 +39,7 @@ public class enemyCtrl : MonoBehaviour {
 		}
 		else if(State == ENEMY_STATE.DEAD){
 			if(Type == ENEMY_TYPE.TYPE1){
+				transform.localScale = new Vector3(1f, 0.5f, 1f);
 				StartCoroutine(Dead(3f));
 			}
 			else if(Type == ENEMY_TYPE.TYPE2){
@@ -59,13 +57,25 @@ public class enemyCtrl : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other){
-		if (other.tag == "NotBreakObject" || other.tag == "Enemy") {
-			Velocity = Vector3.Reflect(-Velocity, new Vector3(0f, -1, 0));
-			transform.position = oldPosition;
+		if (other.tag == "NotBreakObject") {
+			Velocity = Vector3.Reflect(-Velocity, new Vector3(0, 1f, 0));
 		}// if
+		else if(other.tag == "Enemy"){
+			enemyCtrl ec = other.GetComponent("enemyCtrl")as enemyCtrl;
+			if(Velocity.x < ec.Velocity.x){
+				Velocity.x *= -1;
+			}
+			else if(Velocity.x == ec.Velocity.x){
+				Velocity.x *= -1;
+			}
+		}
 		else if(other.tag == "Floor"){
 			Velocity.y = -1;
 		}
+	}
+
+	public void SetState(ENEMY_STATE state){
+		State = state;
 	}
 
 }

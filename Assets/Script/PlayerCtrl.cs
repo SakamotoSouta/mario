@@ -15,17 +15,18 @@ public class PlayerCtrl : MonoBehaviour {
 	private readonly float waitTime = 0.05F;
 	// 着地モーションへの移項を許可する距離
 	private readonly float landingDistance = 5F;
-
 	public float jumpPawer;
 	public float Inertia;
 	public float Speed;
-	private float pawer;
 	public Vector3 Velocity;
-	private CharacterController Col;
-	private bool Jump = false;
+	public bool Jump = false;
 
+	private float pawer;
+	private CharacterController Col;
+	private int oldVector;
 	// Use this for initialization
 	void Start () {
+		oldVector = 1;
 		// アニメーションの取得
 		Anim = GetComponent<Animator> ();
 		// アニメーションイベントの取得
@@ -39,7 +40,6 @@ public class PlayerCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// 左右入力で移動
-		pawer = Input.GetAxis("Jump") * jumpPawer;
 		Velocity.x = Input.GetAxis ("Horizontal") * Speed;
 		Velocity.y += Physics.gravity.y * Time.deltaTime;
 		Col.Move (Velocity * Time.deltaTime);
@@ -48,11 +48,22 @@ public class PlayerCtrl : MonoBehaviour {
 		Velocity *= Inertia;
 		// 地面に接していたら
 		if(Col.isGrounded){
-			transform.rotation = Quaternion.LookRotation(new Vector3(Velocity.x + 0.001f, 0f, 0f));
+
 			Velocity.y = 0f;
 		}// if
+		if (Velocity.x > 0) {
+			oldVector = 1;
+		}
+		else if (Velocity.x < 0) {
+			oldVector = -1;
+		}
+
+		transform.rotation = Quaternion.LookRotation (new Vector3 (oldVector, 0f, 0f));
+
+
 
 		if (Input.GetKey(KeyCode.Space) && Col.isGrounded) {
+			pawer = Input.GetAxis("Jump") * jumpPawer;
 			Jump = true;
 		}// if
 
