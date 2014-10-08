@@ -12,4 +12,6 @@ public class enemy2Ctrl : MonoBehaviour {
 	void Update () {
 	
 	}
+
+
 }

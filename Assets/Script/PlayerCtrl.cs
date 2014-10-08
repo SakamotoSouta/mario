@@ -20,7 +20,7 @@ public class PlayerCtrl : MonoBehaviour {
 	public float Inertia;
 	public float Speed;
 	private float pawer;
-	private Vector3 Velocity;
+	public Vector3 Velocity;
 	private CharacterController Col;
 	private bool Jump = false;
 
@@ -91,6 +91,14 @@ public class PlayerCtrl : MonoBehaviour {
 		Anim.speed = defaultSpeed;
 	}
 
+	// あたり判定
+	void OnTriggerEnter(Collider other){
+		if (other.tag == "Enemy") {
+
+		}
+	}
+
+	// アニメーションイベント
 	void OnJumpStart(){
 		defaultSpeed = Anim.speed;
 		Velocity.y = pawer;
