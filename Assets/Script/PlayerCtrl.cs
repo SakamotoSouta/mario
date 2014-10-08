@@ -6,6 +6,7 @@ public class PlayerCtrl : MonoBehaviour {
 	private Animator Anim;
 	private int SpeedID;
 	private int JumpID;
+	private int DamageID;
 
 	// アニメーションのデフォルトの再生速度
 	private float defaultSpeed;
@@ -20,8 +21,8 @@ public class PlayerCtrl : MonoBehaviour {
 	public float Speed;
 	public Vector3 Velocity;
 	public bool Jump = false;
+	public  bool Damage = false;
 	public GameRule rule;
-
 	private float pawer;
 	private CharacterController Col;
 	private int oldVector;
@@ -33,6 +34,7 @@ public class PlayerCtrl : MonoBehaviour {
 		// アニメーションイベントの取得
 		SpeedID = Animator.StringToHash ("Speed");
 		JumpID = Animator.StringToHash ("Jump");
+		DamageID = Animator.StringToHash ("Damage");
 		transform.rotation = Quaternion.LookRotation(new Vector3(1f, 0f, 0f));
 		// キャラクターコントローラーの取得
 		Col = GetComponent ("CharacterController") as CharacterController;
@@ -40,8 +42,10 @@ public class PlayerCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// 左右入力で移動
-		Velocity.x = Input.GetAxis ("Horizontal") * Speed;
+		if (!Damage) {
+			// 左右入力で移動
+			Velocity.x = Input.GetAxis ("Horizontal") * Speed;
+		}
 		Velocity.y += Physics.gravity.y * Time.deltaTime;
 		Col.Move (Velocity * Time.deltaTime);
 
@@ -90,7 +94,8 @@ public class PlayerCtrl : MonoBehaviour {
 		else {
 			Anim.SetFloat (SpeedID, Velocity.x); 
 		}// else
-		
+
+		Anim.SetBool (DamageID, Damage);
 		Anim.SetBool (JumpID, Jump);
 	}
 
@@ -109,10 +114,13 @@ public class PlayerCtrl : MonoBehaviour {
 	}
 
 	// あたり判定
-	void OnTriggerEnter(Collider other){
-		if (other.tag == "Enemy") {
+	public void PlayerDamage(){
+		Damage = true;
+	}
 
-		}
+	void OnDead(){
+		Anim.speed = 0f;
+		StartCoroutine(rule.Restart());
 	}
 
 	// アニメーションイベント
