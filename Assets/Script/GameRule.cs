@@ -20,10 +20,12 @@ public class GameRule : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GameTime -= Time.deltaTime;
-		if (GameTime < 0) {
-			GameTime = 0;
-			TimeOver();
+		if(!pc.Goal){
+			GameTime -= Time.deltaTime;
+			if (GameTime < 0) {
+				GameTime = 0;
+				TimeOver();
+			}
 		}
 	}
 
@@ -44,6 +46,12 @@ public class GameRule : MonoBehaviour {
 			yield break;
 		}
 		Application.LoadLevel("Game");
+	}
+
+	public IEnumerator ClearGame (string NextScene){
+		yield return new WaitForSeconds(WaitTime);
+
+		Application.LoadLevel(NextScene);
 	}
 
 	// 仮のUI

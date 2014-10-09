@@ -7,6 +7,7 @@ public class PlayerCtrl : MonoBehaviour {
 	private int SpeedID;
 	private int JumpID;
 	private int DamageID;
+	private int GoalID;
 
 	// アニメーションのデフォルトの再生速度
 	private float defaultSpeed;
@@ -20,6 +21,7 @@ public class PlayerCtrl : MonoBehaviour {
 	public float Inertia;
 	public float Speed;
 	public Vector3 Velocity;
+	public bool Goal = false;
 	public bool Jump = false;
 	public  bool Damage = false;
 	public GameRule rule;
@@ -36,6 +38,7 @@ public class PlayerCtrl : MonoBehaviour {
 		SpeedID = Animator.StringToHash ("Speed");
 		JumpID = Animator.StringToHash ("Jump");
 		DamageID = Animator.StringToHash ("Damage");
+		GoalID = Animator.StringToHash ("Goal");
 		transform.rotation = Quaternion.LookRotation(new Vector3(1f, 0f, 0f));
 		// キャラクターコントローラーの取得
 		Col = GetComponent ("CharacterController") as CharacterController;
@@ -43,43 +46,47 @@ public class PlayerCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!Damage) {
-			// 左右入力で移動
-			Velocity.x = Input.GetAxis ("Horizontal") * Speed;
+		if(!Goal){
+				if (!Damage) {
+					// 左右入力で移動
+					Velocity.x = Input.GetAxis ("Horizontal") * Speed;
+				}
+
+				// 慣性
+				Velocity *= Inertia;
+
+				if (Velocity.x > 0) {
+						oldVector = 1;
+				} else if (Velocity.x < 0) {
+						oldVector = -1;
+				}
+
+				transform.rotation = Quaternion.LookRotation (new Vector3 (oldVector, 0f, 0f));
+
+
+
+				if (Input.GetKey (KeyCode.Space) && Col.isGrounded) {
+						pawer = Input.GetAxis ("Jump") * jumpPawer;
+						Jump = true;
+				}// if
+
+				if (Jump) {
+						CheckLanding ();
+				}
+
+				// 穴判定
+				if (transform.position.y < -5) {
+						StartCoroutine (rule.Restart ());
+				}
+		}
+		if(!Damage){
 			Velocity.y += Physics.gravity.y * Time.deltaTime;
 			Col.Move (Velocity * Time.deltaTime);
 		}
-
-		// 慣性
-		Velocity *= Inertia;
 		// 地面に接していたら
-		if(Col.isGrounded){
+		if (Col.isGrounded) {
 			Velocity.y = 0f;
 		}// if
-		if (Velocity.x > 0) {
-			oldVector = 1;
-		}
-		else if (Velocity.x < 0) {
-			oldVector = -1;
-		}
-
-		transform.rotation = Quaternion.LookRotation (new Vector3 (oldVector, 0f, 0f));
-
-
-
-		if (Input.GetKey(KeyCode.Space) && Col.isGrounded) {
-			pawer = Input.GetAxis("Jump") * jumpPawer;
-			Jump = true;
-		}// if
-
-		if (Jump) {
-			CheckLanding ();
-		}
-
-		// 穴判定
-		if(transform.position.y < -5){
-			StartCoroutine(rule.Restart());
-		}
 		// アニメーションの設定
 		AnimSet ();
 
@@ -97,6 +104,7 @@ public class PlayerCtrl : MonoBehaviour {
 
 		Anim.SetBool (DamageID, Damage);
 		Anim.SetBool (JumpID, Jump);
+		Anim.SetBool (GoalID, Goal);
 	}
 
 	IEnumerator CheckLanding()
@@ -111,6 +119,22 @@ public class PlayerCtrl : MonoBehaviour {
 			yield return new WaitForSeconds(waitTime);
 		}
 		Anim.speed = defaultSpeed;
+	}
+
+	// ゴール
+	public void GoalIn(){
+		Goal = true;
+		Jump = false;
+		Damage = false;
+		GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
+		CameraCtrl cc = camera.GetComponent ("CameraCtrl") as CameraCtrl;
+		cc.CameraOffet.z = -5;
+		cc.CameraOffet.y = 0;
+
+		transform.rotation = Quaternion.Euler(0, 180, 0);
+		Speed = 0;
+		Velocity.x = 0;
+		Velocity.y = 0;
 	}
 
 	// あたり判定
@@ -139,6 +163,9 @@ public class PlayerCtrl : MonoBehaviour {
 		Jump = false;
 	}
 	void OnJumpEnd(){
+	}
+	void AnimEnd(){
+		StartCoroutine (rule.ClearGame("Title"));
 	}
 	
 }

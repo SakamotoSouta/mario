@@ -13,11 +13,11 @@ public class CameraCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(FillowTarget){
-			transform.position = new Vector3(Target.transform.position.x + CameraOffet.x,
-		                                 Target.transform.position.y + CameraOffet.y,
-		                                 Target.transform.position.z + CameraOffet.z);
-			transform.LookAt(Target.transform);
+		if (FillowTarget) {
+				transform.position = new Vector3 (Target.transform.position.x + CameraOffet.x,
+                                 Target.transform.position.y + CameraOffet.y,
+                                 Target.transform.position.z + CameraOffet.z);
+				transform.LookAt (Target.transform);
 		}
 
 		if(transform.position.y < 0){
