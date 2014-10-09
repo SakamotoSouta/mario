@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GameRule : MonoBehaviour {
-	private static int Life;
+	public static int Life;
 	private static int MaxLife = 3;
 	public float GameTime;
 	public GUIStyle customGuiStyle;
@@ -54,13 +54,12 @@ public class GameRule : MonoBehaviour {
 		Application.LoadLevel(NextScene);
 	}
 
-	// 仮のUI
-	void OnGUI(){
-		int time = (int)GameTime;
-		GUI.Label (new Rect(0,0,100,100), ""+Life, customGuiStyle);
-		GUI.Label (new Rect(400,0,500,100), ""+time, customGuiStyle);
-
+	// Lifeの取得
+	public int GetLife(){
+		return Life;
 	}
+
+
 	void GameOver(){
 		Application.LoadLevel ("Title");
 	}
