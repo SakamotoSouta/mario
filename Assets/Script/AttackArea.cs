@@ -17,11 +17,12 @@ public class AttackArea : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		// キャラクターコントローラーを取得
 		CharacterController cc = Player.GetComponent ("CharacterController")as CharacterController;
+		PlayerCtrl pc = Player.GetComponent("PlayerCtrl")as PlayerCtrl;
 		// 地面についていないかつ敵にあたっている
-		if(!cc.isGrounded && other.tag == "Enemy"){
+		if(pc.Jump && other.tag == "Enemy"){
 			enemyCtrl ec = other.GetComponent("enemyCtrl")as enemyCtrl;
 			ec.SetState(enemyCtrl.ENEMY_STATE.DEAD);
-			PlayerCtrl pc = Player.GetComponent("PlayerCtrl")as PlayerCtrl;
+
 			pc.Velocity.y += pc.jumpPawer / 2;
 		}
 	}

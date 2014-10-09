@@ -26,6 +26,7 @@ public class PlayerCtrl : MonoBehaviour {
 	private float pawer;
 	private CharacterController Col;
 	private int oldVector;
+
 	// Use this for initialization
 	void Start () {
 		oldVector = 1;
@@ -45,15 +46,14 @@ public class PlayerCtrl : MonoBehaviour {
 		if (!Damage) {
 			// 左右入力で移動
 			Velocity.x = Input.GetAxis ("Horizontal") * Speed;
+			Velocity.y += Physics.gravity.y * Time.deltaTime;
+			Col.Move (Velocity * Time.deltaTime);
 		}
-		Velocity.y += Physics.gravity.y * Time.deltaTime;
-		Col.Move (Velocity * Time.deltaTime);
 
 		// 慣性
 		Velocity *= Inertia;
 		// 地面に接していたら
 		if(Col.isGrounded){
-
 			Velocity.y = 0f;
 		}// if
 		if (Velocity.x > 0) {
@@ -106,7 +106,7 @@ public class PlayerCtrl : MonoBehaviour {
 		{
 			var raycast = new RaycastHit();
 			var raycastSuccess = Physics.Raycast(transform.position, Vector3.down, out raycast);
-			// レイを飛ばして、成功且つ一定距離内であった場合、着地モーションへ移項させる
+			// レイを飛ばして、成功且つ一定距離内であった場合、着地モーションへ移行させる
 			if(raycastSuccess && raycast.distance < landingDistance) break;
 			yield return new WaitForSeconds(waitTime);
 		}
@@ -115,6 +115,8 @@ public class PlayerCtrl : MonoBehaviour {
 
 	// あたり判定
 	public void PlayerDamage(){
+		Jump = false;
+		Col.enabled = false;
 		Damage = true;
 	}
 
@@ -132,8 +134,11 @@ public class PlayerCtrl : MonoBehaviour {
 		Anim.speed = 0f;
 		StartCoroutine(CheckLanding());
 	}
-	void OnJumpEnd(){
+
+	void OnJumpHitEnd(){
 		Jump = false;
+	}
+	void OnJumpEnd(){
 	}
 	
 }

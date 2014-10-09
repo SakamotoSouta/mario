@@ -70,7 +70,7 @@ public class enemyCtrl : MonoBehaviour {
 			}
 		}
 		else if(other.tag == "Floor"){
-			Velocity.y = -1;
+			Velocity.y = -0.1f;
 		}
 	}
 
