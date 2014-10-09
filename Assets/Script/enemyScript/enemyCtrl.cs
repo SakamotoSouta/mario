@@ -69,9 +69,6 @@ public class enemyCtrl : MonoBehaviour {
 				Velocity.x *= -1;
 			}
 		}
-		else if(other.tag == "Floor"){
-			Velocity.y = -0.1f;
-		}
 	}
 
 	public void SetState(ENEMY_STATE state){

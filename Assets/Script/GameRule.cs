@@ -6,17 +6,21 @@ public class GameRule : MonoBehaviour {
 	private static int MaxLife = 3;
 	public float GameTime;
 	public GUIStyle customGuiStyle;
+
+	private GameObject Player;
+	private PlayerCtrl pc;
 	// 遷移時間
 	public int WaitTime;
 
 	// Use this for initialization
 	void Start () {
+		Player = GameObject.FindGameObjectWithTag("Player");
+		pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		GameTime -= Time.deltaTime;
-		Debug.Log (""+GameTime);
 		if (GameTime < 0) {
 			GameTime = 0;
 			TimeOver();
@@ -27,8 +31,7 @@ public class GameRule : MonoBehaviour {
 		Life = MaxLife;
 	}
 	private void TimeOver(){
-		GameObject Player = GameObject.FindGameObjectWithTag("Player");
-		PlayerCtrl pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+
 		pc.Damage = true;
 		StartCoroutine( Restart());
  	}
