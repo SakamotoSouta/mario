@@ -5,6 +5,9 @@ public class GameUICtrl : MonoBehaviour {
 
 	public GameObject GameRule;
 	private GameRule Rule;
+	private GameObject Player;
+	private	PlayerCtrl playerCtrl;
+
 	// プレハブ
 	public GameObject labelPrefab;
 	public GameObject texturePrefab;
@@ -23,12 +26,18 @@ public class GameUICtrl : MonoBehaviour {
 	// 残り時間
 	private GameObject timeLabel;
 
+	// 親オブジェクト
+	GameObject Parent;
+
 	// Use this for initialization
 	void Start () {
+		Player = GameObject.FindGameObjectWithTag("Player");
+		playerCtrl = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+
 		// ゲーム」管理者の取得
 		Rule = GameRule.GetComponent ("GameRule") as GameRule;
 		// 親オブジェクトの検索
-		GameObject Parent = GameObject.Find ("Panel");
+		Parent = GameObject.Find ("Panel");
 		// スコア文字の生成
 		scoreLabel = NGUITools.AddChild (Parent, labelPrefab);
 		InitScoreUI ();
@@ -46,6 +55,9 @@ public class GameUICtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (playerCtrl.Goal) {
+			ClearUI();
+		}
 		// 各種UIの表示処理
 		ScoreUI ();
 		TimeUI ();
@@ -104,6 +116,16 @@ public class GameUICtrl : MonoBehaviour {
 		Offset = lifeTexture.GetComponent ("UIAnchor") as UIAnchor;
 		Offset.side = UIAnchor.Side.TopRight;
 		Offset.pixelOffset = new Vector2 (-130, -40);
+	}
+
+	void ClearUI(){
+		GameObject clearLabel = NGUITools.AddChild (Parent, labelPrefab);
+		clearLabel.transform.localScale = new Vector2 (30f, 30f);
+		Text = clearLabel.GetComponent ("UILabel") as UILabel;
+		Text.pivot = UIWidget.Pivot.Center;
+		Offset = timeLabel.GetComponent ("UIAnchor") as UIAnchor;
+		Offset.side = UIAnchor.Side.Top;
+		Text.text = "Clear!!";
 	}
 
 }

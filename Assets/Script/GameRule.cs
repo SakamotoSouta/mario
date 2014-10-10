@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GameRule : MonoBehaviour {
-	public static int Life;
+	public static int Life = 3;
 	private static int MaxLife = 3;
 	public float GameTime;
 	public GUIStyle customGuiStyle;

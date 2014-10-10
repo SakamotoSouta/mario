@@ -165,7 +165,7 @@ public class PlayerCtrl : MonoBehaviour {
 	void OnJumpEnd(){
 	}
 	void AnimEnd(){
-		StartCoroutine (rule.ClearGame("Title"));
+		StartCoroutine (rule.ClearGame("Result"));
 	}
 	
 }
