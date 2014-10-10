@@ -41,7 +41,7 @@ public class PlayerCtrl : MonoBehaviour {
 		GoalID = Animator.StringToHash ("Goal");
 		transform.rotation = Quaternion.LookRotation(new Vector3(1f, 0f, 0f));
 		// キャラクターコントローラーの取得
-		Col = GetComponent ("CharacterController") as CharacterController;
+		Col = gameObject.GetComponent("CharacterController") as CharacterController;
 	}
 	
 	// Update is called once per frame
@@ -71,12 +71,25 @@ public class PlayerCtrl : MonoBehaviour {
 				}// if
 
 				if (Jump) {
-						CheckLanding ();
+					CheckLanding ();
+					RaycastHit hit;
+					Vector3 fromPos = transform.position+Vector3.up;
+					Vector3 direction = new Vector3(0, 1, 0);
+					float length = 0.8f;
+					Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
+					if (Physics.Raycast(fromPos, direction, out hit, length)) {
+						if(hit.collider.tag == "Block"){
+							GameObject block = hit.collider.gameObject;
+							Block b = block.GetComponent("Block")as Block;
+							b.HitBlock();
+						}
+					}
+
 				}
 
 				// 穴判定
 				if (transform.position.y < -5) {
-						StartCoroutine (rule.Restart ());
+					StartCoroutine (rule.Restart ());
 				}
 		}
 		if(!Damage){
@@ -119,6 +132,7 @@ public class PlayerCtrl : MonoBehaviour {
 			yield return new WaitForSeconds(waitTime);
 		}
 		Anim.speed = defaultSpeed;
+		yield break;
 	}
 
 	// ゴール
