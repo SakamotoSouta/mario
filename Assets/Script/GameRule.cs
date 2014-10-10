@@ -61,6 +61,6 @@ public class GameRule : MonoBehaviour {
 
 
 	void GameOver(){
-		Application.LoadLevel ("Title");
+		Application.LoadLevel ("Result");
 	}
 }
