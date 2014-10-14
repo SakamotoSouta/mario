@@ -4706,7 +4706,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100332}
   m_LocalRotation: {x: -.5, y: -.5, z: -.5, w: .5}
-  m_LocalPosition: {x: -.00573027181, y: -.168985128, z: -0}
+  m_LocalPosition: {x: -.00573027367, y: .510374546, z: 2.59209221e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400004}
@@ -4857,6 +4857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4470a60d783fef54bbd876e7491312ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  State: 0
   Invincible: 0
   InvincibleTime: 5
   jumpPawer: 35
@@ -6034,8 +6035,8 @@ CharacterController:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   serializedVersion: 2
-  m_Height: 1.63999999
-  m_Radius: .310000002
+  m_Height: 1.88
+  m_Radius: .379999995
   m_SlopeLimit: 45
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982
@@ -6413,7 +6414,7 @@ ParticleSystem:
           rgba: 16777215
         key1:
           serializedVersion: 2
-          rgba: 2148010239
+          rgba: 4077453287
         key2:
           serializedVersion: 2
           rgba: 16777215
@@ -6432,7 +6433,7 @@ ParticleSystem:
         key7:
           serializedVersion: 2
           rgba: 0
-        ctime0: 0
+        ctime0: 193
         ctime1: 65535
         ctime2: 65535
         ctime3: 0

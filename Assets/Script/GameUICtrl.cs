@@ -85,7 +85,7 @@ public class GameUICtrl : MonoBehaviour {
 		Text.pivot = UIWidget.Pivot.Left;
 		Offset = scoreLabel.GetComponent ("UIAnchor") as UIAnchor;
 		Offset.side = UIAnchor.Side.TopLeft;
-		Offset.pixelOffset = new Vector2 (100, -40);
+		Offset.pixelOffset = new Vector2 (10, -40);
 		int score = Rule.GetScore();
 		Text.text = string.Format ("Score : {0:D4}", score);
 	}

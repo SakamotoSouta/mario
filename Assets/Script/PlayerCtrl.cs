@@ -9,7 +9,16 @@ public class PlayerCtrl : MonoBehaviour {
 	private int DamageID;
 	private int GoalID;
 
+	// プレイヤーの状態
+	public enum PLAYER_STATE{
+		PLAYER_NORMAL = 0,
+		PLAYER_SUPER,
+		PLAYER_FIRE,
+		PLAYER_MAX
 
+	}
+
+	public PLAYER_STATE State;
 	// エフェクト
 	ParticleSystem InvinsibleEffect;
 	// アニメーションのデフォルトの再生速度
@@ -39,11 +48,16 @@ public class PlayerCtrl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// プレイヤーのステートの初期化
+		State = PLAYER_STATE.PLAYER_NORMAL;
+
+		// エフェクトの初期化
 		InvinsibleEffect = transform.Find ("InvinsibleEffect").GetComponent<ParticleSystem> ();
 		InvinsibleEffect.Stop ();
+		// プレイヤーの向きベクトルの初期化
 		oldVector = 1;
 		// アニメーションの取得
-		Anim = GetComponent<Animator> ();
+		Anim = GetComponent<Animator>();
 		// アニメーションイベントの取得
 		SpeedID = Animator.StringToHash ("Speed");
 		JumpID = Animator.StringToHash ("Jump");
@@ -181,10 +195,49 @@ public class PlayerCtrl : MonoBehaviour {
 	}
 
 	// あたり判定
-	public void PlayerDamage(){
+	void PlayerDead(){
 		Jump = false;
 		Col.enabled = false;
 		Damage = true;
+	}
+
+	public void PlayerDamage(){
+		Velocity.y += jumpPawer / 2;
+		switch (State) {
+		case PLAYER_STATE.PLAYER_NORMAL:
+			PlayerDead();
+			break;
+		case PLAYER_STATE.PLAYER_SUPER:
+			State = PLAYER_STATE.PLAYER_NORMAL;
+			break;
+		case PLAYER_STATE.PLAYER_FIRE:
+			State = PLAYER_STATE.PLAYER_NORMAL;
+			break;
+		default:
+			break;
+		}
+	}
+
+	// プレイヤーのパワーアップ
+	public void PlayerPawerUp(){
+		// 現在の状態によってパワーアップ
+		switch (State) {
+		case PLAYER_STATE.PLAYER_NORMAL:
+			State = PLAYER_STATE.PLAYER_SUPER;
+			break;
+		case PLAYER_STATE.PLAYER_SUPER:
+			State = PLAYER_STATE.PLAYER_FIRE;
+			break;
+		case PLAYER_STATE.PLAYER_FIRE:
+			rule.AddScore(1000);
+			break;
+		default:
+			break;
+		}
+
+		if (State != PLAYER_STATE.PLAYER_NORMAL) {
+			transform.localScale = new Vector3(2, 2, 2);
+		}
 	}
 
 	void OnDead(){
