@@ -9,8 +9,14 @@ public class PlayerCtrl : MonoBehaviour {
 	private int DamageID;
 	private int GoalID;
 
+
+	// エフェクト
+	ParticleSystem InvinsibleEffect;
 	// アニメーションのデフォルトの再生速度
 	private float defaultSpeed;
+	// 無敵
+	public bool Invincible = false;
+	public int InvincibleTime;
 	// 着地判定を調べる回数
 	private readonly int landingCheckLimit = 100;
 	// 着地判定チェックを行う時間間隔
@@ -20,6 +26,7 @@ public class PlayerCtrl : MonoBehaviour {
 	public float jumpPawer;
 	public float Inertia;
 	public float Speed;
+	[HideInInspector]
 	public Vector3 Velocity;
 	public bool Goal = false;
 	public bool Jump = false;
@@ -32,6 +39,8 @@ public class PlayerCtrl : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		InvinsibleEffect = transform.Find ("InvinsibleEffect").GetComponent<ParticleSystem> ();
+		InvinsibleEffect.Stop ();
 		oldVector = 1;
 		// アニメーションの取得
 		Anim = GetComponent<Animator> ();
@@ -53,8 +62,7 @@ public class PlayerCtrl : MonoBehaviour {
 					Velocity.x = Input.GetAxis ("Horizontal") * Speed;
 				}
 
-				// 慣性
-				Velocity *= Inertia;
+
 
 				if (Velocity.x > 0) {
 						oldVector = 1;
@@ -99,6 +107,9 @@ public class PlayerCtrl : MonoBehaviour {
 		if(!Damage){
 			Velocity.y += Physics.gravity.y * Time.deltaTime;
 			Col.Move (Velocity * Time.deltaTime);
+
+			// 慣性
+			Velocity *= Inertia;
 		}
 		// 地面に接していたら
 		if (Col.isGrounded) {
@@ -153,6 +164,20 @@ public class PlayerCtrl : MonoBehaviour {
 		Speed = 0;
 		Velocity.x = 0;
 		Velocity.y = 0;
+	}
+
+	public void GetStar(){
+		StartCoroutine (StateInvincible ());
+	}
+
+	// 無敵時間
+	IEnumerator StateInvincible(){
+		Invincible = true;
+		InvinsibleEffect.Play ();
+		yield return new WaitForSeconds (InvincibleTime);
+		Invincible = false;
+		InvinsibleEffect.Stop();
+
 	}
 
 	// あたり判定

@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class ItemShoot : MonoBehaviour {
+	private float rebornCounter = 0;
 	public Vector3 Velocity;
 	public float Speed;
 	public GameObject Enemy;
@@ -22,9 +23,15 @@ public class ItemShoot : MonoBehaviour {
 			// 待機中
 		case ITEM_SHOOT_STATE.STAY:
 			Velocity = new Vector3(0, 0, 0);
-			StartCoroutine("Reborn");
+			rebornCounter+=Time.deltaTime;
+			if(rebornCounter > 30){
+				// 復活
+				Instantiate(Enemy, transform.position, transform.rotation);
+				Destroy (gameObject);
+			}
 			break;
 		case ITEM_SHOOT_STATE.SHOOT:
+			rebornCounter = 0;
 			transform.Translate(Velocity);
 			break;
 		default:
@@ -34,17 +41,6 @@ public class ItemShoot : MonoBehaviour {
 		if(transform.position.y < -5){
 			Destroy(gameObject);
 		}
-	}
-
-	IEnumerator Reborn(){
-		yield return new WaitForSeconds (30f);
-		if(State != ITEM_SHOOT_STATE.STAY){
-			yield break;
-		}
-		// 復活
-		Instantiate(Enemy, transform.position, transform.rotation);
-		Destroy (gameObject);
-
 	}
 
 	void OnTriggerEnter(Collider other){

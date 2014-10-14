@@ -16,7 +16,12 @@ public class HitArea : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Enemy") {
 			PlayerCtrl pc = Player.GetComponent("PlayerCtrl")as PlayerCtrl;
-			pc.PlayerDamage();
+			if(!pc.Invincible){
+				pc.PlayerDamage();
+			}
+			else{
+				Destroy(other.gameObject);
+			}
 		}
 	}
 }
