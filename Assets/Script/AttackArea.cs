@@ -23,5 +23,9 @@ public class AttackArea : MonoBehaviour {
 
 			pc.Velocity.y += pc.jumpPawer / 2;
 		}
+		else if(pc.Jump && other.tag == "ItemShoot"){
+			ItemShoot Item = other.GetComponent("ItemShoot") as ItemShoot;
+			Item.SetState(ItemShoot.ITEM_SHOOT_STATE.STAY);
+		}
 	}
 }

@@ -11,7 +11,7 @@ public class Block : MonoBehaviour {
 		BLOCK_MAX
 	}
 	public BLOCK_TYPE BlockType;
-	public ItemControler.ITEM_TYPE ItemType; 
+	public ItemController.ITEM_TYPE ItemType; 
 
 	// Use this for initialization
 	void Start () {
@@ -39,7 +39,7 @@ public class Block : MonoBehaviour {
 
 	void HitItemBlock(){
 		GameObject Root= GameObject.Find ("ItemRoot");
-		ItemControler ItemCtrl = Root.GetComponent ("ItemControler") as ItemControler;
+		ItemController ItemCtrl = Root.GetComponent ("ItemController") as ItemController;
 		ItemCtrl.GenerateItem (ItemType, transform.position);
 		Debug.Log ("" + transform.position);
 		BlockType = BLOCK_TYPE.NONE_BLOCK;

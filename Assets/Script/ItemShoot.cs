@@ -5,7 +5,7 @@ public class ItemShoot : MonoBehaviour {
 	public Vector3 Velocity;
 	public float Speed;
 	public GameObject Enemy;
-	private enum ITEM_SHOOT_STATE{
+	public enum ITEM_SHOOT_STATE{
 		STAY,
 		SHOOT,
 		ITEM_SHOOT_STATE_MAX
@@ -21,6 +21,7 @@ public class ItemShoot : MonoBehaviour {
 		switch(State){
 			// 待機中
 		case ITEM_SHOOT_STATE.STAY:
+			Velocity = new Vector3(0, 0, 0);
 			StartCoroutine("Reborn");
 			break;
 		case ITEM_SHOOT_STATE.SHOOT:
@@ -48,14 +49,21 @@ public class ItemShoot : MonoBehaviour {
 		}// if
 		if(other.tag == "Player"){
 			PlayerCtrl pc = other.GetComponent("PlayerCtrl") as PlayerCtrl;
-			if(pc.Speed > 1f && State == ITEM_SHOOT_STATE.STAY){
+			if(pc.Velocity.x > 1f && State == ITEM_SHOOT_STATE.STAY){
 				State = ITEM_SHOOT_STATE.SHOOT;
 				Velocity = new Vector3(Speed * Vector3.Normalize(new Vector3(pc.Velocity.x, 0f, 0f)).x, 0f, 0f);
+			}
+			else if(State == ITEM_SHOOT_STATE.SHOOT){
+				pc.PlayerDamage();
 			}
 		}
 		if (other.tag == "Enemy" && State == ITEM_SHOOT_STATE.SHOOT) {
 			enemyCtrl ec = other.GetComponent("enemyCtrl")as enemyCtrl;
 			ec.Velocity = new Vector3(0f, 0f, -0.1f);
 		}
+	}
+
+	public void SetState(ITEM_SHOOT_STATE state){
+		State = state;
 	}
 }

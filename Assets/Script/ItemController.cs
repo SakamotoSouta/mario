@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ItemControler : MonoBehaviour {
+public class ItemController : MonoBehaviour {
 	// ブロックの種類
 	public enum ITEM_TYPE{
 		ITEM_PAWERUP = 0,

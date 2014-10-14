@@ -57,7 +57,7 @@ public class enemyCtrl : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other){
-		if (other.tag == "NotBreakObject") {
+		if (other.tag == "NotBreakObject" || other.tag == "ItemShoot") {
 			Velocity = Vector3.Reflect(-Velocity, new Vector3(0, 1f, 0));
 		}// if
 		else if(other.tag == "Enemy"){
