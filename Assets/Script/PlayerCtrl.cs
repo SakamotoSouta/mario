@@ -28,6 +28,7 @@ public class PlayerCtrl : MonoBehaviour {
 	private float pawer;
 	private CharacterController Col;
 	private int oldVector;
+	private bool blockHit = false;
 
 	// Use this for initialization
 	void Start () {
@@ -72,19 +73,22 @@ public class PlayerCtrl : MonoBehaviour {
 
 				if (Jump) {
 					CheckLanding ();
-					RaycastHit hit;
-					Vector3 fromPos = transform.position+Vector3.up;
-					Vector3 direction = new Vector3(0, 1, 0);
-					float length = 0.8f;
-					Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
-					if (Physics.Raycast(fromPos, direction, out hit, length)) {
-						if(hit.collider.tag == "Block"){
-							GameObject block = hit.collider.gameObject;
-							Block b = block.GetComponent("Block")as Block;
-							b.HitBlock();
+					if(!blockHit){
+						RaycastHit hit;
+						Vector3 fromPos = transform.position+Vector3.up;
+						Vector3 direction = new Vector3(0, 1, 0);
+						float length = 0.8f;
+						// 上方向にレイを飛ばしてブロックにあたっていないか判定
+						Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
+						if (Physics.Raycast(fromPos, direction, out hit, length)) {
+							if(hit.collider.tag == "Block"){
+								GameObject block = hit.collider.gameObject;
+								Block b = block.GetComponent("Block")as Block;
+								b.HitBlock();
+								blockHit = true;
+							}
 						}
 					}
-
 				}
 
 				// 穴判定
@@ -175,6 +179,7 @@ public class PlayerCtrl : MonoBehaviour {
 
 	void OnJumpHitEnd(){
 		Jump = false;
+		blockHit = false;
 	}
 	void OnJumpEnd(){
 	}

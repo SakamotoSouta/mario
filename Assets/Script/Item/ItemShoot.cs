@@ -30,6 +30,10 @@ public class ItemShoot : MonoBehaviour {
 		default:
 			break;
 		}
+
+		if(transform.position.y < -5){
+			Destroy(gameObject);
+		}
 	}
 
 	IEnumerator Reborn(){
@@ -49,7 +53,7 @@ public class ItemShoot : MonoBehaviour {
 		}// if
 		if(other.tag == "Player"){
 			PlayerCtrl pc = other.GetComponent("PlayerCtrl") as PlayerCtrl;
-			if(pc.Velocity.x > 1f && State == ITEM_SHOOT_STATE.STAY){
+			if(pc.Velocity.x > 1f || pc.Velocity.x < -1f && State == ITEM_SHOOT_STATE.STAY){
 				State = ITEM_SHOOT_STATE.SHOOT;
 				Velocity = new Vector3(Speed * Vector3.Normalize(new Vector3(pc.Velocity.x, 0f, 0f)).x, 0f, 0f);
 			}

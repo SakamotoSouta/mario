@@ -28,7 +28,7 @@ public class ItemController : MonoBehaviour {
 
 	// 生成
 	public void GenerateItem(ITEM_TYPE Item, Vector3 position){
-
+		position.y += 1;
 		GameObject root = GameObject.Find ("ItemRoot");
 		switch(Item){
 			// アイテムの種類判断
@@ -44,7 +44,7 @@ public class ItemController : MonoBehaviour {
 			break;
 
 		}
-		GameObject item = Instantiate (ItemObject, position, transform.rotation) as GameObject;
+		GameObject item = Instantiate (ItemObject, position, ItemObject.transform.rotation) as GameObject;
 		item.transform.parent = root.transform;
 
 	}

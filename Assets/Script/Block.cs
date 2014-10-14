@@ -10,12 +10,18 @@ public class Block : MonoBehaviour {
 		NONE_BLOCK,
 		BLOCK_MAX
 	}
+	public int BlockLife;
 	public BLOCK_TYPE BlockType;
 	public ItemController.ITEM_TYPE ItemType; 
 
 	// Use this for initialization
 	void Start () {
-
+		if (ItemType == ItemController.ITEM_TYPE.ITEM_COIN) {
+			BlockLife = Random.Range(1, 5);
+		}
+		else {
+			BlockLife = 1;
+		}
 	}
 	
 	// Update is called once per frame
@@ -38,11 +44,19 @@ public class Block : MonoBehaviour {
 	}
 
 	void HitItemBlock(){
+		BlockLife--;
+		if (ItemType == ItemController.ITEM_TYPE.ITEM_COIN) {
+			GameObject GameRule = GameObject.Find("GameRule");
+			GameRule Rule = GameRule.GetComponent("GameRule") as GameRule;
+			Rule.GetCoin();
+		}
 		GameObject Root= GameObject.Find ("ItemRoot");
 		ItemController ItemCtrl = Root.GetComponent ("ItemController") as ItemController;
 		ItemCtrl.GenerateItem (ItemType, transform.position);
-		Debug.Log ("" + transform.position);
-		BlockType = BLOCK_TYPE.NONE_BLOCK;
+		if (BlockLife == 0) {
+			gameObject.renderer.material.color = new Color(1, 1, 1, 0);
+			BlockType = BLOCK_TYPE.NONE_BLOCK;
+		}
 	}
 
 	void HitBreakBlock(){

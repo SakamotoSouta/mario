@@ -86,8 +86,8 @@ public class GameUICtrl : MonoBehaviour {
 		Offset = scoreLabel.GetComponent ("UIAnchor") as UIAnchor;
 		Offset.side = UIAnchor.Side.TopLeft;
 		Offset.pixelOffset = new Vector2 (100, -40);
-
-		Text.text = "Score ???";
+		int score = Rule.GetScore();
+		Text.text = string.Format ("Score : {0:D4}", score);
 	}
 
 	// 時間の表示
