@@ -12,7 +12,7 @@ public class ItemShoot : MonoBehaviour {
 		ITEM_SHOOT_STATE_MAX
 	}
 
-	ITEM_SHOOT_STATE State;
+	public ITEM_SHOOT_STATE State;
 	// Use this for initialization
 	void Start () {
 	}
@@ -22,6 +22,7 @@ public class ItemShoot : MonoBehaviour {
 		switch(State){
 			// 待機中
 		case ITEM_SHOOT_STATE.STAY:
+			rigidbody.WakeUp();
 			Velocity = new Vector3(0, 0, 0);
 			rebornCounter+=Time.deltaTime;
 			if(rebornCounter > 30){
@@ -43,22 +44,27 @@ public class ItemShoot : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider other){
-		if (other.tag == "NotBreakObject") {
+	void OnCollisionEnter(Collision other){
+		// フィールドオブジェクトにあたった場合跳ね返る
+		if (other.gameObject.tag == "NotBreakObject") {
 			Velocity = Vector3.Reflect(Velocity, new Vector3(-1f, 0f, 0f));
 		}// if
-		if(other.tag == "Player"){
-			PlayerCtrl pc = other.GetComponent("PlayerCtrl") as PlayerCtrl;
-			if(pc.Velocity.x > 1f || pc.Velocity.x < -1f && State == ITEM_SHOOT_STATE.STAY){
-				State = ITEM_SHOOT_STATE.SHOOT;
-				Velocity = new Vector3(Speed * Vector3.Normalize(new Vector3(pc.Velocity.x, 0f, 0f)).x, 0f, 0f);
+		// プレイヤーにあたった場合
+		if(other.collider.tag == "Player"){
+			PlayerCtrl pc = other.gameObject.GetComponent("PlayerCtrl") as PlayerCtrl;
+			// 動いている場合プレイヤーにダメージ＆無敵状態だったら自身を消去
+			if(State == ITEM_SHOOT_STATE.SHOOT){
+				if(!pc.Invincible){
+					pc.PlayerDamage();
+				}
 			}
-			else if(State == ITEM_SHOOT_STATE.SHOOT){
-				pc.PlayerDamage();
+			if(pc.Invincible){
+				Destroy(gameObject);
 			}
 		}
-		if (other.tag == "Enemy" && State == ITEM_SHOOT_STATE.SHOOT) {
-			enemyCtrl ec = other.GetComponent("enemyCtrl")as enemyCtrl;
+
+		if (other.gameObject.tag == "Enemy" && State == ITEM_SHOOT_STATE.SHOOT) {
+			enemyCtrl ec = other.collider.GetComponent("enemyCtrl")as enemyCtrl;
 			ec.Velocity = new Vector3(0f, 0f, -0.1f);
 		}
 	}

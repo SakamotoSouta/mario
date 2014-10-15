@@ -17,17 +17,4 @@ public class ItemMushroom : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
-
-	void OnTriggerEnter(Collider other){
-		if(other.tag == "NotBreakObject" || other.tag == "Enemy"){
-			Velocity.x *= -1;
-		}
-		// プレイヤーと当ったら消去
-		if(other.tag == "Player"){
-			GameObject Player = GameObject.FindGameObjectWithTag("Player");
-			PlayerCtrl pc = Player.GetComponent("PlayerCtrl") as PlayerCtrl;
-			pc.PlayerPawerUp();
-			Destroy(gameObject);
-		}
-	}
 }

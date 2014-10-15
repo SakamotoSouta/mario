@@ -56,12 +56,12 @@ public class enemyCtrl : MonoBehaviour {
 		Destroy (gameObject);
 	}
 
-	private void OnTriggerEnter(Collider other){
-		if (other.tag == "NotBreakObject" || other.tag == "ItemShoot") {
+	void OnCollisionEnter(Collision other){
+		if (other.gameObject.tag == "NotBreakObject" || other.collider.tag == "ItemShoot") {
 			Velocity = Vector3.Reflect(-Velocity, new Vector3(0, 1f, 0));
 		}// if
-		else if(other.tag == "Enemy"){
-			enemyCtrl ec = other.GetComponent("enemyCtrl")as enemyCtrl;
+		else if(other.gameObject.tag == "Enemy"){
+			enemyCtrl ec = other.collider.GetComponent("enemyCtrl")as enemyCtrl;
 			if(Velocity.x < ec.Velocity.x){
 				Velocity.x *= -1;
 			}

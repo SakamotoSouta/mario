@@ -41,13 +41,4 @@ public class ItemCoin : MonoBehaviour {
 		}
 	
 	}
-	void OnTriggerEnter(Collider other){
-		if(other.tag == "Player"){
-			if(coinType == COIN_TYPE.OBJECT_COIN){
-				Rule.GetCoin();
-				Destroy(gameObject);
-			}
-		}
-
-	}
 }

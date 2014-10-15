@@ -13,6 +13,8 @@ public class Block : MonoBehaviour {
 	public int BlockLife;
 	public BLOCK_TYPE BlockType;
 	public ItemController.ITEM_TYPE ItemType; 
+	private bool Move = false;
+	private float count = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +28,14 @@ public class Block : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Move) {
+			count += 0.1f;
+			transform.Translate(0,Mathf.Sin(count) * 0.01f,0);
+			if(count > Mathf.PI * 2){
+				Move = false;
+				count = 0;
+			}
+		}
 	}
 
 	public void HitBlock(){
@@ -35,6 +45,7 @@ public class Block : MonoBehaviour {
 			HitItemBlock();
 			break;
 		case BLOCK_TYPE.BLREAK_BLOCK:
+			HitBreakBlock();
 			break;
 		case BLOCK_TYPE.NONE_BLOCK:
 			break;
@@ -60,7 +71,14 @@ public class Block : MonoBehaviour {
 	}
 
 	void HitBreakBlock(){
-		Destroy (gameObject);
+		GameObject Player = GameObject.FindGameObjectWithTag ("Player");
+		PlayerCtrl pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+		if (pc.State != PlayerCtrl.PLAYER_STATE.PLAYER_NORMAL) {
+			Destroy (gameObject);
+		}
+		else {
+			Move = true;
+		}
 	}
 
 	void HitNoneBlock(){

@@ -17,7 +17,9 @@ public class Goal : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		Pc.GoalIn ();
-		Debug.Log ("gole");
+		if(other.tag == "Player"){
+			Pc.GoalIn ();
+			Debug.Log ("gole");
+		}
 	}
 }

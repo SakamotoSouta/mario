@@ -97,9 +97,10 @@ public class PlayerCtrl : MonoBehaviour {
 					CheckLanding ();
 					if(!blockHit){
 						RaycastHit hit;
-						Vector3 fromPos = transform.position+Vector3.up;
+						GameObject head = GameObject.Find("Character1_Spine1");
+						Vector3 fromPos = head.transform.position;
 						Vector3 direction = new Vector3(0, 1, 0);
-						float length = 0.8f;
+					float length = 0.1f;
 						// 上方向にレイを飛ばしてブロックにあたっていないか判定
 						Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
 						if (Physics.Raycast(fromPos, direction, out hit, length)) {
@@ -201,8 +202,8 @@ public class PlayerCtrl : MonoBehaviour {
 		Damage = true;
 	}
 
+	// 敵にあたった時
 	public void PlayerDamage(){
-		Velocity.y += jumpPawer / 2;
 		switch (State) {
 		case PLAYER_STATE.PLAYER_NORMAL:
 			PlayerDead();
@@ -214,6 +215,17 @@ public class PlayerCtrl : MonoBehaviour {
 			State = PLAYER_STATE.PLAYER_NORMAL;
 			break;
 		default:
+			break;
+		}
+		switch(State){
+		case PLAYER_STATE.PLAYER_NORMAL:
+			transform.localScale = new Vector3(1, 1, 1);
+			break;
+		case PLAYER_STATE.PLAYER_SUPER:
+			transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+			break;
+		case PLAYER_STATE.PLAYER_FIRE:
+			transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 			break;
 		}
 	}
@@ -229,15 +241,23 @@ public class PlayerCtrl : MonoBehaviour {
 			State = PLAYER_STATE.PLAYER_FIRE;
 			break;
 		case PLAYER_STATE.PLAYER_FIRE:
-			rule.AddScore(1000);
+			rule.AddScore(500);
 			break;
 		default:
 			break;
 		}
-
-		if (State != PLAYER_STATE.PLAYER_NORMAL) {
-			transform.localScale = new Vector3(2, 2, 2);
+		switch(State){
+		case PLAYER_STATE.PLAYER_NORMAL:
+			transform.localScale = new Vector3(1, 1, 1);
+			break;
+		case PLAYER_STATE.PLAYER_SUPER:
+			transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+			break;
+		case PLAYER_STATE.PLAYER_FIRE:
+			transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+			break;
 		}
+
 	}
 
 	void OnDead(){
@@ -264,5 +284,54 @@ public class PlayerCtrl : MonoBehaviour {
 	void AnimEnd(){
 		StartCoroutine (rule.ClearGame("Result"));
 	}
-	
+
+	// キャラクターコントローラーのあたり判定
+	void OnControllerColliderHit(ControllerColliderHit other){
+		if(other.gameObject.tag == "ItemShoot"){
+			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
+			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !Invincible){
+				if(Velocity.x > 5f || Velocity.x < -5f){
+					StartCoroutine(NotHitJudge(0.1f, "Player", "ItemShoot"));
+					Shoot.State = ItemShoot.ITEM_SHOOT_STATE.SHOOT;
+					Shoot.Velocity = new Vector3(Shoot.Speed * Vector3.Normalize(new Vector3(Velocity.x, 0f, 0f)).x, 0f, 0f);
+				}
+			}
+
+			else if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.SHOOT){
+				PlayerDamage();
+			}
+			else if(Invincible){
+				Destroy(other.gameObject);
+			}
+		}
+		// パワーアップ
+		if(other.gameObject.tag == "ItemPawerUp"){
+			GameObject Item = GameObject.Find("ItemRoot");
+			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
+			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
+			Destroy(other.gameObject);
+		}
+		// コイン
+		if(other.gameObject.tag == "ItemCoin"){
+			GameObject Item = GameObject.Find("ItemRoot");
+			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
+			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_COIN);
+			Destroy(other.gameObject);
+		}
+		// スター
+		if(other.gameObject.tag == "ItemStar"){
+			GameObject Item = GameObject.Find("ItemRoot");
+			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
+			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
+			Destroy(other.gameObject);
+		}
+	}
+
+	// レイヤー制御であたり判定を一定時間消す
+	public IEnumerator NotHitJudge(float InvinsibleTime ,string Layer1, string Layer2){
+		Physics.IgnoreLayerCollision (LayerMask.NameToLayer(Layer1), LayerMask.NameToLayer(Layer2), true);
+		yield return new WaitForSeconds (InvincibleTime);
+		Physics.IgnoreLayerCollision (LayerMask.NameToLayer(Layer1), LayerMask.NameToLayer(Layer2), false);
+
+	}
 }

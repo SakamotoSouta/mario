@@ -48,4 +48,27 @@ public class ItemController : MonoBehaviour {
 		item.transform.parent = root.transform;
 
 	}
+
+	public void GetItem(ITEM_TYPE Item){
+		GameObject Player = GameObject.FindGameObjectWithTag ("Player");
+		PlayerCtrl pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+		switch(Item){
+		case ITEM_TYPE.ITEM_PAWERUP:
+			pc.PlayerPawerUp();
+			break;
+		case ITEM_TYPE.ITEM_COIN:
+			GameObject GameRule = GameObject.Find("GameRule");
+			GameRule Rule = GameRule.GetComponent("GameRule") as GameRule;
+
+			Rule.GetCoin();
+			Destroy(gameObject);
+			break;
+		case ITEM_TYPE.ITEM_STAR:
+			pc.GetStar();
+			break;
+		default:
+			break;
+		}
+
+	}
 }

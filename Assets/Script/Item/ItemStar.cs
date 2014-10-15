@@ -27,13 +27,9 @@ public class ItemStar : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider other){
-		if(other.tag == "Enemy" || other.tag == "NotBreakObject" || other.tag == "Block"){
+	void OnCollisionEnter(Collision other){
+		if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "NotBreakObject" || other.gameObject.tag == "Block"){
 			Velocity.x *= -1;
-		}
-		if (other.tag == "Player") {
-			pc.GetStar();
-			Destroy(gameObject);
 		}
 	}
 }
