@@ -45,6 +45,7 @@ public class PlayerCtrl : MonoBehaviour {
 	private CharacterController Col;
 	private int oldVector;
 	private bool blockHit = false;
+	public GameObject FireBallPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -71,53 +72,61 @@ public class PlayerCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(!Goal){
-				if (!Damage) {
-					// 左右入力で移動
-					Velocity.x = Input.GetAxis ("Horizontal") * Speed;
+			if(State == PLAYER_STATE.PLAYER_FIRE){
+				if(Input.GetKeyDown(KeyCode.Q)){
+					GameObject Fb = Instantiate(FireBallPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.rotation) as GameObject;
+					Fireball FireBall = Fb.GetComponent("Fireball") as Fireball;
+					FireBall.GenerateFireBall(new Vector3(0f, 0f, 1f));
 				}
+			}
+
+			if (!Damage) {
+				// 左右入力で移動
+				Velocity.x = Input.GetAxis ("Horizontal") * Speed;
+			}
 
 
 
-				if (Velocity.x > 0) {
-						oldVector = 1;
-				} else if (Velocity.x < 0) {
-						oldVector = -1;
-				}
+			if (Velocity.x > 0) {
+					oldVector = 1;
+			} else if (Velocity.x < 0) {
+					oldVector = -1;
+			}
 
-				transform.rotation = Quaternion.LookRotation (new Vector3 (oldVector, 0f, 0f));
+			transform.rotation = Quaternion.LookRotation (new Vector3 (oldVector, 0f, 0f));
 
 
 
-				if (Input.GetKey (KeyCode.Space) && Col.isGrounded) {
-						pawer = Input.GetAxis ("Jump") * jumpPawer;
-						Jump = true;
-				}// if
+			if (Input.GetKey (KeyCode.Space) && Col.isGrounded) {
+					pawer = Input.GetAxis ("Jump") * jumpPawer;
+					Jump = true;
+			}// if
 
-				if (Jump) {
-					CheckLanding ();
-					if(!blockHit){
-						RaycastHit hit;
-						GameObject head = GameObject.Find("Character1_Spine1");
-						Vector3 fromPos = head.transform.position;
-						Vector3 direction = new Vector3(0, 1, 0);
-					float length = 0.1f;
-						// 上方向にレイを飛ばしてブロックにあたっていないか判定
-						Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
-						if (Physics.Raycast(fromPos, direction, out hit, length)) {
-							if(hit.collider.tag == "Block"){
-								GameObject block = hit.collider.gameObject;
-								Block b = block.GetComponent("Block")as Block;
-								b.HitBlock();
-								blockHit = true;
-							}
+			if (Jump) {
+				CheckLanding ();
+				if(!blockHit){
+					RaycastHit hit;
+					GameObject head = GameObject.Find("Character1_Spine1");
+					Vector3 fromPos = head.transform.position;
+					Vector3 direction = new Vector3(0, 1, 0);
+				float length = 0.1f;
+					// 上方向にレイを飛ばしてブロックにあたっていないか判定
+					Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
+					if (Physics.Raycast(fromPos, direction, out hit, length)) {
+						if(hit.collider.tag == "Block"){
+							GameObject block = hit.collider.gameObject;
+							Block b = block.GetComponent("Block")as Block;
+							b.HitBlock();
+							blockHit = true;
 						}
 					}
 				}
+			}
 
-				// 穴判定
-				if (transform.position.y < -5) {
-					StartCoroutine (rule.Restart ());
-				}
+			// 穴判定
+			if (transform.position.y < -5) {
+				StartCoroutine (rule.Restart ());
+			}
 		}
 		if(!Damage){
 			Velocity.y += Physics.gravity.y * Time.deltaTime;
@@ -291,7 +300,6 @@ public class PlayerCtrl : MonoBehaviour {
 			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
 			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !Invincible){
 				if(Velocity.x > 5f || Velocity.x < -5f){
-					StartCoroutine(NotHitJudge(0.1f, "Player", "ItemShoot"));
 					Shoot.State = ItemShoot.ITEM_SHOOT_STATE.SHOOT;
 					Shoot.Velocity = new Vector3(Shoot.Speed * Vector3.Normalize(new Vector3(Velocity.x, 0f, 0f)).x, 0f, 0f);
 				}
@@ -309,6 +317,13 @@ public class PlayerCtrl : MonoBehaviour {
 			GameObject Item = GameObject.Find("ItemRoot");
 			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
+			Destroy(other.gameObject);
+		}
+		// 花
+		if(other.gameObject.tag == "ItemStar"){
+			GameObject Item = GameObject.Find("ItemRoot");
+			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
+			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
 			Destroy(other.gameObject);
 		}
 		// コイン
@@ -330,7 +345,7 @@ public class PlayerCtrl : MonoBehaviour {
 	// レイヤー制御であたり判定を一定時間消す
 	public IEnumerator NotHitJudge(float InvinsibleTime ,string Layer1, string Layer2){
 		Physics.IgnoreLayerCollision (LayerMask.NameToLayer(Layer1), LayerMask.NameToLayer(Layer2), true);
-		yield return new WaitForSeconds (InvincibleTime);
+		yield return new WaitForSeconds (InvinsibleTime);
 		Physics.IgnoreLayerCollision (LayerMask.NameToLayer(Layer1), LayerMask.NameToLayer(Layer2), false);
 
 	}

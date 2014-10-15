@@ -32,9 +32,15 @@ public class ItemController : MonoBehaviour {
 		GameObject root = GameObject.Find ("ItemRoot");
 		switch(Item){
 			// アイテムの種類判断
-		// パワーアップアイテムはプレイヤーのステートを見て判断とりあえずキノコ
 		case ITEM_TYPE.ITEM_PAWERUP:
-			ItemObject = ItemMushroomPrefab; 
+			GameObject Player = GameObject.FindGameObjectWithTag("Player");
+			PlayerCtrl pc = Player.GetComponent("PlayerCtrl") as PlayerCtrl;
+			if(pc.State == PlayerCtrl.PLAYER_STATE.PLAYER_NORMAL){
+				ItemObject = ItemMushroomPrefab; 
+			}
+			else{
+				ItemObject = ItemFlowerPrefab;
+			}
 			break;
 		case ITEM_TYPE.ITEM_STAR:
 			ItemObject = ItemStarPrefab;

@@ -28,9 +28,6 @@ public class enemyCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(State == ENEMY_STATE.ACTIVE){
-			if(Input.GetKey(KeyCode.Q)){
-				State = ENEMY_STATE.DEAD;
-			}
 			transform.Translate (Velocity);
 			
 			if(transform.position.y < -5){
