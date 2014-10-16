@@ -16,10 +16,10 @@ public class HitArea : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Enemy") {
 			PlayerCtrl pc = Player.GetComponent("PlayerCtrl")as PlayerCtrl;
-			if(pc.State != PlayerCtrl.PLAYER_STATE.PLAYER_NORMAL){
-				StartCoroutine(pc.NotHitJudge(1f, "Player", "Enemy"));
-			}
 			if(!pc.Invincible){
+				if(pc.State != PlayerCtrl.PLAYER_STATE.PLAYER_NORMAL){
+					StartCoroutine(pc.NotHitJudge(1f, "Player", "Enemy"));
+				}
 				pc.PlayerDamage();
 			}
 			else{

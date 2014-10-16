@@ -44,6 +44,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400006}
+  - 54: {fileID: 5400002}
   m_Layer: 10
   m_Name: unitychan
   m_TagString: Player
@@ -4831,7 +4832,22 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &5400002
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -4846,8 +4862,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.22000003, y: .529999971, z: 1}
-  m_Center: {x: -.159999996, y: -.0500000007, z: .200000003}
+  m_Size: {x: 1.22000003, y: .589999974, z: 1}
+  m_Center: {x: -.0399999991, y: -.0599999987, z: .200000003}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -4880,6 +4896,7 @@ MonoBehaviour:
   FireBallPrefab: {fileID: 100002, guid: 66ab1d89078f5094985add52eb4c67f2, type: 2}
   jumpPawer: 35
   Velocity: {x: 0, y: 0, z: 0}
+  onGround: 0
   Goal: 0
   Jump: 0
   Damage: 0

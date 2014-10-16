@@ -25,6 +25,8 @@ public class PlayerCtrl : MonoBehaviour {
 	private float Speed = 7.0f;
 	[HideInInspector]
 	public Vector3 Velocity;
+	[HideInInspector]
+	public bool onGround;
 	public bool Goal = false;
 	public bool Jump = false;
 	public  bool Damage = false;
@@ -94,7 +96,7 @@ public class PlayerCtrl : MonoBehaviour {
 					Vector3 direction = new Vector3(0, 1, 0);
 					float length = 0.3f;
 					// 上方向にレイを飛ばしてブロックにあたっていないか判定
-					Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
+					//Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
 					if (Physics.Raycast(fromPos, direction, out hit, length)) {
 						if(hit.collider.tag == "Block"){
 							GameObject block = hit.collider.gameObject;
@@ -226,6 +228,7 @@ public class PlayerCtrl : MonoBehaviour {
 	void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag == "ItemShoot"){
 			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
+			// 甲羅が待機状態かつ自分が無敵でない
 			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !Invincible){
 				if(Velocity.x > 5f || Velocity.x < -5f){
 					Shoot.State = ItemShoot.ITEM_SHOOT_STATE.SHOOT;
@@ -234,6 +237,9 @@ public class PlayerCtrl : MonoBehaviour {
 			}
 			
 			else if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.SHOOT){
+				if(State != PLAYER_STATE.PLAYER_NORMAL){
+					StartCoroutine(NotHitJudge(1, "Player", "ItemShoot"));
+				}
 				PlayerDamage();
 			}
 			else if(Invincible){
@@ -268,16 +274,33 @@ public class PlayerCtrl : MonoBehaviour {
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
 			Destroy(other.gameObject);
 		}
+
+		if (other.gameObject.layer == LayerMask.NameToLayer ("Field") || other.gameObject.tag == "Block") {
+			onGround = true;
+		}
+		else {
+			onGround = false;
+		}
 	}
 	// キャラクターコントローラーのあたり判定動いているとき
 	void OnControllerColliderHit(ControllerColliderHit other){
+
+		// 甲羅にあたった場合
 		if(other.gameObject.tag == "ItemShoot"){
 			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
+			// 甲羅が待機状態かつ自分が無敵でない
 			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !Invincible){
 				if(Velocity.x > 5f || Velocity.x < -5f){
 					Shoot.State = ItemShoot.ITEM_SHOOT_STATE.SHOOT;
 					Shoot.Velocity = new Vector3(Shoot.Speed * Vector3.Normalize(new Vector3(Velocity.x, 0f, 0f)).x, 0f, 0f);
 				}
+			}
+			// 甲羅にあたったとき（蹴った瞬間をはじくために速度も判断）
+			else if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.SHOOT && Shoot.Velocity.x > 5f){
+				if(State != PLAYER_STATE.PLAYER_NORMAL){
+					StartCoroutine(NotHitJudge(1, "Player", "ItemShoot"));
+				}
+				PlayerDamage();
 			}
 			else if(Invincible){
 				Destroy(other.gameObject);
@@ -310,6 +333,12 @@ public class PlayerCtrl : MonoBehaviour {
 			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
 			Destroy(other.gameObject);
+		}
+		if (other.gameObject.layer == LayerMask.NameToLayer ("Field") || other.gameObject.tag == "Block") {
+			onGround = true;
+		}
+		else {
+			onGround = false;
 		}
 	}
 

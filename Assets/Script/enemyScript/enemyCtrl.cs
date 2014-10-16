@@ -49,6 +49,8 @@ public class enemyCtrl : MonoBehaviour {
 	}
 
 	IEnumerator Dead(float time){
+		gameObject.layer = LayerMask.NameToLayer("UI");
+		gameObject.tag = "Floor";
 		yield return new WaitForSeconds(time);
 		Destroy (gameObject);
 	}
