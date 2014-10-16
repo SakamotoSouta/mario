@@ -11,7 +11,7 @@ public class Fireball : MonoBehaviour {
 		effect = transform.Find ("InvinsibleEffect").GetComponent<ParticleSystem> ();
 		effect.Play();
 		Rigidbody Rb = gameObject.GetComponent("Rigidbody") as Rigidbody;
-		Rb.AddForce (100f, -500f, 0);
+		Rb.AddForce (100f, -200f, 0);
 	}
 	
 	// Update is called once per frame
@@ -26,12 +26,14 @@ public class Fireball : MonoBehaviour {
 	public void GenerateFireBall(Vector3 frontVector){
 		Velocity = frontVector * Speed;	
 	}
+
 	void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag == "NotBreakObject" || other.gameObject.tag == "Block"){
 			Destroy(gameObject);
 		}
 		if(other.collider.tag == "Enemy"){
 			Destroy(other.gameObject);
+			Destroy(gameObject);
 		}
 	}
 }

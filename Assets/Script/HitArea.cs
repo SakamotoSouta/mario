@@ -10,7 +10,7 @@ public class HitArea : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		rigidbody.WakeUp ();
 	}
 	// あたり判定
 	void OnTriggerEnter(Collider other){

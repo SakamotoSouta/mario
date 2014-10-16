@@ -49,19 +49,7 @@ public class ItemShoot : MonoBehaviour {
 		if (other.gameObject.tag == "NotBreakObject") {
 			Velocity = Vector3.Reflect(Velocity, new Vector3(-1f, 0f, 0f));
 		}// if
-		// プレイヤーにあたった場合
-		if(other.collider.tag == "Player"){
-			PlayerCtrl pc = other.gameObject.GetComponent("PlayerCtrl") as PlayerCtrl;
-			// 動いている場合プレイヤーにダメージ＆無敵状態だったら自身を消去
-			if(State == ITEM_SHOOT_STATE.SHOOT){
-				if(!pc.Invincible){
-					pc.PlayerDamage();
-				}
-			}
-			if(pc.Invincible){
-				Destroy(gameObject);
-			}
-		}
+
 
 		if (other.gameObject.tag == "Enemy" && State == ITEM_SHOOT_STATE.SHOOT) {
 			enemyCtrl ec = other.collider.GetComponent("enemyCtrl")as enemyCtrl;

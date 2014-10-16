@@ -11,10 +11,19 @@ public class ItemMushroom : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		rigidbody.WakeUp ();
 		transform.Translate (Velocity);
 
 		if(transform.position.y < -5){
 			Destroy(gameObject);
 		}
+	}
+
+	// あたり判定
+	void OnCollisionEnter(Collision other){
+		if(other.collider.tag == "NotBreakObject" || other.collider.tag == "Enemy"){
+			Velocity.x *= -1;
+		}
+
 	}
 }

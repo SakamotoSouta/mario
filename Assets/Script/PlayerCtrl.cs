@@ -71,6 +71,7 @@ public class PlayerCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		rigidbody.WakeUp ();
 		if(!Goal){
 			if(State == PLAYER_STATE.PLAYER_FIRE){
 				if(Input.GetKeyDown(KeyCode.Q)){
@@ -293,9 +294,8 @@ public class PlayerCtrl : MonoBehaviour {
 	void AnimEnd(){
 		StartCoroutine (rule.ClearGame("Result"));
 	}
-
-	// キャラクターコントローラーのあたり判定
-	void OnControllerColliderHit(ControllerColliderHit other){
+	//止まっているときのあたり判定
+	void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag == "ItemShoot"){
 			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
 			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !Invincible){
@@ -304,7 +304,7 @@ public class PlayerCtrl : MonoBehaviour {
 					Shoot.Velocity = new Vector3(Shoot.Speed * Vector3.Normalize(new Vector3(Velocity.x, 0f, 0f)).x, 0f, 0f);
 				}
 			}
-
+			
 			else if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.SHOOT){
 				PlayerDamage();
 			}
@@ -314,6 +314,51 @@ public class PlayerCtrl : MonoBehaviour {
 		}
 		// パワーアップ
 		if(other.gameObject.tag == "ItemPawerUp"){
+			Debug.Log ("");
+			GameObject Item = GameObject.Find("ItemRoot");
+			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
+			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
+			Destroy(other.gameObject);
+		}
+		// 花
+		if(other.gameObject.tag == "ItemStar"){
+			GameObject Item = GameObject.Find("ItemRoot");
+			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
+			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
+			Destroy(other.gameObject);
+		}
+		// コイン
+		if(other.gameObject.tag == "ItemCoin"){
+			GameObject Item = GameObject.Find("ItemRoot");
+			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
+			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_COIN);
+			Destroy(other.gameObject);
+		}
+		// スター
+		if(other.gameObject.tag == "ItemStar"){
+			GameObject Item = GameObject.Find("ItemRoot");
+			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
+			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
+			Destroy(other.gameObject);
+		}
+	}
+	// キャラクターコントローラーのあたり判定動いているとき
+	void OnControllerColliderHit(ControllerColliderHit other){
+		if(other.gameObject.tag == "ItemShoot"){
+			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
+			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !Invincible){
+				if(Velocity.x > 5f || Velocity.x < -5f){
+					Shoot.State = ItemShoot.ITEM_SHOOT_STATE.SHOOT;
+					Shoot.Velocity = new Vector3(Shoot.Speed * Vector3.Normalize(new Vector3(Velocity.x, 0f, 0f)).x, 0f, 0f);
+				}
+			}
+			else if(Invincible){
+				Destroy(other.gameObject);
+			}
+		}
+		// パワーアップ
+		if(other.gameObject.tag == "ItemPawerUp"){
+			Debug.Log ("");
 			GameObject Item = GameObject.Find("ItemRoot");
 			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
