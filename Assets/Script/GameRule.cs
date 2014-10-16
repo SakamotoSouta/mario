@@ -9,6 +9,8 @@ public class GameRule : MonoBehaviour {
 	private static int MaxLife = 3;
 	public float GameTime;
 	public GUIStyle customGuiStyle;
+	[HideInInspector]
+	public bool endFlag = false;
 
 	private GameObject Player;
 	private PlayerCtrl pc;
@@ -40,7 +42,10 @@ public class GameRule : MonoBehaviour {
 	private void TimeOver(){
 
 		pc.Damage = true;
-		StartCoroutine( Restart());
+		if (!endFlag) {
+			StartCoroutine (Restart ());
+			endFlag = true;
+		}
  	}
 
 	public IEnumerator Restart(){

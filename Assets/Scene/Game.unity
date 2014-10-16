@@ -35315,7 +35315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: 0
-  Coin1UpNum: 0
+  Coin1UpNum: 100
   GameTime: 300
   customGuiStyle:
     m_Name: 
@@ -35376,6 +35376,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  endFlag: 0
   WaitTime: 3
 --- !u!4 &1438697311
 Transform:

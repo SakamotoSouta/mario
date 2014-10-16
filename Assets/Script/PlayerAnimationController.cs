@@ -79,7 +79,11 @@ public class PlayerAnimationController : MonoBehaviour {
 
 	void OnDead(){
 		Anim.speed = 0f;
-		StartCoroutine(Rule.Restart());
+		if (!Rule.endFlag) {
+			StartCoroutine(Rule.Restart());
+			Rule.endFlag = true;
+		}
+
 	}
 	
 	// アニメーションイベント

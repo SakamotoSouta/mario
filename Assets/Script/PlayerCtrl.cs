@@ -110,7 +110,10 @@ public class PlayerCtrl : MonoBehaviour {
 
 			// 穴判定
 			if (transform.position.y < -5) {
-				StartCoroutine (rule.Restart ());
+				if(!rule.endFlag){
+					StartCoroutine (rule.Restart ());
+				}
+				rule.endFlag = true;
 			}
 		}
 		if(!Damage){
