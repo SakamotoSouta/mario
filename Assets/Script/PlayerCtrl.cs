@@ -56,7 +56,6 @@ public class PlayerCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 		if(!Goal){
 			if(State == PLAYER_STATE.PLAYER_FIRE){
 				if(Input.GetKeyDown(KeyCode.Q)){
@@ -93,7 +92,7 @@ public class PlayerCtrl : MonoBehaviour {
 					GameObject head = GameObject.Find("Character1_Spine1");
 					Vector3 fromPos = head.transform.position;
 					Vector3 direction = new Vector3(0, 1, 0);
-				float length = 0.1f;
+					float length = 0.3f;
 					// 上方向にレイを飛ばしてブロックにあたっていないか判定
 					Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
 					if (Physics.Raycast(fromPos, direction, out hit, length)) {
@@ -113,6 +112,7 @@ public class PlayerCtrl : MonoBehaviour {
 			}
 		}
 		if(!Damage){
+			// 重力処理
 			Velocity.y += Physics.gravity.y * Time.deltaTime;
  			Col.Move (Velocity * Time.deltaTime);
 
