@@ -625,8 +625,8 @@ ModelImporter:
     - serializedVersion: 16
       name: JUMP00
       takeName: Take 001
-      firstFrame: 1
-      lastFrame: 56
+      firstFrame: 11
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -717,28 +717,28 @@ ModelImporter:
           preInfinity: 2
           postInfinity: 2
       events:
-      - time: .166666657
+      - time: .0105690956
         functionName: OnJumpStart
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: .387209237
+      - time: .377453148
         functionName: OnJumpTopPoint
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: .826066613
+      - time: .931707382
         functionName: OnJumpHitEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: .969014108
+      - time: .95925802
         functionName: OnJumpEnd
         data: 
         objectReferenceParameter: {instanceID: 0}

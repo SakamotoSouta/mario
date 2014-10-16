@@ -2,12 +2,6 @@
 using System.Collections;
 
 public class PlayerCtrl : MonoBehaviour {
-	// アニメーション
-	private Animator Anim;
-	private int SpeedID;
-	private int JumpID;
-	private int DamageID;
-	private int GoalID;
 
 	// プレイヤーの状態
 	public enum PLAYER_STATE{
@@ -15,40 +9,37 @@ public class PlayerCtrl : MonoBehaviour {
 		PLAYER_SUPER,
 		PLAYER_FIRE,
 		PLAYER_MAX
-
 	}
-
 	public PLAYER_STATE State;
+
 	// エフェクト
 	ParticleSystem InvinsibleEffect;
-	// アニメーションのデフォルトの再生速度
-	private float defaultSpeed;
+
 	// 無敵
 	public bool Invincible = false;
 	public int InvincibleTime;
-	// 着地判定を調べる回数
-	private readonly int landingCheckLimit = 100;
-	// 着地判定チェックを行う時間間隔
-	private readonly float waitTime = 0.05F;
-	// 着地モーションへの移項を許可する距離
-	private readonly float landingDistance = 5F;
+	public GameObject FireBallPrefab;
+
 	public float jumpPawer;
-	public float Inertia;
-	public float Speed;
+	private float Inertia = 0.9f;
+	private float Speed = 7.0f;
 	[HideInInspector]
 	public Vector3 Velocity;
 	public bool Goal = false;
 	public bool Jump = false;
 	public  bool Damage = false;
-	public GameRule rule;
-	private float pawer;
+	private GameRule rule;
 	private CharacterController Col;
 	private int oldVector;
 	private bool blockHit = false;
-	public GameObject FireBallPrefab;
+
 
 	// Use this for initialization
 	void Start () {
+
+		// ゲーム管理者取得
+		GameObject GameRule = GameObject.Find ("GameRule");
+		rule = GameRule.GetComponent ("GameRule") as GameRule;
 		// プレイヤーのステートの初期化
 		State = PLAYER_STATE.PLAYER_NORMAL;
 
@@ -57,13 +48,7 @@ public class PlayerCtrl : MonoBehaviour {
 		InvinsibleEffect.Stop ();
 		// プレイヤーの向きベクトルの初期化
 		oldVector = 1;
-		// アニメーションの取得
-		Anim = GetComponent<Animator>();
-		// アニメーションイベントの取得
-		SpeedID = Animator.StringToHash ("Speed");
-		JumpID = Animator.StringToHash ("Jump");
-		DamageID = Animator.StringToHash ("Damage");
-		GoalID = Animator.StringToHash ("Goal");
+
 		transform.rotation = Quaternion.LookRotation(new Vector3(1f, 0f, 0f));
 		// キャラクターコントローラーの取得
 		Col = gameObject.GetComponent("CharacterController") as CharacterController;
@@ -71,7 +56,7 @@ public class PlayerCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		rigidbody.WakeUp ();
+
 		if(!Goal){
 			if(State == PLAYER_STATE.PLAYER_FIRE){
 				if(Input.GetKeyDown(KeyCode.Q)){
@@ -98,13 +83,11 @@ public class PlayerCtrl : MonoBehaviour {
 
 
 
-			if (Input.GetKey (KeyCode.Space) && Col.isGrounded) {
-					pawer = Input.GetAxis ("Jump") * jumpPawer;
-					Jump = true;
+			if (Input.GetKeyDown (KeyCode.Space) && Col.isGrounded) {
+				Jump = true;
 			}// if
 
 			if (Jump) {
-				CheckLanding ();
 				if(!blockHit){
 					RaycastHit hit;
 					GameObject head = GameObject.Find("Character1_Spine1");
@@ -131,50 +114,18 @@ public class PlayerCtrl : MonoBehaviour {
 		}
 		if(!Damage){
 			Velocity.y += Physics.gravity.y * Time.deltaTime;
-			Col.Move (Velocity * Time.deltaTime);
+ 			Col.Move (Velocity * Time.deltaTime);
 
 			// 慣性
 			Velocity *= Inertia;
 		}
 		// 地面に接していたら
 		if (Col.isGrounded) {
+			blockHit = false;
 			Velocity.y = 0f;
 		}// if
-		// アニメーションの設定
-		AnimSet ();
-
-
 	}
-
-	void AnimSet(){
-		// アニメーションの設定
-		if (Velocity.x < 0f) {
-			Anim.SetFloat (SpeedID, Velocity.x * -1); 
-		}// if
-		else {
-			Anim.SetFloat (SpeedID, Velocity.x); 
-		}// else
-
-		Anim.SetBool (DamageID, Damage);
-		Anim.SetBool (JumpID, Jump);
-		Anim.SetBool (GoalID, Goal);
-	}
-
-	IEnumerator CheckLanding()
-	{
-		// 規定回数チェックして成功しない場合も着地モーションに移行する
-		for(int count = 0;count < landingCheckLimit; count++)
-		{
-			var raycast = new RaycastHit();
-			var raycastSuccess = Physics.Raycast(transform.position, Vector3.down, out raycast);
-			// レイを飛ばして、成功且つ一定距離内であった場合、着地モーションへ移行させる
-			if(raycastSuccess && raycast.distance < landingDistance) break;
-			yield return new WaitForSeconds(waitTime);
-		}
-		Anim.speed = defaultSpeed;
-		yield break;
-	}
-
+	
 	// ゴール
 	public void GoalIn(){
 		Goal = true;
@@ -205,7 +156,7 @@ public class PlayerCtrl : MonoBehaviour {
 
 	}
 
-	// あたり判定
+
 	void PlayerDead(){
 		Jump = false;
 		Col.enabled = false;
@@ -270,30 +221,7 @@ public class PlayerCtrl : MonoBehaviour {
 
 	}
 
-	void OnDead(){
-		Anim.speed = 0f;
-		StartCoroutine(rule.Restart());
-	}
 
-	// アニメーションイベント
-	void OnJumpStart(){
-		defaultSpeed = Anim.speed;
-		Velocity.y = pawer;
-	}
-	void OnJumpTopPoint(){
-		Anim.speed = 0f;
-		StartCoroutine(CheckLanding());
-	}
-
-	void OnJumpHitEnd(){
-		Jump = false;
-		blockHit = false;
-	}
-	void OnJumpEnd(){
-	}
-	void AnimEnd(){
-		StartCoroutine (rule.ClearGame("Result"));
-	}
 	//止まっているときのあたり判定
 	void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag == "ItemShoot"){
@@ -314,7 +242,6 @@ public class PlayerCtrl : MonoBehaviour {
 		}
 		// パワーアップ
 		if(other.gameObject.tag == "ItemPawerUp"){
-			Debug.Log ("");
 			GameObject Item = GameObject.Find("ItemRoot");
 			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
@@ -358,7 +285,6 @@ public class PlayerCtrl : MonoBehaviour {
 		}
 		// パワーアップ
 		if(other.gameObject.tag == "ItemPawerUp"){
-			Debug.Log ("");
 			GameObject Item = GameObject.Find("ItemRoot");
 			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
@@ -392,6 +318,5 @@ public class PlayerCtrl : MonoBehaviour {
 		Physics.IgnoreLayerCollision (LayerMask.NameToLayer(Layer1), LayerMask.NameToLayer(Layer2), true);
 		yield return new WaitForSeconds (InvinsibleTime);
 		Physics.IgnoreLayerCollision (LayerMask.NameToLayer(Layer1), LayerMask.NameToLayer(Layer2), false);
-
 	}
 }

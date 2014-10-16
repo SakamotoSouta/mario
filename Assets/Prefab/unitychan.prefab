@@ -43,7 +43,7 @@ GameObject:
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
   - 143: {fileID: 14300000}
-  - 54: {fileID: 5400000}
+  - 114: {fileID: 11400006}
   m_Layer: 10
   m_Name: unitychan
   m_TagString: Player
@@ -1584,6 +1584,7 @@ GameObject:
   - 4: {fileID: 400206}
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400004}
+  - 54: {fileID: 5400000}
   m_Layer: 10
   m_Name: Character1_Spine
   m_TagString: Untagged
@@ -4825,7 +4826,7 @@ Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100004}
+  m_GameObject: {fileID: 100206}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -4845,8 +4846,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.25, y: .620000005, z: 1}
-  m_Center: {x: -.0500000007, y: -.0199999996, z: .200000003}
+  m_Size: {x: 1.22000003, y: .529999971, z: 1}
+  m_Center: {x: -.159999996, y: -.0500000007, z: .200000003}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -4876,14 +4877,12 @@ MonoBehaviour:
   State: 0
   Invincible: 0
   InvincibleTime: 5
+  FireBallPrefab: {fileID: 100002, guid: 66ab1d89078f5094985add52eb4c67f2, type: 2}
   jumpPawer: 35
-  Inertia: .899999976
-  Speed: 10
   Velocity: {x: 0, y: 0, z: 0}
   Goal: 0
   Jump: 0
   Damage: 0
-  rule: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4904,6 +4903,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b795ad0d1e16dcc43a93728c5b317978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b91030bdea47a04ea9e647321fe08db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &13500000
