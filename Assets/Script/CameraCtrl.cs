@@ -7,7 +7,8 @@ public class CameraCtrl : MonoBehaviour {
 	public bool FillowTarget = true;
 	// Use this for initialization
 	void Start () {
-	
+		//　プレイヤーの取得
+		Target = GameObject.FindGameObjectWithTag ("Player");
 	}
 	
 	// Update is called once per frame

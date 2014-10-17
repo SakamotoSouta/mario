@@ -20,6 +20,8 @@ public class PlayerCtrl : MonoBehaviour {
 	public int InvincibleTime;
 	public GameObject FireBallPrefab;
 
+	private GameObject Item;
+	ItemController ItemController;
 	public float jumpPawer;
 	private float Inertia = 0.9f;
 	private float Speed = 7.0f;
@@ -34,11 +36,16 @@ public class PlayerCtrl : MonoBehaviour {
 	private CharacterController Col;
 	private int oldVector;
 	private bool blockHit = false;
-
+	public bool waitPipe = false;
+	public bool Bonus = false;
+	[HideInInspector]
+	public bool outPipe = false;
 
 	// Use this for initialization
 	void Start () {
-
+		// アイテム管理者の取得
+		Item = GameObject.Find ("ItemRoot");
+		ItemController = Item.GetComponent("ItemController") as ItemController;
 		// ゲーム管理者取得
 		GameObject GameRule = GameObject.Find ("GameRule");
 		rule = GameRule.GetComponent ("GameRule") as GameRule;
@@ -51,14 +58,14 @@ public class PlayerCtrl : MonoBehaviour {
 		// プレイヤーの向きベクトルの初期化
 		oldVector = 1;
 
-		transform.rotation = Quaternion.LookRotation(new Vector3(1f, 0f, 0f));
+		transform.localRotation = Quaternion.LookRotation(new Vector3(1f, 0f, 0f));
 		// キャラクターコントローラーの取得
 		Col = gameObject.GetComponent("CharacterController") as CharacterController;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(!Goal){
+		if(!Goal && !waitPipe){
 			if(State == PLAYER_STATE.PLAYER_FIRE){
 				if(Input.GetKeyDown(KeyCode.Q)){
 					GameObject Fb = Instantiate(FireBallPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.rotation) as GameObject;
@@ -116,7 +123,25 @@ public class PlayerCtrl : MonoBehaviour {
 				rule.endFlag = true;
 			}
 		}
-		if(!Damage){
+
+		// パイプにもぐるあいだ
+		if(waitPipe){
+
+			if(!Bonus){
+				if(!outPipe){
+					transform.Translate(0, -0.01f, 0);
+				}
+				else if(outPipe){
+					transform.Translate(0, 0.01f, 0);
+				}
+			}
+
+			else if(Bonus){
+				transform.Translate(0, 0, 0.01f);
+			}
+		}
+
+		if(!Damage && !outPipe){
 			// 重力処理
 			Velocity.y += Physics.gravity.y * Time.deltaTime;
  			Col.Move (Velocity * Time.deltaTime);
@@ -251,29 +276,17 @@ public class PlayerCtrl : MonoBehaviour {
 		}
 		// パワーアップ
 		if(other.gameObject.tag == "ItemPawerUp"){
-			GameObject Item = GameObject.Find("ItemRoot");
-			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
 			Destroy(other.gameObject);
 		}
 		// 花
 		if(other.gameObject.tag == "ItemStar"){
-			GameObject Item = GameObject.Find("ItemRoot");
-			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
 			Destroy(other.gameObject);
 		}
-		// コイン
-		if(other.gameObject.tag == "ItemCoin"){
-			GameObject Item = GameObject.Find("ItemRoot");
-			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
-			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_COIN);
-			Destroy(other.gameObject);
-		}
+
 		// スター
 		if(other.gameObject.tag == "ItemStar"){
-			GameObject Item = GameObject.Find("ItemRoot");
-			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
 			Destroy(other.gameObject);
 		}
@@ -284,6 +297,7 @@ public class PlayerCtrl : MonoBehaviour {
 		else {
 			onGround = false;
 		}
+
 	}
 	// キャラクターコントローラーのあたり判定動いているとき
 	void OnControllerColliderHit(ControllerColliderHit other){
@@ -311,29 +325,17 @@ public class PlayerCtrl : MonoBehaviour {
 		}
 		// パワーアップ
 		if(other.gameObject.tag == "ItemPawerUp"){
-			GameObject Item = GameObject.Find("ItemRoot");
-			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
 			Destroy(other.gameObject);
 		}
 		// 花
 		if(other.gameObject.tag == "ItemStar"){
-			GameObject Item = GameObject.Find("ItemRoot");
-			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
 			Destroy(other.gameObject);
 		}
-		// コイン
-		if(other.gameObject.tag == "ItemCoin"){
-			GameObject Item = GameObject.Find("ItemRoot");
-			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
-			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_COIN);
-			Destroy(other.gameObject);
-		}
+
 		// スター
 		if(other.gameObject.tag == "ItemStar"){
-			GameObject Item = GameObject.Find("ItemRoot");
-			ItemController ItemController = Item.GetComponent("ItemController") as ItemController;
 			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
 			Destroy(other.gameObject);
 		}

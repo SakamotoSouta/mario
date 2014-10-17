@@ -8,15 +8,19 @@ public class ItemCoin : MonoBehaviour {
 		COIN_TYPE_MAX
 	}
 
+
 	public COIN_TYPE coinType;
+	private GameObject ItemRoot;
+	private ItemController ItemController;
 	private float Counter = 0;
-	public GameObject GameRule;
-	private GameRule Rule;
+
 
 	// Use this for initialization
 	void Start () {
-		GameRule = GameObject.Find("GameRule");
-		Rule = GameRule.GetComponent ("GameRule") as GameRule;
+		// アイテム管理者の取得
+		ItemRoot = GameObject.Find("ItemRoot");
+		ItemController = ItemRoot.GetComponent ("ItemController") as ItemController;
+
 		if (coinType == COIN_TYPE.BLOCK_COIN) {
 			CapsuleCollider hit = gameObject.GetComponent("CapsuleCollider") as CapsuleCollider;
 			hit.enabled = false;
@@ -40,5 +44,13 @@ public class ItemCoin : MonoBehaviour {
 			break;
 		}
 	
+	}
+
+	// あたった瞬間
+	void OnTriggerEnter(Collider other){
+		if(other.tag == "Player"){
+			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_COIN);
+			Destroy(gameObject);
+		}
 	}
 }

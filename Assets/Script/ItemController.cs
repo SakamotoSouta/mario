@@ -65,9 +65,7 @@ public class ItemController : MonoBehaviour {
 		case ITEM_TYPE.ITEM_COIN:
 			GameObject GameRule = GameObject.Find("GameRule");
 			GameRule Rule = GameRule.GetComponent("GameRule") as GameRule;
-
 			Rule.GetCoin();
-			Destroy(gameObject);
 			break;
 		case ITEM_TYPE.ITEM_STAR:
 			pc.GetStar();

@@ -4,15 +4,32 @@ using System.Collections;
 public class AttackArea : MonoBehaviour {
 	private GameObject Player;
 	private PlayerCtrl pc;
+	GameObject GameRuleObject;
+	GameRule Rule;
+	[HideInInspector]
+	public bool inPipe = false;
 
 	// Use this for initialization
 	void Start () {
+		GameRuleObject = GameObject.Find ("GameRule");
+		Rule = GameRuleObject.GetComponent ("GameRule") as GameRule;
+
 		Player = GameObject.FindGameObjectWithTag("Player");
 		// キャラクターコントローラーを取得
 		pc = Player.GetComponent("PlayerCtrl")as PlayerCtrl;
 	}
+
 	// Update is called once per frame
 	void Update () {
+		// パイプアクションが終わったら
+		if (inPipe && !pc.Bonus) {
+			inPipe = false;
+			pc.Bonus = true;
+			// あたり判定を戻す
+			Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Pipe"), false);
+			Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
+			Rule.PipeInChangeScene();
+		}
 		if (!pc.onGround) {
 			RaycastHit hit;
 			GameObject leg = GameObject.Find("Character1_LeftToeBase");
@@ -28,11 +45,35 @@ public class AttackArea : MonoBehaviour {
 					
 					pc.Velocity.y += pc.jumpPawer / 2;
 				}
+
+				//　パイプに乗っているときに使途を押した場合
+				if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Pipe") && !pc.Bonus){
+					if(Input.GetKeyDown(KeyCode.DownArrow) && !pc.waitPipe){
+						// レイヤーのあたり判定を消す
+						Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Pipe"));
+						Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"));
+						pc.transform.position = new Vector3(hit.collider.transform.position.x, pc.transform.position.y, hit.collider.transform.position.z);	
+						pc.transform.rotation = Quaternion.Euler(0, 180, 0);
+						pc.Velocity = new Vector3(0, 0, 0);
+						pc.waitPipe = true;
+					}
+				}
 			}
 		}	
+
+		// パイプに入り切ったとき
+		if(pc.waitPipe && !pc.Bonus){
+			if(pc.transform.position.y < 0){
+				inPipe = true;
+				pc.waitPipe = false;
+			}
+			else if(pc.transform.position.y > 4.153705f){
+				pc.waitPipe = false;
+				pc.outPipe = false;
+			}
+		}
 	}
-
-
+	
 	void OnTriggerEnter(Collider other){
 		if(other.collider.tag == "ItemShoot" && pc.Jump){
 			ItemShoot Item = other.collider.GetComponent("ItemShoot") as ItemShoot;

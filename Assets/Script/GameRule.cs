@@ -11,7 +11,9 @@ public class GameRule : MonoBehaviour {
 	public GUIStyle customGuiStyle;
 	[HideInInspector]
 	public bool endFlag = false;
-
+	// ゲームシーンのオブジェクト
+	private GameObject gameSceneObject;
+	private GameObject notActiveObject;
 	private GameObject Player;
 	private PlayerCtrl pc;
 	// 遷移時間
@@ -19,6 +21,8 @@ public class GameRule : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gameSceneObject = GameObject.Find ("GameSceneObject");
+		notActiveObject = GameObject.Find ("NotActiveObject");
 		Score = 0;
 		CoinCount = 0;
 		Player = GameObject.FindGameObjectWithTag("Player");
@@ -84,6 +88,19 @@ public class GameRule : MonoBehaviour {
 			CoinCount = 0;
 			Life1Up();
 		}
+	}
+
+	// パイプに入ったとき
+	public void PipeInChangeScene(){
+		pc.transform.position = new Vector3(0, 10, 0);
+		notActiveObject.SetActive(false);
+		Application.LoadLevelAdditive("Bonus");
+	}
+
+	public void PipeOutChangeScene(){
+		pc.transform.position = new Vector3(158.9707f, 0.7177644f, 0);
+		notActiveObject.SetActive(true);
+		pc.outPipe = true;
 	}
 
 	public void Life1Up(){
