@@ -132,12 +132,12 @@ public class PlayerCtrl : MonoBehaviour {
 					transform.Translate(0, -0.01f, 0);
 				}
 				else if(outPipe){
-					transform.Translate(0, 0.01f, 0);
+					transform.Translate(0, 0.03f, 0);
 				}
 			}
 
 			else if(Bonus){
-				transform.Translate(0, 0, 0.01f);
+				transform.Translate(0, 0, 0.03f);
 			}
 		}
 

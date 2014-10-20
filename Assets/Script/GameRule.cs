@@ -98,7 +98,8 @@ public class GameRule : MonoBehaviour {
 	}
 
 	public void PipeOutChangeScene(){
-		pc.transform.position = new Vector3(158.9707f, 0.7177644f, 0);
+		pc.transform.rotation = Quaternion.Euler(0, 180, 0);
+		pc.transform.position = new Vector3(110.1489f, -3.49503f, 0);
 		notActiveObject.SetActive(true);
 		pc.outPipe = true;
 	}

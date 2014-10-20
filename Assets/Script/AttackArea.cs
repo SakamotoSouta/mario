@@ -63,11 +63,12 @@ public class AttackArea : MonoBehaviour {
 
 		// パイプに入り切ったとき
 		if(pc.waitPipe && !pc.Bonus){
-			if(pc.transform.position.y < 0){
+			if(pc.transform.position.y < -3.49503  && !pc.outPipe){
 				inPipe = true;
 				pc.waitPipe = false;
 			}
-			else if(pc.transform.position.y > 4.153705f){
+			// パイプからでる処理
+			else if(pc.transform.position.y > -0.7715993f && pc.outPipe){
 				pc.waitPipe = false;
 				pc.outPipe = false;
 			}
