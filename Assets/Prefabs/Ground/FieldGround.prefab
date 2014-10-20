@@ -3795,7 +3795,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400314}
   m_Layer: 0
-  m_Name: Field_Ground
+  m_Name: FieldGround
   m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
