@@ -35384,8 +35384,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 484625fc4e78fa848803023f8f68e0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 0
-  Coin1UpNum: 100
+  Score: 1
+  Coin1UpNum: 1
   GameTime: 300
   customGuiStyle:
     m_Name: 

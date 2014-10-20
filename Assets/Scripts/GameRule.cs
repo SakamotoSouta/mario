@@ -84,7 +84,7 @@ public class GameRule : MonoBehaviour {
 	public void GetCoin(){
 		CoinCount++;
 		AddScore(100);
-		if(CoinCount > Coin1UpNum){
+		if(CoinCount >= Coin1UpNum){
 			CoinCount = 0;
 			Life1Up();
 		}

@@ -14,7 +14,7 @@ public class SetCollider : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		colliderObject [0].transform.position = new Vector3 (transform.position.x, transform.position.y, 0.8f);
-		colliderObject [1].transform.position = new Vector3 (transform.position.x, transform.position.y, -0.8f);
+		colliderObject [0].transform.position = new Vector3 (transform.position.x, transform.position.y, 1f);
+		colliderObject [1].transform.position = new Vector3 (transform.position.x, transform.position.y, -1f);
 	}
 }
