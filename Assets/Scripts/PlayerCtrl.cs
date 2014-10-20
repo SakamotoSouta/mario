@@ -65,6 +65,13 @@ public class PlayerCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// Z判定入れるとバグるアニメーションのところを修正するときに実装する
+		/*
+		if (transform.position.z > 0 || transform.position.z < 0) {
+			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+		}
+		*/
+
 		if(!Goal && !waitPipe){
 			if(State == PLAYER_STATE.PLAYER_FIRE){
 				if(Input.GetKeyDown(KeyCode.Q)){
