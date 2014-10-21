@@ -7,8 +7,10 @@ public class Goal : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Player = GameObject.FindGameObjectWithTag ("Player");
-		Pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+		if(Application.loadedLevelName == "Game"){
+			Player = GameObject.FindGameObjectWithTag ("Player");
+			Pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+		}
 	}
 	
 	// Update is called once per frame

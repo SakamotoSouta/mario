@@ -27,23 +27,27 @@ public class enemyCtrl : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(State == ENEMY_STATE.ACTIVE){
-			transform.Translate (Velocity);
-			
-			if(transform.position.y < -5){
-				Destroy(gameObject);
-			}
-		}
-		else if(State == ENEMY_STATE.DEAD){
-			if(Type == ENEMY_TYPE.TYPE1){
-				transform.localScale = new Vector3(1f, 0.5f, 1f);
-				StartCoroutine(Dead(3f));
-			}
-			else if(Type == ENEMY_TYPE.TYPE2){
-				Instantiate(Type2Item, transform.position, transform.rotation);
-				Destroy (gameObject);
+		if (Application.loadedLevelName == "Game") {
+						if (State == ENEMY_STATE.ACTIVE) {
+								transform.Translate (Velocity);
+				
+								if (transform.position.y < -5) {
+										Destroy (gameObject);
+								}
+						} else if (State == ENEMY_STATE.DEAD) {
+								if (Type == ENEMY_TYPE.TYPE1) {
+										transform.localScale = new Vector3 (1f, 0.5f, 1f);
+										StartCoroutine (Dead (3f));
+								} else if (Type == ENEMY_TYPE.TYPE2) {
+										Instantiate (Type2Item, transform.position, transform.rotation);
+										Destroy (gameObject);
 
-			}
+								}
+						}
+				}
+		else {
+			Rigidbody physics = GetComponent<Rigidbody>();
+			physics.isKinematic = true;
 		}
 
 	}
