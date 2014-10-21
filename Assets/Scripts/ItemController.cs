@@ -34,8 +34,8 @@ public class ItemController : MonoBehaviour {
 			// アイテムの種類判断
 		case ITEM_TYPE.ITEM_PAWERUP:
 			GameObject Player = GameObject.FindGameObjectWithTag("Player");
-			PlayerCtrl pc = Player.GetComponent("PlayerCtrl") as PlayerCtrl;
-			if(pc.State == PlayerCtrl.PLAYER_STATE.PLAYER_NORMAL){
+			PlayerController pc = Player.GetComponent("PlayerController") as PlayerController;
+			if(pc.State == PlayerController.PLAYER_STATE.PLAYER_NORMAL){
 				ItemObject = ItemMushroomPrefab; 
 			}
 			else{
@@ -57,7 +57,7 @@ public class ItemController : MonoBehaviour {
 
 	public void GetItem(ITEM_TYPE Item){
 		GameObject Player = GameObject.FindGameObjectWithTag ("Player");
-		PlayerCtrl pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+		PlayerController pc = Player.GetComponent ("PlayerController") as PlayerController;
 		switch(Item){
 		case ITEM_TYPE.ITEM_PAWERUP:
 			pc.PlayerPawerUp();

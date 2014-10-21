@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BonusPipe : MonoBehaviour {
 	private GameObject Player;
-	private PlayerCtrl pc;
+	private PlayerController pc;
 	GameObject GameRuleObject;
 	GameRule Rule;
 	[HideInInspector]
@@ -15,20 +15,19 @@ public class BonusPipe : MonoBehaviour {
 		Rule = GameRuleObject.GetComponent ("GameRule") as GameRule;
 		Player = GameObject.FindGameObjectWithTag("Player");
 		// キャラクターコントローラーを取得
-		pc = Player.GetComponent("PlayerCtrl")as PlayerCtrl;	
+		pc = Player.GetComponent("PlayerController")as PlayerController;	
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// パイプアクションが終わったら
-		if (inPipe && pc.Bonus) {
+		if (inPipe) {
 			inPipe = false;
-			pc.Bonus = false;
 			// あたり判定を戻す
-			Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Pipe"), false);
+			Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("InPipe"), false);
 			Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), false);
 
-			Rule.PipeOutChangeScene();
+			//Rule.PipeOutChangeScene();
 			GameObject Delete = GameObject.Find("DeleteObject");
 			Destroy(Delete);
 
@@ -41,18 +40,17 @@ public class BonusPipe : MonoBehaviour {
 		// 下方向にレイを飛ばして判定
 		Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
 		if (Physics.Raycast(fromPos, direction, out hit, length)) {		
-			if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Player") && pc.Bonus){
-				if(Input.GetKeyDown(KeyCode.RightArrow) && !pc.waitPipe){
+			if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
+				if(Input.GetKeyDown(KeyCode.RightArrow)){
 					// レイヤーのあたり判定を消す
-					Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Pipe"));
-					pc.waitPipe = true;
+					Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("InPipe"));
 					pc.transform.rotation = Quaternion.Euler( 0, 90, 0);
 					pc.Velocity = new Vector3(0, 0, 0);
 				}
 			}
 		}
 
-		if(pc.transform.position.x > 15f && pc.waitPipe && pc.Bonus){
+		if(pc.transform.position.x > 15f){
 			inPipe = true;
 		}
 	}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerCtrl : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
 	// プレイヤーの状態
 	public enum PLAYER_STATE{
@@ -36,10 +36,10 @@ public class PlayerCtrl : MonoBehaviour {
 	private CharacterController Col;
 	private int oldVector;
 	private bool blockHit = false;
-	public bool waitPipe = false;
-	public bool Bonus = false;
 	[HideInInspector]
-	public bool outPipe = false;
+	// プレイヤーを操作できるかどうか
+	public bool PlayerControllFlag = true;
+
 
 	// Use this for initialization
 	void Start () {
@@ -72,7 +72,7 @@ public class PlayerCtrl : MonoBehaviour {
 		}
 		*/
 
-		if(!Goal && !waitPipe){
+		if(PlayerControllFlag){
 			if(State == PLAYER_STATE.PLAYER_FIRE){
 				if(Input.GetKeyDown(KeyCode.Q)){
 					GameObject Fb = Instantiate(FireBallPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.rotation) as GameObject;
@@ -131,24 +131,7 @@ public class PlayerCtrl : MonoBehaviour {
 			}
 		}
 
-		// パイプにもぐるあいだ
-		if(waitPipe){
-
-			if(!Bonus){
-				if(!outPipe){
-					transform.Translate(0, -0.01f, 0);
-				}
-				else if(outPipe){
-					transform.Translate(0, 0.03f, 0);
-				}
-			}
-
-			else if(Bonus){
-				transform.Translate(0, 0, 0.03f);
-			}
-		}
-
-		if(!Damage && !outPipe){
+		if(!Damage && PlayerControllFlag){
 			// 重力処理
 			Velocity.y += Physics.gravity.y * Time.deltaTime;
  			Col.Move (Velocity * Time.deltaTime);
@@ -165,6 +148,7 @@ public class PlayerCtrl : MonoBehaviour {
 	
 	// ゴール
 	public void GoalIn(){
+		PlayerControllFlag = false;
 		Goal = true;
 		Jump = false;
 		Damage = false;
@@ -258,101 +242,12 @@ public class PlayerCtrl : MonoBehaviour {
 
 	}
 
-
-	//止まっているときのあたり判定
-	void OnCollisionEnter(Collision other){
-		if(other.gameObject.tag == "ItemShoot"){
-			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
-			// 甲羅が待機状態かつ自分が無敵でない
-			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !Invincible){
-				if(Velocity.x > 5f || Velocity.x < -5f){
-					Shoot.State = ItemShoot.ITEM_SHOOT_STATE.SHOOT;
-					Shoot.Velocity = new Vector3(Shoot.Speed * Vector3.Normalize(new Vector3(Velocity.x, 0f, 0f)).x, 0f, 0f);
-				}
-			}
-			
-			else if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.SHOOT){
-				if(State != PLAYER_STATE.PLAYER_NORMAL){
-					StartCoroutine(NotHitJudge(1, "Player", "ItemShoot"));
-				}
-				PlayerDamage();
-			}
-			else if(Invincible){
-				Destroy(other.gameObject);
-			}
-		}
-		// パワーアップ
-		if(other.gameObject.tag == "ItemPawerUp"){
-			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
-			Destroy(other.gameObject);
-		}
-		// 花
-		if(other.gameObject.tag == "ItemStar"){
-			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
-			Destroy(other.gameObject);
-		}
-
-		// スター
-		if(other.gameObject.tag == "ItemStar"){
-			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
-			Destroy(other.gameObject);
-		}
-
-		if (other.gameObject.layer == LayerMask.NameToLayer ("Field") || other.gameObject.tag == "Block") {
-			onGround = true;
-		}
-		else {
-			onGround = false;
-		}
-
+	// プレイヤーアイテム取得
+	public void PlayerGetItem(GameObject Item, ItemController.ITEM_TYPE Type){
+		ItemController.GetItem(Type);
+		Destroy(Item.gameObject);
 	}
-	// キャラクターコントローラーのあたり判定動いているとき
-	void OnControllerColliderHit(ControllerColliderHit other){
 
-		// 甲羅にあたった場合
-		if(other.gameObject.tag == "ItemShoot"){
-			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
-			// 甲羅が待機状態かつ自分が無敵でない
-			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !Invincible){
-				if(Velocity.x > 5f || Velocity.x < -5f){
-					Shoot.State = ItemShoot.ITEM_SHOOT_STATE.SHOOT;
-					Shoot.Velocity = new Vector3(Shoot.Speed * Vector3.Normalize(new Vector3(Velocity.x, 0f, 0f)).x, 0f, 0f);
-				}
-			}
-			// 甲羅にあたったとき（蹴った瞬間をはじくために速度も判断）
-			else if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.SHOOT && Shoot.Velocity.x > 5f){
-				if(State != PLAYER_STATE.PLAYER_NORMAL){
-					StartCoroutine(NotHitJudge(1, "Player", "ItemShoot"));
-				}
-				PlayerDamage();
-			}
-			else if(Invincible){
-				Destroy(other.gameObject);
-			}
-		}
-		// パワーアップ
-		if(other.gameObject.tag == "ItemPawerUp"){
-			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_PAWERUP);
-			Destroy(other.gameObject);
-		}
-		// 花
-		if(other.gameObject.tag == "ItemStar"){
-			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
-			Destroy(other.gameObject);
-		}
-
-		// スター
-		if(other.gameObject.tag == "ItemStar"){
-			ItemController.GetItem(ItemController.ITEM_TYPE.ITEM_STAR);
-			Destroy(other.gameObject);
-		}
-		if (other.gameObject.layer == LayerMask.NameToLayer ("Field") || other.gameObject.tag == "Block") {
-			onGround = true;
-		}
-		else {
-			onGround = false;
-		}
-	}
 
 	// レイヤー制御であたり判定を一定時間消す
 	public IEnumerator NotHitJudge(float InvinsibleTime ,string Layer1, string Layer2){

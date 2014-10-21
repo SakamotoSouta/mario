@@ -72,8 +72,8 @@ public class Block : MonoBehaviour {
 
 	void HitBreakBlock(){
 		GameObject Player = GameObject.FindGameObjectWithTag ("Player");
-		PlayerCtrl pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
-		if (pc.State != PlayerCtrl.PLAYER_STATE.PLAYER_NORMAL) {
+		PlayerController pc = Player.GetComponent ("PlayerController") as PlayerController;
+		if (pc.State != PlayerController.PLAYER_STATE.PLAYER_NORMAL) {
 			Destroy (gameObject);
 		}
 		else {

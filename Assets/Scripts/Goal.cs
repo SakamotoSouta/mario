@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Goal : MonoBehaviour {
 	GameObject Player;
-	PlayerCtrl Pc;
+	PlayerController Pc;
 
 	// Use this for initialization
 	void Start () {
 		if(Application.loadedLevelName == "Game"){
 			Player = GameObject.FindGameObjectWithTag ("Player");
-			Pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+			Pc = Player.GetComponent ("PlayerController") as PlayerController;
 		}
 	}
 	

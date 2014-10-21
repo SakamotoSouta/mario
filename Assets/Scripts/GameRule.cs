@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class GameRule : MonoBehaviour {
+	public static int MaxScene = 3;
 	public static int Life = 3;
 	public int Score;
 	private int CoinCount;
@@ -15,9 +16,11 @@ public class GameRule : MonoBehaviour {
 	private GameObject gameSceneObject;
 	private GameObject notActiveObject;
 	private GameObject Player;
-	private PlayerCtrl pc;
+	private PlayerController pc;
 	// 遷移時間
 	public int WaitTime;
+	public bool activeObjectFlag = true;
+	private GameObject staticObject;
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +29,10 @@ public class GameRule : MonoBehaviour {
 		Score = 0;
 		CoinCount = 0;
 		Player = GameObject.FindGameObjectWithTag("Player");
-		pc = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+		pc = Player.GetComponent ("PlayerController") as PlayerController;
+
+		staticObject = GameObject.Find("staticObject");
+		DontDestroyOnLoad(staticObject);
 	}
 	
 	// Update is called once per frame
@@ -37,6 +43,7 @@ public class GameRule : MonoBehaviour {
 				GameTime = 0;
 				TimeOver();
 			}
+
 		}
 	}
 
@@ -59,13 +66,21 @@ public class GameRule : MonoBehaviour {
 			GameOver();
 			yield break;
 		}
-		Application.LoadLevel("Game");
+		Application.LoadLevel(Application.loadedLevelName);
 	}
 
+	// クリア
 	public IEnumerator ClearGame (string NextScene){
 		yield return new WaitForSeconds(WaitTime);
 
-		Application.LoadLevel(NextScene);
+		if (MaxScene > Application.loadedLevel + 1) {
+			MaxScene = Application.loadedLevel + 1;
+
+			Application.LoadLevel(MaxScene);
+		}
+		else{
+			GameOver();
+		}
 	}
 
 	// Lifeの取得
@@ -91,17 +106,25 @@ public class GameRule : MonoBehaviour {
 	}
 
 	// パイプに入ったとき
-	public void PipeInChangeScene(){
-		pc.transform.position = new Vector3(0, 10, 0);
-		notActiveObject.SetActive(false);
-		Application.LoadLevelAdditive("Bonus");
-	}
-
-	public void PipeOutChangeScene(){
-		pc.transform.rotation = Quaternion.Euler(0, 180, 0);
-		pc.transform.position = new Vector3(110.1489f, -3.49503f, 0);
-		notActiveObject.SetActive(true);
-		pc.outPipe = true;
+	public void PipeInChangeScene(Vector3 afterPosition, string sceneName){
+		// 位置の設定
+		pc.transform.position = afterPosition;
+		// オリジナル→サブ
+		if (activeObjectFlag) {
+			Application.LoadLevelAdditive(sceneName);
+			notActiveObject.SetActive (false);
+			activeObjectFlag = false;
+		}
+		// サブ→オリジナル
+		else{
+			notActiveObject.SetActive (true);
+			activeObjectFlag = true;
+			GameObject Delete = GameObject.Find("DeleteObject");
+			Destroy(Delete);
+			GameObject OutPipe = GameObject.Find("OutPipe");
+			PipeActionController PipeAction = OutPipe.GetComponent("PipeActionController") as PipeActionController;
+			PipeAction.SetPipeAction(new Vector3(0, 180, 0));
+		}
 	}
 
 	public void Life1Up(){
@@ -111,4 +134,5 @@ public class GameRule : MonoBehaviour {
 	void GameOver(){
 		Application.LoadLevel ("Result");
 	}
+	
 }

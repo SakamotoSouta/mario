@@ -18,7 +18,7 @@ public class PlayerAnimationController : MonoBehaviour {
 	// アニメーションのデフォルトの再生速度
 	private float defaultSpeed;
 
-	private PlayerCtrl PlayerController;
+	private PlayerController PlayerController;
 	private GameObject GameRule;
 	private GameRule Rule;
 
@@ -30,7 +30,7 @@ public class PlayerAnimationController : MonoBehaviour {
 
 		// プレイヤーコントローラーの取得
 		GameObject Player = GameObject.FindGameObjectWithTag("Player");
-		PlayerController = Player.GetComponent("PlayerCtrl") as PlayerCtrl;
+		PlayerController = Player.GetComponent("PlayerController") as PlayerController;
 
 		// アニメーションの取得
 		Anim = GetComponent<Animator>();

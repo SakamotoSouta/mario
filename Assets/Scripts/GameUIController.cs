@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameUICtrl : MonoBehaviour {
+public class GameUIController : MonoBehaviour {
 
 	public GameObject GameRule;
 	private GameRule Rule;
 	private GameObject Player;
-	private	PlayerCtrl playerCtrl;
-
+	private	PlayerController pc;
 	// プレハブ
 	public GameObject labelPrefab;
 	public GameObject texturePrefab;
@@ -32,7 +31,7 @@ public class GameUICtrl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Player = GameObject.FindGameObjectWithTag("Player");
-		playerCtrl = Player.GetComponent ("PlayerCtrl") as PlayerCtrl;
+		pc = Player.GetComponent ("PlayerController") as PlayerController;
 
 		// ゲーム」管理者の取得
 		Rule = GameRule.GetComponent ("GameRule") as GameRule;
@@ -55,7 +54,7 @@ public class GameUICtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (playerCtrl.Goal) {
+		if (pc.Goal) {
 			ClearUI();
 		}
 		// 各種UIの表示処理

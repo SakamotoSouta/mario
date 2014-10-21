@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class enemyCtrl : MonoBehaviour {
+public class enemyController : MonoBehaviour {
 	public enum ENEMY_STATE{
 		ACTIVE = 0,
 		DEAD,
@@ -64,7 +64,7 @@ public class enemyCtrl : MonoBehaviour {
 			Velocity = Vector3.Reflect(-Velocity, new Vector3(0, 1f, 0));
 		}// if
 		else if(other.gameObject.tag == "Enemy"){
-			enemyCtrl ec = other.collider.GetComponent("enemyCtrl")as enemyCtrl;
+			enemyController ec = other.collider.GetComponent("enemyController")as enemyController;
 			if(Velocity.x < ec.Velocity.x){
 				Velocity.x *= -1;
 			}
