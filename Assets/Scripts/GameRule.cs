@@ -13,7 +13,6 @@ public class GameRule : MonoBehaviour {
 	[HideInInspector]
 	public bool endFlag = false;
 	// ゲームシーンのオブジェクト
-	private GameObject gameSceneObject;
 	private GameObject notActiveObject;
 	private GameObject Player;
 	private PlayerController pc;
@@ -24,15 +23,10 @@ public class GameRule : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameSceneObject = GameObject.Find ("GameSceneObject");
 		notActiveObject = GameObject.Find ("NotActiveObject");
-		Score = 0;
 		CoinCount = 0;
 		Player = GameObject.FindGameObjectWithTag("Player");
 		pc = Player.GetComponent ("PlayerController") as PlayerController;
-
-		staticObject = GameObject.Find("staticObject");
-		DontDestroyOnLoad(staticObject);
 	}
 	
 	// Update is called once per frame
@@ -69,16 +63,27 @@ public class GameRule : MonoBehaviour {
 		Application.LoadLevel(Application.loadedLevelName);
 	}
 
-	// クリア
-	public IEnumerator ClearGame (string NextScene){
-		yield return new WaitForSeconds(WaitTime);
+	// 初期化
+	public void SceneInit (){
+		CameraCtrl CameraController = Camera.main.GetComponent ("CameraCtrl") as CameraCtrl;
+		CameraController.InitCamera ();
+	}
 
+	// クリア
+	public IEnumerator ClearGame (){
+		yield return new WaitForSeconds(WaitTime);
+		staticObject = GameObject.Find("staticObject");
 		if (MaxScene > Application.loadedLevel + 1) {
 			MaxScene = Application.loadedLevel + 1;
-
+			// 値の保存
+			staticObject staticObjectScript = staticObject.GetComponent("staticObject") as staticObject;
+			staticObjectScript.Score = Score;
+			staticObjectScript.State = pc.State;
+			DontDestroyOnLoad(staticObject);
 			Application.LoadLevel(MaxScene);
 		}
 		else{
+			Destroy(staticObject);
 			GameOver();
 		}
 	}

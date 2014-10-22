@@ -85,7 +85,7 @@ public class PlayerAnimationController : MonoBehaviour {
 		}
 
 	}
-	
+
 	// アニメーションイベント
 	void OnJumpStart(){
 		defaultSpeed = Anim.speed;
@@ -104,7 +104,7 @@ public class PlayerAnimationController : MonoBehaviour {
 	}
 
 	void AnimEnd(){
-		StartCoroutine (Rule.ClearGame("Result"));
+		StartCoroutine (Rule.ClearGame());
 	}
 
 }

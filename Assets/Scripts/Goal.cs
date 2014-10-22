@@ -7,10 +7,7 @@ public class Goal : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(Application.loadedLevelName == "Game"){
-			Player = GameObject.FindGameObjectWithTag ("Player");
-			Pc = Player.GetComponent ("PlayerController") as PlayerController;
-		}
+
 	}
 	
 	// Update is called once per frame
@@ -20,6 +17,8 @@ public class Goal : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if(other.tag == "Player"){
+			Player = GameObject.FindGameObjectWithTag ("Player");
+			Pc = Player.GetComponent ("PlayerController") as PlayerController;
 			Pc.GoalIn ();
 			Debug.Log ("gole");
 		}

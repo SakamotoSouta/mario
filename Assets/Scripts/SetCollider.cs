@@ -3,11 +3,14 @@ using System.Collections;
 
 public class SetCollider : MonoBehaviour {
 	public GameObject colliderObjectPrefab;
+
 	private GameObject[] colliderObject = new GameObject[2];
 
 	// Use this for initialization
 	void Start () {
+
 		colliderObject[0] =  (GameObject)Instantiate(colliderObjectPrefab, transform.position, transform.rotation);
+
 		colliderObject[1] =  (GameObject)Instantiate(colliderObjectPrefab, transform.position, transform.rotation);
 
 	}

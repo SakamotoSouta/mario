@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour {
 	// プレイヤーを操作できるかどうか
 	public bool PlayerControllFlag = true;
 
-
 	// Use this for initialization
 	void Start () {
 		// アイテム管理者の取得
@@ -49,8 +48,6 @@ public class PlayerController : MonoBehaviour {
 		// ゲーム管理者取得
 		GameObject GameRule = GameObject.Find ("GameRule");
 		rule = GameRule.GetComponent ("GameRule") as GameRule;
-		// プレイヤーのステートの初期化
-		State = PLAYER_STATE.PLAYER_NORMAL;
 
 		// エフェクトの初期化
 		InvinsibleEffect = transform.Find ("InvinsibleEffect").GetComponent<ParticleSystem> ();
@@ -199,17 +196,7 @@ public class PlayerController : MonoBehaviour {
 		default:
 			break;
 		}
-		switch(State){
-		case PLAYER_STATE.PLAYER_NORMAL:
-			transform.localScale = new Vector3(1, 1, 1);
-			break;
-		case PLAYER_STATE.PLAYER_SUPER:
-			transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-			break;
-		case PLAYER_STATE.PLAYER_FIRE:
-			transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-			break;
-		}
+		SetState (State);
 	}
 
 	// プレイヤーのパワーアップ
@@ -228,6 +215,13 @@ public class PlayerController : MonoBehaviour {
 		default:
 			break;
 		}
+		SetState (State);
+
+	}
+
+	// ステータスの設定
+	public void SetState(PLAYER_STATE state){
+		State = state;
 		switch(State){
 		case PLAYER_STATE.PLAYER_NORMAL:
 			transform.localScale = new Vector3(1, 1, 1);
@@ -239,7 +233,6 @@ public class PlayerController : MonoBehaviour {
 			transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 			break;
 		}
-
 	}
 
 	// プレイヤーアイテム取得

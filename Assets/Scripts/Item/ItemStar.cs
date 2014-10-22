@@ -3,16 +3,12 @@ using System.Collections;
 
 public class ItemStar : MonoBehaviour {
 	private Vector3 Velocity;
-	GameObject Player;
-	PlayerController pc;
 	private ParticleSystem effect;
 
 	// Use this for initialization
 	void Start () {
 		effect = transform.Find ("InvinsibleEffect").GetComponent<ParticleSystem> ();
 		effect.Play();
-		Player = GameObject.FindGameObjectWithTag("Player");
-		pc = Player.GetComponent("PlayerController") as PlayerController;
 		Rigidbody Rb = gameObject.GetComponent("Rigidbody") as Rigidbody;
 		Rb.AddForce (100f, 500f, 0);
 		Velocity = new Vector3 (0.1f, 0, 0);

@@ -18,35 +18,46 @@ public class enemyController : MonoBehaviour {
 	public float Speed;
 	public GameObject Type2Item;
 
-
+	Rigidbody physics;
 	// Use this for initialization
 	void Start () {
 		State = ENEMY_STATE.ACTIVE;
 		Velocity.x = Speed;
+		physics = GetComponent<Rigidbody> ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (Application.loadedLevelName == "Game") {
-						if (State == ENEMY_STATE.ACTIVE) {
-								transform.Translate (Velocity);
+		if (Application.loadedLevelName != "FieldCreateTool") {
+								
+			physics.isKinematic = false;
 				
-								if (transform.position.y < -5) {
-										Destroy (gameObject);
-								}
-						} else if (State == ENEMY_STATE.DEAD) {
-								if (Type == ENEMY_TYPE.TYPE1) {
-										transform.localScale = new Vector3 (1f, 0.5f, 1f);
-										StartCoroutine (Dead (3f));
-								} else if (Type == ENEMY_TYPE.TYPE2) {
-										Instantiate (Type2Item, transform.position, transform.rotation);
-										Destroy (gameObject);
-
-								}
-						}
+			if (transform.position.y < -5) {
+				Destroy (gameObject);
+			
+			}
+		
+		
+			if (State == ENEMY_STATE.DEAD) {
+				if (Type == ENEMY_TYPE.TYPE1) {
+					transform.localScale = new Vector3 (1f, 0.5f, 1f);	
+					StartCoroutine (Dead (3f));
+				} 
+			
+				else if (Type == ENEMY_TYPE.TYPE2) {
+					Instantiate (Type2Item, transform.position, transform.rotation);	
+					Destroy (gameObject);
 				}
-		else {
-			Rigidbody physics = GetComponent<Rigidbody>();
+			}
+			else if(State != ENEMY_STATE.DEAD){
+				transform.Translate (Velocity);
+			}
+			if (transform.position.y < -5) {
+				Destroy (gameObject);
+				
+			}
+		}
+		else{
 			physics.isKinematic = true;
 		}
 

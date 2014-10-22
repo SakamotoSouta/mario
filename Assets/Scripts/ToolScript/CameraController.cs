@@ -35,7 +35,7 @@ namespace TAK_CameraController
 				this.setupFocusObject("CameraFocusObject");
 			
 			// 注視点オブジェクトをカメラの親にする
-			Transform trans = this.transform;
+			//Transform trans = this.transform;
 			transform.parent = this.focusObj.transform;
 			
 			// カメラの方向ベクトル(ローカルのZ方向)を注視点オブジェクトに向ける

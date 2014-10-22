@@ -5,10 +5,16 @@ public class CameraCtrl : MonoBehaviour {
 	public GameObject Target;
 	public Vector3 CameraOffet;
 	public bool FillowTarget = true;
-	// Use this for initialization
-	void Start () {
+
+	// カメラ初期化
+	public void InitCamera(){
 		//　プレイヤーの取得
 		Target = GameObject.FindGameObjectWithTag ("Player");
+	}
+
+	// Use this for initialization
+	void Start () {
+		InitCamera();
 	}
 	
 	// Update is called once per frame

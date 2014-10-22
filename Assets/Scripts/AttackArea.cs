@@ -5,19 +5,15 @@ public class AttackArea : MonoBehaviour {
 	private GameObject Player;
 	private PlayerController pc;
 	GameObject GameRuleObject;
-	GameRule Rule;
-	[HideInInspector]
-	public bool inPipe = false;
 	private RaycastHit hit;
 	private GameObject leg ;
 	private Vector3 fromPos;
 	private Vector3 direction;
 	private float length = 0.2f;
+
+
 	// Use this for initialization
 	void Start () {
-		GameRuleObject = GameObject.Find ("GameRule");
-		Rule = GameRuleObject.GetComponent ("GameRule") as GameRule;
-
 		Player = GameObject.FindGameObjectWithTag("Player");
 		// キャラクターコントローラーを取得
 		pc = Player.GetComponent("PlayerController")as PlayerController;
