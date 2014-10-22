@@ -76,7 +76,7 @@ public class GameRule : MonoBehaviour {
 		if (MaxScene > Application.loadedLevel + 1) {
 			MaxScene = Application.loadedLevel + 1;
 			// 値の保存
-			staticObject staticObjectScript = staticObject.GetComponent("staticObject") as staticObject;
+			StaticObject staticObjectScript = staticObject.GetComponent("StaticObject") as StaticObject;
 			staticObjectScript.Score = Score;
 			staticObjectScript.State = pc.State;
 			DontDestroyOnLoad(staticObject);

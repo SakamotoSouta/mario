@@ -7,7 +7,7 @@ public class Game2 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameObject staticObject= GameObject.Find("staticObject");
-		staticObject staticObjectScript = staticObject.GetComponent("staticObject") as staticObject;
+		StaticObject staticObjectScript = staticObject.GetComponent("StaticObject") as StaticObject;
 
 		RuleObject = GameObject.Find ("GameRule");
 		Rule = RuleObject.GetComponent ("GameRule") as GameRule;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class staticObject : MonoBehaviour {
+public class StaticObject : MonoBehaviour {
 	public int Score;
 	public PlayerController.PLAYER_STATE State;
 	// Use this for initialization

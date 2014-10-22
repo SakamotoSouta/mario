@@ -23,7 +23,9 @@ public class ToolController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		if(!Parent){
+			Parent = GameObject.Find ("FieldRoot");
+		}
 	}
 	
 	// Update is called once per frame
