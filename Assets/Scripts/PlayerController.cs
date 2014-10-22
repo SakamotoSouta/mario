@@ -70,6 +70,13 @@ public class PlayerController : MonoBehaviour {
 			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 		}
 		*/
+
+		if(!Col.isGrounded){
+			onGround = false;
+		}
+		else{
+			onGround = true;
+		}
 		if(HitGoalPole){
 			PlayerControllFlag = false;
 			transform.Translate(0f, -0.01f, 0f);
