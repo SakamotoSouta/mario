@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour {
 	// プレイヤーを操作できるかどうか
 	public bool PlayerControllFlag = true;
 
+	public bool HitGoalPole = false;
+
 	// Use this for initialization
 	void Start () {
 		// アイテム管理者の取得
@@ -68,6 +70,14 @@ public class PlayerController : MonoBehaviour {
 			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 		}
 		*/
+		if(HitGoalPole){
+			PlayerControllFlag = false;
+			transform.Translate(0f, -0.01f, 0f);
+			Jump = false;
+			Damage = false;
+			
+			transform.rotation = Quaternion.Euler(0, 180, 0);
+		}
 
 		if(PlayerControllFlag){
 			if(State == PLAYER_STATE.PLAYER_FIRE){
@@ -145,16 +155,13 @@ public class PlayerController : MonoBehaviour {
 	
 	// ゴール
 	public void GoalIn(){
+		HitGoalPole = false;
 		PlayerControllFlag = false;
 		Goal = true;
-		Jump = false;
-		Damage = false;
 		GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
 		CameraCtrl cc = camera.GetComponent ("CameraCtrl") as CameraCtrl;
 		cc.CameraOffet.z = -5;
 		cc.CameraOffet.y = 0;
-
-		transform.rotation = Quaternion.Euler(0, 180, 0);
 		Speed = 0;
 		Velocity.x = 0;
 		Velocity.y = 0;

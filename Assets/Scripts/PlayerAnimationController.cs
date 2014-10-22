@@ -8,6 +8,8 @@ public class PlayerAnimationController : MonoBehaviour {
 	private int JumpID;
 	private int DamageID;
 	private int GoalID;
+	private int FlagID;
+
 	// 着地判定を調べる回数
 	private readonly int landingCheckLimit = 100;
 	// 着地判定チェックを行う時間間隔
@@ -40,6 +42,7 @@ public class PlayerAnimationController : MonoBehaviour {
 		JumpID = Animator.StringToHash ("Jump");
 		DamageID = Animator.StringToHash ("Damage");
 		GoalID = Animator.StringToHash ("Goal");	
+		FlagID = Animator.StringToHash ("Flag");
 	}
 	
 	// Update is called once per frame
@@ -55,7 +58,7 @@ public class PlayerAnimationController : MonoBehaviour {
 		else {
 			Anim.SetFloat (SpeedID, PlayerController.Velocity.x); 
 		}// else
-		
+		Anim.SetBool (FlagID, PlayerController.HitGoalPole);
 		Anim.SetBool (DamageID, PlayerController.Damage);
 		Anim.SetBool (JumpID, PlayerController.Jump);
 		Anim.SetBool (GoalID, PlayerController.Goal);
