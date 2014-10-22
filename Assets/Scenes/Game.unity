@@ -40386,7 +40386,7 @@ MonoBehaviour:
   Invincible: 0
   InvincibleTime: 5
   FireBallPrefab: {fileID: 100002, guid: 66ab1d89078f5094985add52eb4c67f2, type: 2}
-  jumpPawer: 8
+  jumpPawer: 5
   Velocity: {x: 0, y: 0, z: 0}
   onGround: 0
   Goal: 0

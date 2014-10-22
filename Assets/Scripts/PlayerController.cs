@@ -23,10 +23,10 @@ public class PlayerController : MonoBehaviour {
 	private GameObject Item;
 	ItemController ItemController;
 	public float jumpPawer;
-	private float Speed = 7.0f;
+	private bool Dash;
+	private float Speed = 3.5f;
 	private float Gravity = 20.0f;
 	private float jumpCounter;
-	[HideInInspector]
 	public Vector3 Velocity;
 	[HideInInspector]
 	public bool onGround;
@@ -71,6 +71,12 @@ public class PlayerController : MonoBehaviour {
 			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 		}
 		*/
+		if(Input.GetKey(KeyCode.LeftShift)){
+			Dash = true;
+		}
+		else{
+			Dash = false;
+		}
 
 		if(!Col.isGrounded){
 			onGround = false;
@@ -93,7 +99,12 @@ public class PlayerController : MonoBehaviour {
 					FireBall.GenerateFireBall(new Vector3(0f, 0f, 1f));
 				}
 			}
-
+			if(Dash){
+				Speed = 7.0f;
+			}
+			else{
+				Speed = 3.5f;
+			}
 			if (!Damage) {
 				// 左右入力で移動
 				Velocity.x = Input.GetAxis ("Horizontal") * Speed;
@@ -118,7 +129,12 @@ public class PlayerController : MonoBehaviour {
 				}
 				if(jumpCounter < 10f){
 					jumpCounter++;
-					Velocity.y = jumpPawer;
+					if(Dash){
+						Velocity.y = jumpPawer * 2;
+					}
+					else{
+						Velocity.y = jumpPawer;
+					}
 				}
 			}// if
 			if(Input.GetKeyUp(KeyCode.Space)){
