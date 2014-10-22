@@ -23,8 +23,9 @@ public class PlayerController : MonoBehaviour {
 	private GameObject Item;
 	ItemController ItemController;
 	public float jumpPawer;
-	private float Inertia = 0.9f;
 	private float Speed = 7.0f;
+	private float Gravity = 20.0f;
+	private float jumpCounter;
 	[HideInInspector]
 	public Vector3 Velocity;
 	[HideInInspector]
@@ -74,9 +75,7 @@ public class PlayerController : MonoBehaviour {
 		if(!Col.isGrounded){
 			onGround = false;
 		}
-		else{
-			onGround = true;
-		}
+
 		if(HitGoalPole){
 			PlayerControllFlag = false;
 			transform.Translate(0f, -0.01f, 0f);
@@ -112,9 +111,19 @@ public class PlayerController : MonoBehaviour {
 
 
 
-			if (Input.GetKeyDown (KeyCode.Space) && Col.isGrounded) {
-				Jump = true;
+			if (Input.GetKey(KeyCode.Space)) {
+				if(Col.isGrounded){
+
+					Jump = true;
+				}
+				if(jumpCounter < 10f){
+					jumpCounter++;
+					Velocity.y = jumpPawer;
+				}
 			}// if
+			if(Input.GetKeyUp(KeyCode.Space)){
+				jumpCounter = 100;
+			}
 
 			if (Jump) {
 				if(!blockHit){
@@ -147,16 +156,17 @@ public class PlayerController : MonoBehaviour {
 
 		if(!Damage && PlayerControllFlag){
 			// 重力処理
-			Velocity.y += Physics.gravity.y * Time.deltaTime;
+			Velocity.y -= Gravity * Time.deltaTime;
  			Col.Move (Velocity * Time.deltaTime);
 
 			// 慣性
-			Velocity *= Inertia;
+			//Velocity *= Inertia;
 		}
 		// 地面に接していたら
 		if (Col.isGrounded) {
 			blockHit = false;
 			Velocity.y = 0f;
+			jumpCounter = 0;
 		}// if
 	}
 	

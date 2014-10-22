@@ -15,7 +15,7 @@ public class PlayerAnimationController : MonoBehaviour {
 	// 着地判定チェックを行う時間間隔
 	private readonly float waitTime = 0.05F;
 	// 着地モーションへの移項を許可する距離
-	private readonly float landingDistance = 5F;
+	private readonly float landingDistance = 3;
 
 	// アニメーションのデフォルトの再生速度
 	private float defaultSpeed;
@@ -92,7 +92,7 @@ public class PlayerAnimationController : MonoBehaviour {
 	// アニメーションイベント
 	void OnJumpStart(){
 		defaultSpeed = Anim.speed;
-		PlayerController.Velocity.y = PlayerController.jumpPawer;
+		//PlayerController.Velocity.y = PlayerController.jumpPawer;
 	}
 	void OnJumpTopPoint(){
 		Anim.speed = 0f;

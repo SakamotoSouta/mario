@@ -18,7 +18,7 @@ public class AttackArea : MonoBehaviour {
 		// キャラクターコントローラーを取得
 		pc = Player.GetComponent("PlayerController")as PlayerController;
 
-		leg = GameObject.Find("Character1_LeftToeBase");
+		leg = GameObject.Find("Character1_Reference");
 		direction = new Vector3 (0, -1, 0);
 
 	}

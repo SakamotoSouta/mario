@@ -625,8 +625,8 @@ ModelImporter:
     - serializedVersion: 16
       name: JUMP00
       takeName: Take 001
-      firstFrame: 11
-      lastFrame: 35
+      firstFrame: 12
+      lastFrame: 32
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -731,14 +731,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: .931707382
+      - time: .898214579
         functionName: OnJumpHitEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: .95925802
+      - time: .94490397
         functionName: OnJumpEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
