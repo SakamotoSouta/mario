@@ -65,12 +65,12 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// Z判定入れるとバグるアニメーションのところを修正するときに実装する
-		/*
+		// Z判定
+
 		if (transform.position.z > 0 || transform.position.z < 0) {
 			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 		}
-		*/
+
 		if(Input.GetKey(KeyCode.LeftShift)){
 			Dash = true;
 		}
@@ -121,13 +121,14 @@ public class PlayerController : MonoBehaviour {
 			transform.rotation = Quaternion.LookRotation (new Vector3 (oldVector, 0f, 0f));
 
 
-
-			if (Input.GetKey(KeyCode.Space)) {
-				if(Col.isGrounded){
-
+			if(Input.GetKeyDown(KeyCode.Space)){
+				if(Col.isGrounded){		
 					Jump = true;
 				}
-				if(jumpCounter < 10f){
+			}
+			if (Input.GetKey(KeyCode.Space)) {
+
+				if(jumpCounter < 10f && Jump){
 					jumpCounter++;
 					if(Dash){
 						Velocity.y = jumpPawer * 2;
@@ -137,6 +138,7 @@ public class PlayerController : MonoBehaviour {
 					}
 				}
 			}// if
+
 			if(Input.GetKeyUp(KeyCode.Space)){
 				jumpCounter = 100;
 			}
