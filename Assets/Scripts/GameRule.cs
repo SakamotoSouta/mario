@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GameRule : MonoBehaviour {
-	public static int MaxScene = 3;
+	public static int GameStageNum = 3;
 	public static int Life = 3;
 	public int Score;
 	private int CoinCount;
@@ -60,7 +60,7 @@ public class GameRule : MonoBehaviour {
 			GameOver();
 			yield break;
 		}
-		Application.LoadLevel(Application.loadedLevelName);
+		FadeManager.Instance.LoadLevel(Application.loadedLevelName,1.0f);
 	}
 
 	// 初期化
@@ -73,14 +73,16 @@ public class GameRule : MonoBehaviour {
 	public IEnumerator ClearGame (){
 		yield return new WaitForSeconds(WaitTime);
 		staticObject = GameObject.Find("staticObject");
-		if (MaxScene > Application.loadedLevel + 1) {
-			MaxScene = Application.loadedLevel + 1;
+		// 次のシーン番号を代入
+		int Next = Application.loadedLevel + 1;
+		if (Next < GameStageNum) {
+
 			// 値の保存
 			StaticObject staticObjectScript = staticObject.GetComponent("StaticObject") as StaticObject;
 			staticObjectScript.Score = Score;
 			staticObjectScript.State = pc.State;
 			DontDestroyOnLoad(staticObject);
-			Application.LoadLevel(MaxScene);
+			FadeManager.Instance.LoadLevel(Next, 1.0f);
 		}
 		else{
 			Destroy(staticObject);
@@ -137,7 +139,7 @@ public class GameRule : MonoBehaviour {
 	}
 
 	void GameOver(){
-		Application.LoadLevel ("Result");
+		FadeManager.Instance.LoadLevel("Result",1.0f);
 	}
 	
 }
