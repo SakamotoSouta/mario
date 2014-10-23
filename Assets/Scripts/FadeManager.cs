@@ -93,7 +93,6 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 			time += Time.deltaTime;
 			yield return 0;
 		}
-		Debug.Log ("" + scene);
 		//シーン切替
 		Application.LoadLevel (scene);
 		

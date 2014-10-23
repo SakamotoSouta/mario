@@ -18,30 +18,49 @@ public class PlayerController : MonoBehaviour {
 	// 無敵
 	public bool Invincible = false;
 	public int InvincibleTime;
+	// ファイアーボール
 	public GameObject FireBallPrefab;
-
+	// アイテム
 	private GameObject Item;
-	ItemController ItemController;
+	private ItemController ItemController;
+	// ジャンプ力
 	public float jumpPawer;
+	// ダッシュフラグ
 	private bool Dash;
+	// スピード
 	private float Speed = 3.5f;
+	// 重力
 	private float Gravity = 20.0f;
+	// ジャンプの長押しカウンター
 	private float jumpCounter;
+	// 速度
 	public Vector3 Velocity;
+	// フィールドに接しているか
 	[HideInInspector]
 	public bool onGround;
+	// ゴールフラグ
 	public bool Goal = false;
+	// ジャンプフラグ
 	public bool Jump = false;
+	// 死亡フラグ
 	public  bool Damage = false;
+	// ゲームルール管理者
 	private GameRule rule;
+	// キャラクターコントローラー
 	private CharacterController Col;
+	// 前回の向きキャラを入力された方向へ向かせるため
 	private int oldVector;
+	// ブロックにあたっているかどうか
 	private bool blockHit = false;
 	[HideInInspector]
 	// プレイヤーを操作できるかどうか
 	public bool PlayerControllFlag = true;
-
+	// ゴールのポールに接しているかどうか
 	public bool HitGoalPole = false;
+
+	// プレイヤーの声を管理しているところ
+	private PlayerSEManager PlayerSE;
+
 
 	// Use this for initialization
 	void Start () {
@@ -61,16 +80,19 @@ public class PlayerController : MonoBehaviour {
 		transform.localRotation = Quaternion.LookRotation(new Vector3(1f, 0f, 0f));
 		// キャラクターコントローラーの取得
 		Col = gameObject.GetComponent("CharacterController") as CharacterController;
+
+		// 声の管理者取得
+		PlayerSE = GetComponent<PlayerSEManager> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		// Z判定
-
+		// Z判定 常に０
 		if (transform.position.z > 0 || transform.position.z < 0) {
 			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 		}
 
+		// LSHIFTでダッシュフラグを立てる
 		if(Input.GetKey(KeyCode.LeftShift)){
 			Dash = true;
 		}
@@ -78,10 +100,12 @@ public class PlayerController : MonoBehaviour {
 			Dash = false;
 		}
 
+		// とりあえず飛んでれば着地していない
 		if(!Col.isGrounded){
 			onGround = false;
 		}
 
+		// ゴールポールにあたったとき
 		if(HitGoalPole){
 			PlayerControllFlag = false;
 			transform.Translate(0f, -0.01f, 0f);
@@ -91,6 +115,7 @@ public class PlayerController : MonoBehaviour {
 			transform.rotation = Quaternion.Euler(0, 180, 0);
 		}
 
+		// プレイヤーが操作可能な場合のアップデート
 		if(PlayerControllFlag){
 			if(State == PLAYER_STATE.PLAYER_FIRE){
 				if(Input.GetKeyDown(KeyCode.Q)){
@@ -114,18 +139,22 @@ public class PlayerController : MonoBehaviour {
 
 			if (Velocity.x > 0) {
 					oldVector = 1;
-			} else if (Velocity.x < 0) {
+			}
+			else if (Velocity.x < 0) {
 					oldVector = -1;
 			}
 
 			transform.rotation = Quaternion.LookRotation (new Vector3 (oldVector, 0f, 0f));
 
-
+			// ジャンプ処理
 			if(Input.GetKeyDown(KeyCode.Space)){
-				if(Col.isGrounded){		
+				if(Col.isGrounded){	
+					// ジャンプSEの再生
+					PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_JUMP);
 					Jump = true;
 				}
 			}
+			// 長押し対応
 			if (Input.GetKey(KeyCode.Space)) {
 
 				if(jumpCounter < 10f && Jump){
@@ -162,10 +191,14 @@ public class PlayerController : MonoBehaviour {
 					}
 				}
 			}
+			else{
+				jumpCounter = 0;
+			}
 
 			// 穴判定
 			if (transform.position.y < -5) {
 				if(!rule.endFlag){
+					PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_DEAD);
 					StartCoroutine (rule.Restart ());
 				}
 				rule.endFlag = true;
@@ -177,19 +210,19 @@ public class PlayerController : MonoBehaviour {
 			Velocity.y -= Gravity * Time.deltaTime;
  			Col.Move (Velocity * Time.deltaTime);
 
-			// 慣性
-			//Velocity *= Inertia;
 		}
 		// 地面に接していたら
 		if (Col.isGrounded) {
 			blockHit = false;
 			Velocity.y = 0f;
-			jumpCounter = 0;
 		}// if
+
 	}
 	
 	// ゴール
 	public void GoalIn(){
+		//　ゴールSEを再生
+		PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_CLEAR);
 		HitGoalPole = false;
 		PlayerControllFlag = false;
 		Goal = true;
@@ -208,16 +241,22 @@ public class PlayerController : MonoBehaviour {
 
 	// 無敵時間
 	IEnumerator StateInvincible(){
+		// BGMの変更
+		GameObject BGMController = GameObject.Find ("BGMController");
+		BGMController bgm = BGMController.GetComponent ("BGMController") as BGMController;
+		bgm.StartInbisible ();
 		Invincible = true;
 		InvinsibleEffect.Play ();
 		yield return new WaitForSeconds (InvincibleTime);
 		Invincible = false;
 		InvinsibleEffect.Stop();
-
+		bgm.EndInbinsible ();
 	}
 
-
+	// プレイヤーの死亡
 	void PlayerDead(){
+		// 死亡SEの再生
+		PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_DEAD);
 		Jump = false;
 		Col.enabled = false;
 		Damage = true;
@@ -230,14 +269,19 @@ public class PlayerController : MonoBehaviour {
 			PlayerDead();
 			break;
 		case PLAYER_STATE.PLAYER_SUPER:
+			// プレイヤーパワーダウンSEの再生
+			PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_PAWER_DOWN);
 			State = PLAYER_STATE.PLAYER_NORMAL;
 			break;
 		case PLAYER_STATE.PLAYER_FIRE:
+			// プレイヤーパワーダウンSEの再生
+			PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_PAWER_DOWN);
 			State = PLAYER_STATE.PLAYER_NORMAL;
 			break;
 		default:
 			break;
 		}
+	
 		SetState (State);
 	}
 
@@ -257,6 +301,8 @@ public class PlayerController : MonoBehaviour {
 		default:
 			break;
 		}
+		// プレイヤーパワーアップSEの再生
+		PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_PAWER_UP);
 		SetState (State);
 
 	}
@@ -277,7 +323,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	// プレイヤーアイテム取得
+	// アイテム取得
 	public void PlayerGetItem(GameObject Item, ItemController.ITEM_TYPE Type){
 		ItemController.GetItem(Type);
 		Destroy(Item.gameObject);

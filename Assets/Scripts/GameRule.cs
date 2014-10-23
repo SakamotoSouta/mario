@@ -44,6 +44,7 @@ public class GameRule : MonoBehaviour {
 	public static void InitGame (){
 		Life = MaxLife;
 	}
+
 	private void TimeOver(){
 
 		pc.Damage = true;
