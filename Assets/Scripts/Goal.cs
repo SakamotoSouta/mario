@@ -20,7 +20,6 @@ public class Goal : MonoBehaviour {
 			Player = GameObject.FindGameObjectWithTag ("Player");
 			Pc = Player.GetComponent ("PlayerController") as PlayerController;
 			Pc.GoalIn ();
-			Debug.Log ("gole");
 		}
 	}
 }

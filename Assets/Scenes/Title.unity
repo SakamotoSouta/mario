@@ -12240,8 +12240,8 @@ CharacterController:
   m_PrefabInternal: {fileID: 127181228}
   m_GameObject: {fileID: 506785682}
   serializedVersion: 2
-  m_Height: 1.55999994
-  m_Radius: .209999993
+  m_Height: 1.54999995
+  m_Radius: .119999997
   m_SlopeLimit: 45
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982
@@ -12263,7 +12263,7 @@ MonoBehaviour:
   Invincible: 0
   InvincibleTime: 5
   FireBallPrefab: {fileID: 100002, guid: 66ab1d89078f5094985add52eb4c67f2, type: 2}
-  jumpPawer: 10
+  jumpPawer: 15
   Velocity: {x: 0, y: 0, z: 0}
   onGround: 0
   Goal: 0
@@ -12271,7 +12271,7 @@ MonoBehaviour:
   Damage: 0
   PlayerControllFlag: 1
   HitGoalPole: 0
-  GoalPoleSpeed: 0
+  GoalPoleSpeed: .0799999982
 --- !u!95 &506785690
 Animator:
   serializedVersion: 3
@@ -12298,7 +12298,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -44150,7 +44150,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1854959460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.49999994, y: -.49999997, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2126938952}
@@ -48323,7 +48323,7 @@ Transform:
   m_GameObject: {fileID: 2013699595}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00493827183, y: .00493827183, z: .00493827183}
+  m_LocalScale: {x: .00416666688, y: .00416666688, z: .00416666688}
   m_Children:
   - {fileID: 104613370}
   m_Father: {fileID: 0}
@@ -50389,17 +50389,17 @@ MonoBehaviour:
   widgetsAreStatic: 0
   cullWhileDragging: 0
   worldToLocal:
-    e00: 202.499985
+    e00: 239.999985
     e01: 0
     e02: 0
-    e03: .49999994
+    e03: 0
     e10: 0
-    e11: 202.499985
+    e11: 239.999985
     e12: 0
-    e13: .49999997
+    e13: 0
     e20: 0
     e21: 0
-    e22: 202.499985
+    e22: 239.999985
     e23: 0
     e30: 0
     e31: 0

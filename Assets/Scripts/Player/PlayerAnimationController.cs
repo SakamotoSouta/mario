@@ -6,6 +6,7 @@ public class PlayerAnimationController : MonoBehaviour {
 	private Animator Anim;
 	private int SpeedID;
 	private int JumpID;
+	private int GroundID;
 	private int DamageID;
 	private int GoalID;
 	private int FlagID;
@@ -40,6 +41,7 @@ public class PlayerAnimationController : MonoBehaviour {
 		// アニメーションイベントの取得
 		SpeedID = Animator.StringToHash ("Speed");
 		JumpID = Animator.StringToHash ("Jump");
+		GroundID = Animator.StringToHash ("Ground");
 		DamageID = Animator.StringToHash ("Damage");
 		GoalID = Animator.StringToHash ("Goal");	
 		FlagID = Animator.StringToHash ("Flag");
@@ -61,6 +63,7 @@ public class PlayerAnimationController : MonoBehaviour {
 		Anim.SetBool (FlagID, PlayerController.HitGoalPole);
 		Anim.SetBool (DamageID, PlayerController.Damage);
 		Anim.SetBool (JumpID, PlayerController.Jump);
+		Anim.SetBool (GroundID, PlayerController.Ground);
 		Anim.SetBool (GoalID, PlayerController.Goal);
 	}
 
@@ -109,4 +112,8 @@ public class PlayerAnimationController : MonoBehaviour {
 		StartCoroutine (Rule.ClearGame());
 	}
 
+	void OnJump()
+	{
+		Anim.Play("Jump Up");
+	}
 }

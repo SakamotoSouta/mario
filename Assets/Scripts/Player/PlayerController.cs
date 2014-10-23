@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour {
 	public bool Goal = false;
 	// ジャンプフラグ
 	public bool Jump = false;
+	// 接地フラグ
+	public bool Ground { get { return Col.isGrounded; } }
 	// 死亡フラグ
 	public  bool Damage = false;
 	// ゲームルール管理者
@@ -194,6 +196,7 @@ public class PlayerController : MonoBehaviour {
 					// ジャンプSEの再生
 					PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_JUMP);
 					Jump = true;
+					SendMessage("OnJump", SendMessageOptions.DontRequireReceiver);
 				}
 			}
 			// 長押し対応
@@ -203,13 +206,17 @@ public class PlayerController : MonoBehaviour {
 					jumpCounter++;
 					Velocity.y = jumpPawer;
 				}
-			}// if
-			
+			}
+			else
+			{
+				Jump = false;
+			}
+
 			if(Input.GetKeyUp(KeyCode.Space)){
 				jumpCounter = 100;
 			}
-			
-			if (Jump) {
+
+			if (Jump || !Ground) {
 				if(!blockHit){
 					RaycastHit hit;
 					GameObject head = GameObject.Find("Character1_Spine1");
