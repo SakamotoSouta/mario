@@ -52,20 +52,20 @@ public class InPipeController : MonoBehaviour {
 			if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
 				switch(inKey){
 				case PipeActionController.IN_KEY.DOWN:
-					key = KeyCode.DownArrow;
+					key = KeyCode.S;
 					lookAt = new Vector3(0, 180, 0);
 					break;
 				case PipeActionController.IN_KEY.UP:
-					key = KeyCode.UpArrow;
+					key = KeyCode.W;
 					lookAt = new Vector3(0, 180, 0);
 					break;
 				case PipeActionController.IN_KEY.RIGHT:
 					lookAt = new Vector3(0, 90, 0);
-					key = KeyCode.RightArrow;
+					key = KeyCode.D;
 					break;
 				case PipeActionController.IN_KEY.LEFT:
 					lookAt = new Vector3(0, 270, 0);
-					key = KeyCode.LeftArrow;
+					key = KeyCode.A;
 					break;
 				default:
 					break;
