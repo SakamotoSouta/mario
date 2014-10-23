@@ -16,9 +16,5 @@ public class TitleSceneScript : MonoBehaviour {
 			Application.LoadLevel("Game");
 		}
 	}
-
-	// 仮でGUIで出力
-	void OnGUI(){
-		GUI.Label (new Rect(Screen.width / 2 - 100, Screen.height / 2, Screen.width / 2 + 100, Screen.height / 2 + 100), "Press START");
-	}
+	
 }
