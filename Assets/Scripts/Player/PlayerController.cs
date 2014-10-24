@@ -3,6 +3,9 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+	// スピード定数
+	const float DashSpeed = 8.0f;
+	const float DefaultSpeed = 6.0f;
 	// プレイヤーの状態
 	public enum PLAYER_STATE{
 		PLAYER_NORMAL = 0,
@@ -28,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 	// ダッシュフラグ
 	private bool Dash;
 	// スピード
-	private float Speed = 3.5f;
+	private float Speed = DefaultSpeed;
 	// 重力
 	private float Gravity = 20.0f;
 	// ジャンプの長押しカウンター
@@ -135,10 +138,10 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 			if(Dash){
-				Speed = 7.0f;
+				Speed = DashSpeed;
 			}
 			else{
-				Speed = 3.5f;
+				Speed = DefaultSpeed;
 			}
 			if (!Damage) {
 				// 左右入力で移動
