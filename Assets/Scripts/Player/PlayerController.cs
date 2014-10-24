@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 	// スピード
 	private float Speed = DefaultSpeed;
 	// 重力
-	private float Gravity = 20.0f;
+	const float Gravity = 35.0f;
 	// ジャンプの長押しカウンター
 	private float jumpCounter;
 	// 速度
@@ -168,16 +168,11 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 			// 長押し対応
-			if (Input.GetKey(KeyCode.Space)) {
+			if (Input.GetKey(KeyCode.Space) && Jump) {
 
 				if(jumpCounter < 10f && Jump){
 					jumpCounter++;
-					if(Dash){
-						Velocity.y = jumpPawer * 2;
-					}
-					else{
-						Velocity.y = jumpPawer;
-					}
+					Velocity.y = jumpPawer;
 				}
 			}// if
 
@@ -191,15 +186,17 @@ public class PlayerController : MonoBehaviour {
 					GameObject head = GameObject.Find("Character1_Spine1");
 					Vector3 fromPos = head.transform.position;
 					Vector3 direction = new Vector3(0, 1, 0);
-					float length = 0.3f;
+					float length = 1.0f * transform.localScale.y;
 					// 上方向にレイを飛ばしてブロックにあたっていないか判定
-					//Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
+					Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
 					if (Physics.Raycast(fromPos, direction, out hit, length)) {
 						if(hit.collider.tag == "Block"){
 							GameObject block = hit.collider.gameObject;
 							Block b = block.GetComponent("Block")as Block;
 							b.HitBlock();
+							Velocity.y = 0;
 							blockHit = true;
+							jumpCounter = 100;
 						}
 					}
 				}
@@ -224,6 +221,7 @@ public class PlayerController : MonoBehaviour {
  			Col.Move (Velocity * Time.deltaTime);
 
 		}
+
 		// 地面に接していたら
 		if (Col.isGrounded) {
 			blockHit = false;

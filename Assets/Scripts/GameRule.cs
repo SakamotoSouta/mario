@@ -62,6 +62,7 @@ public class GameRule : MonoBehaviour {
 		Life--;
 		if(Life < 0){
 			GameOver();
+			Life = 0;
 			yield break;
 		}
 		FadeManager.Instance.LoadLevel(Application.loadedLevelName,1.0f);

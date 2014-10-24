@@ -100,7 +100,6 @@ public class PlayerAnimationController : MonoBehaviour {
 	}
 	
 	void OnJumpHitEnd(){
-		PlayerController.Jump = false;
 	}
 	void OnJumpEnd(){
 		PlayerController.Jump = false;

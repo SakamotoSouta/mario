@@ -4877,7 +4877,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4967,7 +4967,7 @@ MonoBehaviour:
   Invincible: 0
   InvincibleTime: 5
   FireBallPrefab: {fileID: 100002, guid: 66ab1d89078f5094985add52eb4c67f2, type: 2}
-  jumpPawer: 10
+  jumpPawer: 15
   Velocity: {x: 0, y: 0, z: 0}
   onGround: 0
   Goal: 0
@@ -4975,6 +4975,7 @@ MonoBehaviour:
   Damage: 0
   PlayerControllFlag: 1
   HitGoalPole: 0
+  GoalPoleSpeed: .0799999982
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6181,8 +6182,8 @@ CharacterController:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100254}
   serializedVersion: 2
-  m_Height: 1.55999994
-  m_Radius: .209999993
+  m_Height: 1.54999995
+  m_Radius: .119999997
   m_SlopeLimit: 45
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982
