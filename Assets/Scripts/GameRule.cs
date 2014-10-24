@@ -18,15 +18,18 @@ public class GameRule : MonoBehaviour {
 	private PlayerController pc;
 	// 遷移時間
 	public int WaitTime;
+	[HideInInspector]
 	public bool activeObjectFlag = true;
 	private GameObject staticObject;
-
+	private StaticObject staticObjectScript;
 	// Use this for initialization
 	void Start () {
 		notActiveObject = GameObject.Find ("NotActiveObject");
 		CoinCount = 0;
 		Player = GameObject.FindGameObjectWithTag("Player");
 		pc = Player.GetComponent ("PlayerController") as PlayerController;
+		staticObject = GameObject.Find ("staticObject");
+		staticObjectScript = staticObject.GetComponent ("StaticObject") as StaticObject;
 	}
 	
 	// Update is called once per frame
@@ -73,13 +76,11 @@ public class GameRule : MonoBehaviour {
 	// クリア
 	public IEnumerator ClearGame (){
 		yield return new WaitForSeconds(WaitTime);
-		staticObject = GameObject.Find("staticObject");
 		// 次のシーン番号を代入
 		int Next = Application.loadedLevel + 1;
 		if (Next < GameStageNum) {
 
 			// 値の保存
-			StaticObject staticObjectScript = staticObject.GetComponent("StaticObject") as StaticObject;
 			staticObjectScript.Score = Score;
 			staticObjectScript.State = pc.State;
 			DontDestroyOnLoad(staticObject);

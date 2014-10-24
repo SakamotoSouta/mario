@@ -27,9 +27,11 @@ public class Block : MonoBehaviour {
 		else {
 			BlockLife = 1;
 		}
-		// SEの取得
-		SEControllerObject = GameObject.Find("SEController");
-		se = SEControllerObject.GetComponent("SEController") as SEController;
+		if(Application.loadedLevelName != "FieldCreateTool" && Application.loadedLevelName != "Title"){
+			// SEの取得
+			SEControllerObject = GameObject.Find("SEController");
+			se = SEControllerObject.GetComponent("SEController") as SEController;
+		}
 	}
 	
 	// Update is called once per frame

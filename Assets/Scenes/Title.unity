@@ -12155,6 +12155,8 @@ GameObject:
   - 54: {fileID: 506785686}
   - 114: {fileID: 506785685}
   - 114: {fileID: 506785684}
+  - 114: {fileID: 506785692}
+  - 82: {fileID: 506785691}
   m_Layer: 10
   m_Name: unitychan
   m_TagString: Player
@@ -12261,7 +12263,7 @@ MonoBehaviour:
   Invincible: 0
   InvincibleTime: 5
   FireBallPrefab: {fileID: 100002, guid: 66ab1d89078f5094985add52eb4c67f2, type: 2}
-  jumpPawer: 5
+  jumpPawer: 10
   Velocity: {x: 0, y: 0, z: 0}
   onGround: 0
   Goal: 0
@@ -12285,6 +12287,82 @@ Animator:
   m_ApplyRootMotion: 0
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!82 &506785691
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 8200000, guid: d08102168922cb94491f65083f63c204,
+    type: 2}
+  m_PrefabInternal: {fileID: 127181228}
+  m_GameObject: {fileID: 506785682}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!114 &506785692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: d08102168922cb94491f65083f63c204,
+    type: 2}
+  m_PrefabInternal: {fileID: 127181228}
+  m_GameObject: {fileID: 506785682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055ddba6152aee24481cdc17f4477997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpSE: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
+  PawerUpSE: {fileID: 8300000, guid: fd78a38399bb64069b2f13cf85d7b9b6, type: 3}
+  PawerDownSE: {fileID: 8300000, guid: 60e04cb188aff4081a59ce70a1ff20c9, type: 3}
+  DeadSE: {fileID: 8300000, guid: 14442038946004af3aaf906b64944b5f, type: 3}
+  ClearSE: {fileID: 8300000, guid: 55cdcf6662c1e410baec7623f20689d6, type: 3}
 --- !u!1 &507715269
 GameObject:
   m_ObjectHideFlags: 0
@@ -44069,7 +44147,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1854959460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .5, y: -.5, z: 0}
+  m_LocalPosition: {x: .49999997, y: -.49999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2126938952}
@@ -48242,7 +48320,7 @@ Transform:
   m_GameObject: {fileID: 2013699595}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00554016605, y: .00554016605, z: .00554016605}
+  m_LocalScale: {x: .00493827183, y: .00493827183, z: .00493827183}
   m_Children:
   - {fileID: 104613370}
   m_Father: {fileID: 0}
@@ -50308,17 +50386,17 @@ MonoBehaviour:
   widgetsAreStatic: 0
   cullWhileDragging: 0
   worldToLocal:
-    e00: 180.5
+    e00: 202.499985
     e01: 0
     e02: 0
-    e03: -.5
+    e03: -.49999997
     e10: 0
-    e11: 180.5
+    e11: 202.499985
     e12: 0
-    e13: .5
+    e13: .49999997
     e20: 0
     e21: 0
-    e22: 180.5
+    e22: 202.499985
     e23: 0
     e30: 0
     e31: 0

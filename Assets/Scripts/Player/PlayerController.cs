@@ -235,6 +235,7 @@ public class PlayerController : MonoBehaviour {
 		HitGoalPole = false;
 		PlayerControllFlag = false;
 		Goal = true;
+		transform.rotation = Quaternion.Euler(0, 180, 0);
 		GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
 		CameraCtrl cc = camera.GetComponent ("CameraCtrl") as CameraCtrl;
 		cc.CameraOffet.z = -5;

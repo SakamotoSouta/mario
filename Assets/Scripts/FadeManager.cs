@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// シーン遷移時のフェードイン・アウトを制御するためのクラス
-/// </summary>
 public class FadeManager : SingletonMonoBehaviour<FadeManager>
 {
-	/// <summary>暗転用黒テクスチャ</summary>
-	private Texture2D blackTexture;
-	/// <summary>フェード中の透明度</summary>
+	// 暗転用黒テクスチャ
+	private Texture2D Texture;
+	// フェード中の透明度
 	private float fadeAlpha = 0;
-	/// <summary>フェード中かどうか</summary>
+	// フェード中かどうか
 	private bool isFading = false;
 	
 	public void Awake ()
@@ -19,14 +16,12 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 			Destroy (this);
 			return;
 		}
-		
-		DontDestroyOnLoad (this.gameObject);
-		
-		//ここで黒テクスチャ作る
-		this.blackTexture = new Texture2D (32, 32, TextureFormat.RGB24, false);
-		this.blackTexture.ReadPixels (new Rect (0, 0, 32, 32), 0, 0, false);
-		this.blackTexture.SetPixel (0, 0, Color.white);
-		this.blackTexture.Apply ();
+		DontDestroyOnLoad (gameObject);
+		// ここでテクスチャ作る
+		this.Texture = new Texture2D (32, 32, TextureFormat.RGB24, false);
+		this.Texture.ReadPixels (new Rect (0, 0, 32, 32), 0, 0, false);
+		this.Texture.SetPixel (0, 0, Color.white);
+		this.Texture.Apply ();
 	}
 	
 	public void OnGUI ()
@@ -34,16 +29,12 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 		if (!this.isFading)
 			return;
 		
-		//透明度を更新して黒テクスチャを描画
+		// 透明度を更新してテクスチャを描画
 		GUI.color = new Color (0, 0, 0, this.fadeAlpha);
-		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), this.blackTexture);
+		GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), this.Texture);
 	}
 	
-	/// <summary>
-	/// 画面遷移
-	/// </summary>
-	/// <param name='scene'>シーン名</param>
-	/// <param name='interval'>暗転にかかる時間(秒)</param>
+
 	public void LoadLevel(string scene, float interval)
 	{
 		StartCoroutine (TransScene (scene, interval));
@@ -52,13 +43,7 @@ public class FadeManager : SingletonMonoBehaviour<FadeManager>
 	{
 		StartCoroutine (TransScene (scene, interval));
 	}
-	
-	
-	/// <summary>
-	/// シーン遷移用コルーチン
-	/// </summary>
-	/// <param name='scene'>シーン名</param>
-	/// <param name='interval'>暗転にかかる時間(秒)</param>
+
 	private IEnumerator TransScene (string scene, float interval)
 	{
 		//だんだん暗く

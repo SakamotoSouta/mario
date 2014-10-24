@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class PlayerSEManager : MonoBehaviour {
-	// プレイヤーコントローラーの取得
-	private PlayerController PlayerController;
 
 	// プレイヤーの声再生用ラベル
 	public enum PLAYER_SE_LABEL{
@@ -26,8 +24,6 @@ public class PlayerSEManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Audio = GetComponent<AudioSource> ();
-		GameObject Player = GameObject.FindGameObjectWithTag ("Player");
-		PlayerController = Player.GetComponent ("PlayerController") as PlayerController;
 	}
 	
 	// Update is called once per frame
