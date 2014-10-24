@@ -14,7 +14,7 @@ public class PipeActionController : MonoBehaviour {
 		LEFT,
 		MAX
 	}
-	
+	public Vector3 RayOffset;
 	public string InPipeNextScene;
 	public IN_KEY InKey; 
 	public PIPE_ACTION_TYPE PipeActionType;

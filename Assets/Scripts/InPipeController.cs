@@ -14,9 +14,11 @@ public class InPipeController : MonoBehaviour {
 	private Vector3 fromPos;
 	public Vector3 direction;
 	private float length = 1.0f;
-	private KeyCode key;
+	private KeyCode key1;
+	private KeyCode key2;
 	private Vector3 outPosition;
 	private Vector3 lookAt;
+	public Vector3 ReyOffset;
 
 	// Use this for initialization
 	void Start () {
@@ -41,7 +43,8 @@ public class InPipeController : MonoBehaviour {
 		default:
 			break;
 		}
-		fromPos = transform.position;
+		ReyOffset = PipeAction.RayOffset;
+		fromPos = transform.position + ReyOffset;
 	}
 
 	// Update is called once per frame
@@ -52,25 +55,29 @@ public class InPipeController : MonoBehaviour {
 			if(hit.collider.gameObject.layer == LayerMask.NameToLayer("Player")){
 				switch(inKey){
 				case PipeActionController.IN_KEY.DOWN:
-					key = KeyCode.S;
+					key1 = KeyCode.S;
+					key2 = KeyCode.DownArrow;
 					lookAt = new Vector3(0, 180, 0);
 					break;
 				case PipeActionController.IN_KEY.UP:
-					key = KeyCode.W;
+					key1 = KeyCode.W;
+					key2 = KeyCode.UpArrow;
 					lookAt = new Vector3(0, 180, 0);
 					break;
 				case PipeActionController.IN_KEY.RIGHT:
 					lookAt = new Vector3(0, 90, 0);
-					key = KeyCode.D;
+					key1 = KeyCode.D;
+					key2 = KeyCode.RightArrow;
 					break;
 				case PipeActionController.IN_KEY.LEFT:
 					lookAt = new Vector3(0, 270, 0);
-					key = KeyCode.A;
+					key1 = KeyCode.A;
+					key2 = KeyCode.LeftArrow;
 					break;
 				default:
 					break;
 				}
-				if(Input.GetKeyDown(key)){
+				if(Input.GetKey(key1) || Input.GetKey(key2)){
 					InFlag = true;
 					PipeAction.SetPipeAction(lookAt);
 				}

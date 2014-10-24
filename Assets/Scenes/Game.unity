@@ -2722,6 +2722,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 401118, guid: 64962d7a75acd9c4a82d7ba57c58502d, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .959999979
+      objectReference: {fileID: 0}
+    - target: {fileID: 400390, guid: 64962d7a75acd9c4a82d7ba57c58502d, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .850000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 6501008, guid: 64962d7a75acd9c4a82d7ba57c58502d, type: 2}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 64962d7a75acd9c4a82d7ba57c58502d, type: 2}
   m_RootGameObject: {fileID: 1469735774}
@@ -14944,7 +14956,7 @@ Transform:
   m_GameObject: {fileID: 656458949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.98372269, y: 1.23332942, z: 0}
-  m_LocalScale: {x: .721094012, y: 1.38179529, z: 1}
+  m_LocalScale: {x: .721094012, y: 1.38179529, z: .850000024}
   m_Children: []
   m_Father: {fileID: 785813649}
   m_RootOrder: 4
@@ -48150,6 +48162,7 @@ GameObject:
   - 65: {fileID: 2016735253}
   - 114: {fileID: 2016735252}
   - 65: {fileID: 2016735251}
+  - 136: {fileID: 2016735257}
   m_Layer: 14
   m_Name: Goal
   m_TagString: Untagged
@@ -48232,12 +48245,25 @@ Transform:
   m_GameObject: {fileID: 2016735250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 193.799988, y: -.040599823, z: 0}
-  m_LocalScale: {x: 5, y: .770856619, z: 1}
+  m_LocalScale: {x: 5, y: .770856619, z: .959999979}
   m_Children:
   - {fileID: 785813649}
   - {fileID: 1076138197}
   m_Father: {fileID: 502772552}
   m_RootOrder: 0
+--- !u!136 &2016735257
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2016735250}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0
+  m_Height: 60
+  m_Direction: 1
+  m_Center: {x: -.0700000003, y: 33.6899986, z: -8.94069672e-08}
 --- !u!1 &2020865870
 GameObject:
   m_ObjectHideFlags: 0
