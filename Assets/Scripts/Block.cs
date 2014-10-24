@@ -16,6 +16,9 @@ public class Block : MonoBehaviour {
 	private bool Move = false;
 	private float count = 0;
 
+	GameObject SEControllerObject;
+	private SEController se;
+
 	// Use this for initialization
 	void Start () {
 		if (ItemType == ItemController.ITEM_TYPE.ITEM_COIN) {
@@ -24,6 +27,9 @@ public class Block : MonoBehaviour {
 		else {
 			BlockLife = 1;
 		}
+		// SEの取得
+		SEControllerObject = GameObject.Find("SEController");
+		se = SEControllerObject.GetComponent("SEController") as SEController;
 	}
 	
 	// Update is called once per frame
@@ -46,8 +52,10 @@ public class Block : MonoBehaviour {
 			break;
 		case BLOCK_TYPE.BLREAK_BLOCK:
 			HitBreakBlock();
+
 			break;
 		case BLOCK_TYPE.NONE_BLOCK:
+			HitNoneBlock();
 			break;
 		default:
 			break;
@@ -60,6 +68,7 @@ public class Block : MonoBehaviour {
 			GameObject GameRule = GameObject.Find("GameRule");
 			GameRule Rule = GameRule.GetComponent("GameRule") as GameRule;
 			Rule.GetCoin();
+			se.SEPlay(SEController.SE_LABEL.SE_COIN);
 		}
 		GameObject Root= GameObject.Find ("ItemRoot");
 		ItemController ItemCtrl = Root.GetComponent ("ItemController") as ItemController;
@@ -75,13 +84,15 @@ public class Block : MonoBehaviour {
 		PlayerController pc = Player.GetComponent ("PlayerController") as PlayerController;
 		if (pc.State != PlayerController.PLAYER_STATE.PLAYER_NORMAL) {
 			Destroy (gameObject);
+			se.SEPlay(SEController.SE_LABEL.SE_BREAK);
 		}
 		else {
+			se.SEPlay(SEController.SE_LABEL.SE_TREAD);
 			Move = true;
 		}
 	}
 
 	void HitNoneBlock(){
-
+		se.SEPlay(SEController.SE_LABEL.SE_NOT_BREAK);
 	}
 }

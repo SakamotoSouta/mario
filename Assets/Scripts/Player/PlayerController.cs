@@ -60,10 +60,16 @@ public class PlayerController : MonoBehaviour {
 
 	// プレイヤーの声を管理しているところ
 	private PlayerSEManager PlayerSE;
+	// SE管理者
+	private GameObject SEControllerObject;
+	private SEController SE;
 
 
 	// Use this for initialization
 	void Start () {
+		// SE 
+		SEControllerObject = GameObject.Find ("SEController");
+		SE = SEControllerObject.GetComponent ("SEController") as SEController;
 		// アイテム管理者の取得
 		Item = GameObject.Find ("ItemRoot");
 		ItemController = Item.GetComponent("ItemController") as ItemController;
@@ -118,10 +124,13 @@ public class PlayerController : MonoBehaviour {
 		// プレイヤーが操作可能な場合のアップデート
 		if(PlayerControllFlag){
 			if(State == PLAYER_STATE.PLAYER_FIRE){
+				// ファイアーボール
 				if(Input.GetKeyDown(KeyCode.Q)){
 					GameObject Fb = Instantiate(FireBallPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.rotation) as GameObject;
 					Fireball FireBall = Fb.GetComponent("Fireball") as Fireball;
 					FireBall.GenerateFireBall(new Vector3(0f, 0f, 1f));
+					//　SEの再生
+					SE.SEPlay(SEController.SE_LABEL.SE_FIREBALL);
 				}
 			}
 			if(Dash){
@@ -256,6 +265,7 @@ public class PlayerController : MonoBehaviour {
 	// プレイヤーの死亡
 	void PlayerDead(){
 		// 死亡SEの再生
+		Debug.Log ("Dead");
 		PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_DEAD);
 		Jump = false;
 		Col.enabled = false;

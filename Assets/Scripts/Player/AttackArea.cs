@@ -10,7 +10,9 @@ public class AttackArea : MonoBehaviour {
 	private Vector3 fromPos;
 	private Vector3 direction;
 	private float length = 0.2f;
-
+	// SE
+	private GameObject SEControllerObject;
+	private SEController se;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +22,8 @@ public class AttackArea : MonoBehaviour {
 
 		leg = GameObject.Find("Character1_Reference");
 		direction = new Vector3 (0, -1, 0);
-
+		SEControllerObject = GameObject.Find("SEController");
+		se = SEControllerObject.GetComponent("SEController") as SEController;
 	}
 
 	// Update is called once per frame
@@ -36,7 +39,8 @@ public class AttackArea : MonoBehaviour {
 				if(hit.collider.tag == "Enemy"){
 					enemyController ec = hit.collider.GetComponent("enemyController")as enemyController;
 					ec.SetState(enemyController.ENEMY_STATE.DEAD);
-
+					// SEの再生
+					se.SEPlay(SEController.SE_LABEL.SE_TREAD);
 					pc.Velocity.y += pc.jumpPawer / 2;
 				}
 			}
@@ -49,6 +53,8 @@ public class AttackArea : MonoBehaviour {
 		if(other.collider.tag == "ItemShoot" && pc.Jump){
 			ItemShoot Item = other.collider.GetComponent("ItemShoot") as ItemShoot;
 			Item.SetState(ItemShoot.ITEM_SHOOT_STATE.STAY);
+			// SEの再生
+			se.SEPlay(SEController.SE_LABEL.SE_TREAD);
 		}
 	}
 }

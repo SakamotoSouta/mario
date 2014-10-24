@@ -25584,17 +25584,17 @@ MonoBehaviour:
   widgetsAreStatic: 0
   cullWhileDragging: 0
   worldToLocal:
-    e00: 180.5
+    e00: 202.499985
     e01: 0
     e02: 0
-    e03: -.5
+    e03: -.49999994
     e10: 0
-    e11: 180.5
+    e11: 202.499985
     e12: 0
-    e13: .5
+    e13: .49999997
     e20: 0
     e21: 0
-    e22: 180.5
+    e22: 202.499985
     e23: 0
     e30: 0
     e31: 0
@@ -33685,7 +33685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: 0
-  Coin1UpNum: 100
+  Coin1UpNum: 1
   GameTime: 300
   customGuiStyle:
     m_Name: 
@@ -42957,7 +42957,7 @@ Transform:
   m_GameObject: {fileID: 1828401144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00554016605, y: .00554016605, z: .00554016605}
+  m_LocalScale: {x: .00493827183, y: .00493827183, z: .00493827183}
   m_Children:
   - {fileID: 1245647598}
   m_Father: {fileID: 0}
@@ -44633,6 +44633,110 @@ Transform:
   - {fileID: 830940652}
   m_Father: {fileID: 1783296044}
   m_RootOrder: 0
+--- !u!1 &1906954440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1906954442}
+  - 114: {fileID: 1906954441}
+  - 82: {fileID: 1906954443}
+  m_Layer: 0
+  m_Name: SEController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1906954441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1906954440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 682d18decafffbd4ea9a2891285fd183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tread: {fileID: 8300000, guid: 831072d6d19d99b4192b5b36f794c497, type: 3}
+  Break: {fileID: 8300000, guid: b6a76bc3bba237845a3c5227501ef026, type: 3}
+  NotBreak: {fileID: 8300000, guid: feac71d7e757dc3429ba894e8d5aa2d9, type: 3}
+  FireBall: {fileID: 8300000, guid: 335512bf2c8805447957b6c0345f28ab, type: 3}
+  PawerUpItemGenerate: {fileID: 8300000, guid: 94652a92ba63e094fbd7358685e9e7be, type: 3}
+  Coin: {fileID: 8300000, guid: ee45fd3fac1f96d4fa3085ff80fd5ec7, type: 3}
+--- !u!4 &1906954442
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1906954440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.211586, y: 9.33354568, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+--- !u!82 &1906954443
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1906954440}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1907739603
 GameObject:
   m_ObjectHideFlags: 0
@@ -47777,7 +47881,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2008844928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .5, y: -.5, z: 0}
+  m_LocalPosition: {x: .49999994, y: -.49999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1091001924}

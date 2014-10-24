@@ -14,10 +14,14 @@ public class ItemController : MonoBehaviour {
 	public GameObject ItemStarPrefab;
 	public GameObject ItemFlowerPrefab;
 	public GameObject ItemCoinPrefab;
-
+	// SE管理者
+	private GameObject SEControllerObject;
+	private SEController SE;
 	// Use this for initialization
 	void Start () {
-	
+		// SEの取得
+		SEControllerObject = GameObject.Find("SEController");
+		SE = SEControllerObject.GetComponent("SEController") as SEController;
 	}
 	
 	// Update is called once per frame
@@ -33,6 +37,7 @@ public class ItemController : MonoBehaviour {
 		switch(Item){
 			// アイテムの種類判断
 		case ITEM_TYPE.ITEM_PAWERUP:
+			SE.SEPlay(SEController.SE_LABEL.SE_PAWERUPITEM_GENERATE);
 			GameObject Player = GameObject.FindGameObjectWithTag("Player");
 			PlayerController pc = Player.GetComponent("PlayerController") as PlayerController;
 			if(pc.State == PlayerController.PLAYER_STATE.PLAYER_NORMAL){
@@ -65,6 +70,7 @@ public class ItemController : MonoBehaviour {
 		case ITEM_TYPE.ITEM_COIN:
 			GameObject GameRule = GameObject.Find("GameRule");
 			GameRule Rule = GameRule.GetComponent("GameRule") as GameRule;
+			SE.SEPlay(SEController.SE_LABEL.SE_COIN);
 			Rule.GetCoin();
 			break;
 		case ITEM_TYPE.ITEM_STAR:
