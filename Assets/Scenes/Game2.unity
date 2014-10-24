@@ -1384,9 +1384,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 130941893}
   - 33: {fileID: 130941897}
-  - 136: {fileID: 130941896}
   - 23: {fileID: 130941895}
-  - 136: {fileID: 130941894}
+  - 65: {fileID: 130941894}
   m_Layer: 14
   m_Name: Pipe(Clone)
   m_TagString: NotBreakObject
@@ -1406,19 +1405,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 698340184}
   m_RootOrder: 203
---- !u!136 &130941894
-CapsuleCollider:
+--- !u!65 &130941894
+BoxCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13600012, guid: 64b1bf7c3f4bb9c44bc693674ec5adae,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 130941892}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .500000119
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 1.00000012, y: 2, z: 1.00000024}
   m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
 --- !u!23 &130941895
 Renderer:
@@ -1441,20 +1438,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!136 &130941896
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13600014, guid: 64b1bf7c3f4bb9c44bc693674ec5adae,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 130941892}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &130941897
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7117,6 +7100,7 @@ MonoBehaviour:
   Damage: 0
   PlayerControllFlag: 1
   HitGoalPole: 0
+  GoalPoleSpeed: 0
 --- !u!95 &643029401
 Animator:
   serializedVersion: 3
@@ -9106,9 +9090,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 803012708}
   - 33: {fileID: 803012712}
-  - 136: {fileID: 803012711}
   - 23: {fileID: 803012710}
-  - 136: {fileID: 803012709}
+  - 65: {fileID: 803012709}
   m_Layer: 14
   m_Name: Pipe(Clone)
   m_TagString: NotBreakObject
@@ -9128,19 +9111,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 698340184}
   m_RootOrder: 210
---- !u!136 &803012709
-CapsuleCollider:
+--- !u!65 &803012709
+BoxCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13600004, guid: 64b1bf7c3f4bb9c44bc693674ec5adae,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 803012707}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .500000119
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 1.00000012, y: 2, z: 1.00000024}
   m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
 --- !u!23 &803012710
 Renderer:
@@ -9163,20 +9144,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!136 &803012711
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13600006, guid: 64b1bf7c3f4bb9c44bc693674ec5adae,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 803012707}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &803012712
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10594,9 +10561,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 964934943}
   - 33: {fileID: 964934947}
-  - 136: {fileID: 964934946}
   - 23: {fileID: 964934945}
-  - 136: {fileID: 964934944}
+  - 65: {fileID: 964934944}
   m_Layer: 14
   m_Name: Pipe(Clone)
   m_TagString: NotBreakObject
@@ -10616,19 +10582,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 698340184}
   m_RootOrder: 204
---- !u!136 &964934944
-CapsuleCollider:
+--- !u!65 &964934944
+BoxCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13600008, guid: 64b1bf7c3f4bb9c44bc693674ec5adae,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 964934942}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .500000119
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 1.00000012, y: 2, z: 1.00000024}
   m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
 --- !u!23 &964934945
 Renderer:
@@ -10651,20 +10615,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!136 &964934946
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13600010, guid: 64b1bf7c3f4bb9c44bc693674ec5adae,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 964934942}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &964934947
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -19882,9 +19832,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1732103483}
   - 33: {fileID: 1732103487}
-  - 136: {fileID: 1732103486}
   - 23: {fileID: 1732103485}
-  - 136: {fileID: 1732103484}
+  - 65: {fileID: 1732103484}
   m_Layer: 14
   m_Name: Pipe(Clone)
   m_TagString: NotBreakObject
@@ -19904,19 +19853,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 698340184}
   m_RootOrder: 211
---- !u!136 &1732103484
-CapsuleCollider:
+--- !u!65 &1732103484
+BoxCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13600000, guid: 64b1bf7c3f4bb9c44bc693674ec5adae,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1732103482}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .500000119
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 1.00000012, y: 2, z: 1.00000024}
   m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
 --- !u!23 &1732103485
 Renderer:
@@ -19939,20 +19886,6 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!136 &1732103486
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 13600002, guid: 64b1bf7c3f4bb9c44bc693674ec5adae,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1732103482}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1732103487
 MeshFilter:
   m_ObjectHideFlags: 0

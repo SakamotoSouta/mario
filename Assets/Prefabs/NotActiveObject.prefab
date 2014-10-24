@@ -2465,10 +2465,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 400274}
   - 33: {fileID: 3300252}
-  - 136: {fileID: 13600004}
   - 23: {fileID: 2300252}
   - 114: {fileID: 11400022}
   - 65: {fileID: 6500250}
+  - 65: {fileID: 6501062}
   m_Layer: 16
   m_Name: InPipe
   m_TagString: NotBreakObject
@@ -10029,6 +10029,7 @@ GameObject:
   - 65: {fileID: 6501010}
   - 114: {fileID: 11400094}
   - 65: {fileID: 6501008}
+  - 136: {fileID: 13600042}
   m_Layer: 14
   m_Name: Goal
   m_TagString: Untagged
@@ -13100,7 +13101,7 @@ Transform:
   m_GameObject: {fileID: 100390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.98372269, y: 1.23332942, z: 0}
-  m_LocalScale: {x: .721094012, y: 1.38179529, z: 1}
+  m_LocalScale: {x: .721094012, y: 1.38179529, z: .850000024}
   m_Children: []
   m_Father: {fileID: 400448}
   m_RootOrder: 4
@@ -13643,7 +13644,7 @@ Transform:
   m_GameObject: {fileID: 100478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 1, z: 0}
-  m_LocalScale: {x: .99000001, y: .99000001, z: .99000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400998}
   m_RootOrder: 6
@@ -14472,7 +14473,7 @@ Transform:
   m_GameObject: {fileID: 100598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3, y: 1, z: 0}
-  m_LocalScale: {x: .99000001, y: .99000001, z: .99000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400770}
   m_RootOrder: 6
@@ -17848,7 +17849,7 @@ Transform:
   m_GameObject: {fileID: 101118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 193.799988, y: -.040599823, z: 0}
-  m_LocalScale: {x: 5, y: .770856619, z: 1}
+  m_LocalScale: {x: 5, y: .770856619, z: .959999979}
   m_Children:
   - {fileID: 400448}
   - {fileID: 400604}
@@ -39855,6 +39856,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6501062
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100274}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.00000012, y: 2, z: 1.00000024}
+  m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 1
@@ -40057,11 +40070,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6def2dc5629a53479d4d1636f58fd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RayOffset: {x: 0, y: 0, z: 0}
   InPipeNextScene: Bonus
   InKey: 0
   PipeActionType: 0
   actionVector: {x: 0, y: -1, z: 0}
-  Speed: .00999999978
+  Speed: .0500000007
   outPosition: {x: 0, y: 10, z: 0}
 --- !u!114 &11400024
 MonoBehaviour:
@@ -40218,11 +40232,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6def2dc5629a53479d4d1636f58fd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RayOffset: {x: 0, y: 0, z: 0}
   InPipeNextScene: 
   InKey: 4
   PipeActionType: 1
   actionVector: {x: 0, y: 1, z: 0}
-  Speed: .00999999978
+  Speed: .0500000007
   outPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &11400046
 MonoBehaviour:
@@ -40624,19 +40639,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
---- !u!136 &13600004
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100274}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13600006
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -40871,6 +40873,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &13600042
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0
+  m_Height: 60
+  m_Direction: 1
+  m_Center: {x: -.0700000003, y: 33.6899986, z: -8.94069672e-08}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
