@@ -17,7 +17,7 @@ public class FlagController : MonoBehaviour {
 	void Update () {
 		if(Application.loadedLevelName != "FieldCreateTool"){
 			if (PlayerController.HitGoalPole) {
-				transform.Translate(0f, 0.012f, 0f);
+				transform.Translate(0f, PlayerController.GoalPoleSpeed, 0f);
 			}
 		}
 	}

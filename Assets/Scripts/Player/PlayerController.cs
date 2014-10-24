@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour {
 	public bool PlayerControllFlag = true;
 	// ゴールのポールに接しているかどうか
 	public bool HitGoalPole = false;
+	public float GoalPoleSpeed;
 
 	// プレイヤーの声を管理しているところ
 	private PlayerSEManager PlayerSE;
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour {
 		// ゴールポールにあたったとき
 		if(HitGoalPole){
 			PlayerControllFlag = false;
-			transform.Translate(0f, -0.01f, 0f);
+			transform.Translate(0f, -GoalPoleSpeed, 0f);
 			Jump = false;
 			Damage = false;
 			
@@ -238,8 +239,8 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0, 180, 0);
 		GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
 		CameraCtrl cc = camera.GetComponent ("CameraCtrl") as CameraCtrl;
-		cc.CameraOffet.z = -5;
-		cc.CameraOffet.y = 0;
+		cc.CameraOffet.z = -8;
+		cc.CameraOffet.y = 10;
 		Speed = 0;
 		Velocity.x = 0;
 		Velocity.y = 0;
@@ -266,7 +267,6 @@ public class PlayerController : MonoBehaviour {
 	// プレイヤーの死亡
 	void PlayerDead(){
 		// 死亡SEの再生
-		Debug.Log ("Dead");
 		PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_DEAD);
 		Jump = false;
 		Col.enabled = false;
