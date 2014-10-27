@@ -77,6 +77,7 @@ public class Block : MonoBehaviour {
 		ItemCtrl.GenerateItem (ItemType, transform.position);
 		if (BlockLife == 0) {
 			gameObject.renderer.material.color = new Color(1, 1, 1, 0);
+			gameObject.renderer.material.mainTexture = null;
 			BlockType = BLOCK_TYPE.NONE_BLOCK;
 		}
 	}

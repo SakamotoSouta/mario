@@ -96,6 +96,8 @@ public class PlayerController : MonoBehaviour {
 
 		// 声の管理者取得
 		PlayerSE = GetComponent<PlayerSEManager> ();
+
+		SetState (State);
 	}
 	
 	// Update is called once per frame
@@ -344,13 +346,13 @@ public class PlayerController : MonoBehaviour {
 		State = state;
 		switch(State){
 		case PLAYER_STATE.PLAYER_NORMAL:
-			transform.localScale = new Vector3(1, 1, 1);
+			transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 			break;
 		case PLAYER_STATE.PLAYER_SUPER:
-			transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+			transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 			break;
 		case PLAYER_STATE.PLAYER_FIRE:
-			transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+			transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 			break;
 		}
 	}

@@ -53,7 +53,7 @@ public class ItemShoot : MonoBehaviour {
 
 		if (other.gameObject.tag == "Enemy" && State == ITEM_SHOOT_STATE.SHOOT) {
 			enemyController ec = other.collider.GetComponent("enemyController")as enemyController;
-			ec.Velocity = new Vector3(0f, 0f, -0.1f);
+			ec.Velocity = new Vector3(-0.1f, 0.1f, 0.1f);
 		}
 	}
 

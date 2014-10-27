@@ -278,7 +278,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -558,7 +558,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -775,7 +775,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a1942ae449e96244db408e629b4545fd, type: 2}
       propertyPath: outPosition.y
-      value: -3.49502993
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: a1942ae449e96244db408e629b4545fd, type: 2}
       propertyPath: m_IsTrigger
@@ -908,7 +908,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1051,7 +1051,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -1187,7 +1187,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -1329,7 +1329,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1856,7 +1856,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -1920,7 +1920,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -1984,7 +1984,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -2126,7 +2126,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2257,7 +2257,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -2365,7 +2365,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -2739,7 +2739,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3264,7 +3264,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3528,7 +3528,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3677,7 +3677,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3776,7 +3776,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -4554,7 +4554,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -4653,7 +4653,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -6210,7 +6210,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -6835,7 +6835,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -7050,7 +7050,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -7114,7 +7114,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -7184,7 +7184,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -7355,7 +7355,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -7673,7 +7673,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -7772,7 +7772,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -8052,7 +8052,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -8122,7 +8122,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -8515,7 +8515,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -8740,7 +8740,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -8961,7 +8961,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -9190,7 +9190,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -9813,7 +9813,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -9999,7 +9999,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a32fc0381c53cc44296ce83fd9b9e91a, type: 2}
+  - {fileID: 2100000, guid: b3284e4e16b1d4d4aba7a61e3e16250f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -10253,7 +10253,7 @@ MonoBehaviour:
   PipeActionType: 0
   actionVector: {x: 0, y: 0, z: 1}
   Speed: .0299999993
-  outPosition: {x: 110.148903, y: -3.49502993, z: 0}
+  outPosition: {x: 110.148903, y: 0, z: 0}
 --- !u!23 &2051182298
 Renderer:
   m_ObjectHideFlags: 0
@@ -10492,7 +10492,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: .8482759, b: 0, a: 1}
   m_Intensity: 1
-  m_Range: 4.1500001
+  m_Range: .980000019
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
