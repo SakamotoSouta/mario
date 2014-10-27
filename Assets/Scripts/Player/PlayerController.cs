@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour {
 	private ItemController ItemController;
 	// ジャンプ力
 	public float jumpPawer;
+	// 前回のY座標
+	private float oldPositionY;
+	private float positionTemp;
+
 	// ダッシュフラグ
 	private bool Dash;
 	// スピード
@@ -96,19 +100,15 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		// Z判定 常に０
+	void Update (){
+		// プレイヤー操作
+		PlayerControll ();
+
+		// Z判定 常に0
 		if (transform.position.z > 0 || transform.position.z < 0) {
 			transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 		}
 
-		// LSHIFTでダッシュフラグを立てる
-		if(Input.GetKey(KeyCode.LeftShift)){
-			Dash = true;
-		}
-		else{
-			Dash = false;
-		}
 
 		// とりあえず飛んでれば着地していない
 		if(!Col.isGrounded){
@@ -125,8 +125,37 @@ public class PlayerController : MonoBehaviour {
 			transform.rotation = Quaternion.Euler(0, 180, 0);
 		}
 
+
+
+		if(!Damage && PlayerControllFlag){
+			// 重力処理
+			Velocity.y -= Gravity * Time.deltaTime;
+ 			Col.Move (Velocity * Time.deltaTime);
+
+		}
+
+		// 地面に接していたら
+		if (Col.isGrounded) {
+			blockHit = false;
+			Velocity.y = 0f;
+		}// if
+
+	}
+
+
+	// プレイヤー操作
+	void PlayerControll(){
 		// プレイヤーが操作可能な場合のアップデート
 		if(PlayerControllFlag){
+
+			// LSHIFTでダッシュフラグを立てる
+			if(Input.GetKey(KeyCode.LeftShift)){
+				Dash = true;
+			}
+			else{
+				Dash = false;
+			}
+
 			if(State == PLAYER_STATE.PLAYER_FIRE){
 				// ファイアーボール
 				if(Input.GetKeyDown(KeyCode.Q)){
@@ -147,18 +176,18 @@ public class PlayerController : MonoBehaviour {
 				// 左右入力で移動
 				Velocity.x = Input.GetAxis ("Horizontal") * Speed;
 			}
-
-
-
+			
+			
+			
 			if (Velocity.x > 0) {
-					oldVector = 1;
+				oldVector = 1;
 			}
 			else if (Velocity.x < 0) {
-					oldVector = -1;
+				oldVector = -1;
 			}
-
+			
 			transform.rotation = Quaternion.LookRotation (new Vector3 (oldVector, 0f, 0f));
-
+			
 			// ジャンプ処理
 			if(Input.GetKeyDown(KeyCode.Space)){
 				if(Col.isGrounded){	
@@ -169,17 +198,17 @@ public class PlayerController : MonoBehaviour {
 			}
 			// 長押し対応
 			if (Input.GetKey(KeyCode.Space) && Jump) {
-
+				
 				if(jumpCounter < 10f && Jump){
 					jumpCounter++;
 					Velocity.y = jumpPawer;
 				}
 			}// if
-
+			
 			if(Input.GetKeyUp(KeyCode.Space)){
 				jumpCounter = 100;
 			}
-
+			
 			if (Jump) {
 				if(!blockHit){
 					RaycastHit hit;
@@ -204,7 +233,7 @@ public class PlayerController : MonoBehaviour {
 			else{
 				jumpCounter = 0;
 			}
-
+			
 			// 穴判定
 			if (transform.position.y < -5) {
 				if(!rule.endFlag){
@@ -214,25 +243,11 @@ public class PlayerController : MonoBehaviour {
 				rule.endFlag = true;
 			}
 		}
-
-		if(!Damage && PlayerControllFlag){
-			// 重力処理
-			Velocity.y -= Gravity * Time.deltaTime;
- 			Col.Move (Velocity * Time.deltaTime);
-
-		}
-
-		// 地面に接していたら
-		if (Col.isGrounded) {
-			blockHit = false;
-			Velocity.y = 0f;
-		}// if
-
 	}
 	
 	// ゴール
 	public void GoalIn(){
-		//　ゴールSEを再生
+		// ゴールSEを再生
 		PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_CLEAR);
 		HitGoalPole = false;
 		PlayerControllFlag = false;

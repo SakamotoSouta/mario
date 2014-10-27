@@ -33756,7 +33756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Score: 0
-  Coin1UpNum: 1
+  Coin1UpNum: 100
   GameTime: 300
   customGuiStyle:
     m_Name: 
