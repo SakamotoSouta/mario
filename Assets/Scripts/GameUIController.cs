@@ -65,17 +65,17 @@ public class GameUIController : MonoBehaviour {
 
 	// スコア表示の初期化
 	void InitScoreUI(){
-		scoreLabel.transform.localScale = new Vector2 (30f, 30f);
+		scoreLabel.transform.localScale = new Vector2 (60f, 60f);
 	}
 	// 時間表示の初期化
 	void InitTimeUI(){
-		timeLabel.transform.localScale = new Vector2 (30f, 30f);
+		timeLabel.transform.localScale = new Vector2 (60f, 60f);
 	}
 
 	// 残機表示の初期化
 	void InitLifeUI(){
-		lifeLabel.transform.localScale = new Vector2 (30f, 30f);
-		lifeTexture.transform.localScale = new Vector2 (30f, 30f);
+		lifeLabel.transform.localScale = new Vector2 (60f, 60f);
+		lifeTexture.transform.localScale = new Vector2 (60f, 60f);
 	}
 
 	// スコアの表示

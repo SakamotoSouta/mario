@@ -631,7 +631,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a1942ae449e96244db408e629b4545fd, type: 2}
       propertyPath: Speed
-      value: .0500000007
+      value: .0299999993
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a1942ae449e96244db408e629b4545fd, type: 2}
       propertyPath: actionVector.z
@@ -9146,7 +9146,7 @@ MonoBehaviour:
   InKey: 2
   PipeActionType: 0
   actionVector: {x: 0, y: 0, z: 1}
-  Speed: .0500000007
+  Speed: .0299999993
   outPosition: {x: 110.148903, y: -3.49502993, z: 0}
 --- !u!23 &2051182298
 Renderer:

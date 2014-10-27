@@ -28,9 +28,6 @@ public class PlayerController : MonoBehaviour {
 	private ItemController ItemController;
 	// ジャンプ力
 	public float jumpPawer;
-	// 前回のY座標
-	private float oldPositionY;
-	private float positionTemp;
 
 	// ダッシュフラグ
 	private bool Dash;
@@ -291,6 +288,7 @@ public class PlayerController : MonoBehaviour {
 	void PlayerDead(){
 		// 死亡SEの再生
 		PlayerSE.PlayerSEPlay(PlayerSEManager.PLAYER_SE_LABEL.PLAYER_SE_DEAD);
+		PlayerControllFlag = false;
 		Jump = false;
 		Col.enabled = false;
 		Damage = true;
