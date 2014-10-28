@@ -4,18 +4,18 @@ using System.Collections;
 public class ItemStar : MonoBehaviour {
 	private Vector3 Velocity;
 	private ParticleSystem effect;
-
+	private Rigidbody Rb;
 	// Use this for initialization
 	void Start () {
-		effect = transform.Find ("InvinsibleEffect").GetComponent<ParticleSystem> ();
+		effect = transform.Find ("energyBlast").GetComponent<ParticleSystem> ();
 		effect.Play();
-		Rigidbody Rb = gameObject.GetComponent("Rigidbody") as Rigidbody;
-		Rb.AddForce (100f, 500f, 0);
-		Velocity = new Vector3 (0.1f, 0, 0);
+		Rb = gameObject.GetComponent ("Rigidbody") as Rigidbody;
+		Velocity = new Vector3 (-0.1f, 0, 0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
 		transform.Translate (Velocity);
 
 		if(transform.position.y < -5){
@@ -24,8 +24,8 @@ public class ItemStar : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision other){
-		if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "NotBreakObject" || other.gameObject.tag == "Block"){
-			Velocity.x *= -1;
-		}
+		Velocity.x *= -1;
+		Rb.AddForce (0, 400f, 0);
+
 	}
 }

@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour {
 		rule = GameRule.GetComponent ("GameRule") as GameRule;
 
 		// エフェクトの初期化
-		InvinsibleEffect = transform.Find ("InvinsibleEffect").GetComponent<ParticleSystem> ();
+		InvinsibleEffect = transform.Find ("energyBlast").GetComponent<ParticleSystem> ();
 		InvinsibleEffect.Stop ();
 		// プレイヤーの向きベクトルの初期化
 		oldVector = 1;
@@ -281,8 +281,8 @@ public class PlayerController : MonoBehaviour {
 		Invincible = true;
 		InvinsibleEffect.Play ();
 		yield return new WaitForSeconds (InvincibleTime);
-		Invincible = false;
 		InvinsibleEffect.Stop();
+		Invincible = false;
 		bgm.EndInbinsible ();
 	}
 
@@ -346,13 +346,13 @@ public class PlayerController : MonoBehaviour {
 		State = state;
 		switch(State){
 		case PLAYER_STATE.PLAYER_NORMAL:
-			transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+			transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 			break;
 		case PLAYER_STATE.PLAYER_SUPER:
-			transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+			transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 			break;
 		case PLAYER_STATE.PLAYER_FIRE:
-			transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+			transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 			break;
 		}
 	}
