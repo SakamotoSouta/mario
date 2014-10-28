@@ -3,10 +3,12 @@ using System.Collections;
 
 public class ColliderController : MonoBehaviour {
 
-	private Grid _gridObject;
+	public Vector2 _Size;
+
+	public float _gridSize;
 	public GameObject _colliderPrefab;
 
-	private int _numBlock;
+	private Vector2 _numBlock;
 	private int _numMaxBlock;
 	private float _blockSize;
 
@@ -22,26 +24,28 @@ public class ColliderController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
 	}
 
 	private void InitColloiderGrid(){
-		_gridObject = GetComponent<Grid> (); 
-		_blockSize = _gridObject.gridSize;
-		_numBlock = _gridObject.size;
-		_numMaxBlock = (int)Mathf.Pow(_gridObject.size, 2);
+
+
+		_blockSize = _gridSize;
+		_numBlock = _Size;
+		_numMaxBlock = (int)(_numBlock.x * _numBlock.y);
 		_colliderObjects = new GameObject[_numMaxBlock];
 		
 		_parentObject = GameObject.Find ("ColliderRoot");
 
 
-		for(int i = 0; i < _numMaxBlock; i++){
-			_colliderObjects[i] = (GameObject)Instantiate(_colliderPrefab, transform.position, transform.rotation);
-			_colliderObjects[i].transform.localScale = new Vector3 (_blockSize, _blockSize, 0);
+		for(int i = 0; i < _numBlock.y; i++){
+			for(int j = 0; j < _numBlock.x; j++){
+				_colliderObjects[(i * (int)_numBlock.x) + j] = (GameObject)Instantiate(_colliderPrefab, transform.position, transform.rotation);
+				_colliderObjects[(i * (int)_numBlock.x) + j].transform.localScale = new Vector3 (_blockSize, _blockSize, 0);
 
-			_colliderObjects[i].transform.position = new Vector3(_blockSize * -( _numBlock / 2 ) +  (_blockSize * (i % _numBlock)), _blockSize * ( _numBlock /2 ) - (_blockSize * (i / _numBlock)), 0);
-			_colliderObjects[i].transform.Translate(_blockSize / 2, -_blockSize / 2, 0);
-			_colliderObjects[i].transform.parent = _parentObject.transform;
+				_colliderObjects[(i * (int)_numBlock.x) + j].transform.position = new Vector3(_blockSize * -( _numBlock.x / 2 ) +  (_blockSize * j), _blockSize * ( _numBlock.y /2 ) - (_blockSize * i), 0);
+				_colliderObjects[(i * (int)_numBlock.x) + j].transform.Translate(_blockSize / 2, -_blockSize / 2, 0);
+				_colliderObjects[(i * (int)_numBlock.x) + j].transform.parent = _parentObject.transform;
+			}
 		}
 	}
 }

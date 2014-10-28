@@ -47,13 +47,15 @@ public class ToolController : MonoBehaviour {
 					// あたった
 					if(hit.collider.tag == "GridCollider"){
 						if(!deleteFlag){
-							GameObject fieldObject =  (GameObject)Instantiate(Prefab, hit.collider.transform.position, transform.rotation);
+							GameObject fieldObject =  (GameObject)Instantiate(Prefab, hit.collider.transform.position, Prefab.transform.rotation);
 							fieldObject.transform.parent = Parent.transform;
 						}
 					}
 					else{
 						if(deleteFlag){
-							Destroy(hit.collider.gameObject);
+							if(hit.collider.tag != "UI"){
+								Destroy(hit.collider.gameObject);
+							}
 						}
 					}
 				}
