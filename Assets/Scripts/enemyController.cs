@@ -36,7 +36,8 @@ public class enemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Application.loadedLevelName != "FieldCreateTool") {
-								
+					
+			transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 			physics.isKinematic = false;
 				
 			if (transform.position.y < -5) {

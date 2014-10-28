@@ -17,10 +17,12 @@ public class GoalPole : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if(other.tag == "Player"){
-			RuleObject = GameObject.Find ("GameRule");
-			Rule = RuleObject.GetComponent ("GameRule") as GameRule;
-			Rule.AddScore(GoleScore);
 			PlayerController PlayerController= other.GetComponent("PlayerController") as PlayerController;
+			if(!PlayerController.HitGoalPole){
+				RuleObject = GameObject.Find ("GameRule");
+				Rule = RuleObject.GetComponent ("GameRule") as GameRule;
+				Rule.AddScore(GoleScore);
+			}
 			PlayerController.HitGoalPole = true;
 		}
 	}
