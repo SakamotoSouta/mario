@@ -8,7 +8,7 @@ public class Fireball : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		effect = transform.Find ("InvinsibleEffect").GetComponent<ParticleSystem> ();
+		effect = transform.Find ("fx_fumefx_fireball").GetComponent<ParticleSystem> ();
 		effect.Play();
 		Rigidbody Rb = gameObject.GetComponent("Rigidbody") as Rigidbody;
 		Rb.AddForce (100f, -200f, 0);
