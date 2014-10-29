@@ -36,8 +36,6 @@ public class enemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Application.loadedLevelName != "FieldCreateTool") {
-					
-			transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 			physics.isKinematic = false;
 				
 			if (transform.position.y < -5) {
@@ -65,6 +63,7 @@ public class enemyController : MonoBehaviour {
 				else{
 					Anim.SetFloat (SpeedID, Velocity.z * -1);
 				}
+
 				transform.rotation = Quaternion.LookRotation (Look);
 			}
 			if (transform.position.y < -5) {
@@ -91,12 +90,13 @@ public class enemyController : MonoBehaviour {
 		if (other.gameObject.tag == "NotBreakObject" || other.collider.tag == "ItemShoot") {
 			Look.x *= -1;
 		}// if
+
 		else if(other.gameObject.tag == "Enemy"){
 			enemyController ec = other.collider.GetComponent("enemyController")as enemyController;
-			if(Velocity.z < ec.Velocity.z){
+			if(Velocity.z > ec.Velocity.z){
 				Look.x *= -1;
 			}
-			else if(Velocity.x == ec.Velocity.z){
+			else if(Velocity.z == ec.Velocity.z){
 				Look.x *= -1;
 			}
 		}

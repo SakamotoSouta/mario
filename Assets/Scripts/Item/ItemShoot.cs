@@ -55,6 +55,9 @@ public class ItemShoot : MonoBehaviour {
 			enemyController ec = other.collider.GetComponent("enemyController")as enemyController;
 			ec.Velocity = new Vector3(-0.1f, 0.1f, 0.1f);
 		}
+		if (other.gameObject.tag == "ItemShoot") {
+			Destroy(other.gameObject);
+		}
 	}
 
 	public void SetState(ITEM_SHOOT_STATE state){

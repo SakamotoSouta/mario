@@ -12,6 +12,7 @@ public class ItemMushroom : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		rigidbody.WakeUp ();
+		transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
 		transform.Translate (Velocity);
 
 		if(transform.position.y < -5){

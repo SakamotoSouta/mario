@@ -44,6 +44,14 @@ public class AttackArea : MonoBehaviour {
 					pc.Velocity.y += pc.jumpPawer / 2;
 				}
 			}
+			if (Physics.Raycast(fromPos, direction, out hit, length)) {
+				if(hit.collider.tag == "ItemShoot"){
+					ItemShoot Item = hit.collider.GetComponent("ItemShoot") as ItemShoot;
+					Item.SetState(ItemShoot.ITEM_SHOOT_STATE.STAY);
+					// SEの再生
+					se.SEPlay(SEController.SE_LABEL.SE_TREAD);
+				}
+			}
 		}	
 
 	}
