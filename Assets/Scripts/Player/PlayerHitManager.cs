@@ -8,11 +8,7 @@ public class PlayerHitManager : MonoBehaviour {
 	void Start () {
 		PlayerController = GetComponent<PlayerController> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 	//止まっているときのあたり判定
 	void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag == "ItemShoot"){
