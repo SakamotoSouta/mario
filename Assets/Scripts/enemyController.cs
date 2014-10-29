@@ -92,7 +92,7 @@ public class enemyController : MonoBehaviour {
 		}// if
 
 		else if(other.gameObject.tag == "Enemy"){
-			enemyController ec = other.collider.GetComponent("enemyController")as enemyController;
+			enemyController ec = other.gameObject.GetComponent("enemyController")as enemyController;
 			if(Velocity.z > ec.Velocity.z){
 				Look.x *= -1;
 			}

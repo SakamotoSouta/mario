@@ -4986,8 +4986,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.22000003, y: .469999999, z: .100000001}
-  m_Center: {x: -.0399999991, y: -.0700000003, z: -.0399999991}
+  m_Size: {x: .74000001, y: .439999998, z: .939999998}
+  m_Center: {x: -.25999999, y: -.0700000003, z: 0}
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -5087,7 +5087,7 @@ MonoBehaviour:
   Invincible: 0
   InvincibleTime: 5
   FireBallPrefab: {fileID: 100002, guid: 66ab1d89078f5094985add52eb4c67f2, type: 2}
-  jumpPawer: 15
+  jumpPawer: 10
   Velocity: {x: 0, y: 0, z: 0}
   onGround: 0
   Goal: 0
@@ -5167,7 +5167,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: .379999995
+  m_Radius: .170000002
   m_Center: {x: .790000021, y: -.00999999978, z: 0}
 --- !u!137 &13700000
 SkinnedMeshRenderer:

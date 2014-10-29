@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour {
 			// 長押し対応
 			if (Input.GetKey(KeyCode.Space) && Jump) {
 				
-				if(jumpCounter < 30f && Jump){
+				if(jumpCounter < 25f && Jump){
 					jumpCounter++;
 					Velocity.y = jumpPawer;
 				}
