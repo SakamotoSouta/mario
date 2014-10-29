@@ -30069,11 +30069,11 @@ MonoBehaviour:
     e00: 360
     e01: 0
     e02: 0
-    e03: .943920791
+    e03: .956755519
     e10: 0
     e11: 360
     e12: 0
-    e13: .954907119
+    e13: 0
     e20: 0
     e21: 0
     e22: 360
@@ -41029,6 +41029,10 @@ Prefab:
     - target: {fileID: 11400002, guid: 64962d7a75acd9c4a82d7ba57c58502d, type: 2}
       propertyPath: Speed
       value: .00499999989
+      objectReference: {fileID: 0}
+    - target: {fileID: 6501078, guid: 64962d7a75acd9c4a82d7ba57c58502d, type: 2}
+      propertyPath: m_Size.x
+      value: 1.79424
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6500672, guid: 64962d7a75acd9c4a82d7ba57c58502d, type: 2}
@@ -58226,7 +58230,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2008844928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.954907119, y: -.954907119, z: 0}
+  m_LocalPosition: {x: -.967741847, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1091001924}
