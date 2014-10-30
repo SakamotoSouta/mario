@@ -29,7 +29,9 @@ public class GameRule : MonoBehaviour {
 		Player = GameObject.FindGameObjectWithTag("Player");
 		pc = Player.GetComponent ("PlayerController") as PlayerController;
 		staticObject = GameObject.Find ("staticObject");
-		staticObjectScript = staticObject.GetComponent ("StaticObject") as StaticObject;
+		if(staticObject){
+			staticObjectScript = staticObject.GetComponent ("StaticObject") as StaticObject;
+		}
 	}
 	
 	// Update is called once per frame
@@ -80,15 +82,18 @@ public class GameRule : MonoBehaviour {
 		// 次のシーン番号を代入
 		int Next = Application.loadedLevel + 1;
 		if (Next < GameStageNum) {
-
-			// 値の保存
-			staticObjectScript.Score = Score;
-			staticObjectScript.State = pc.State;
-			DontDestroyOnLoad(staticObject);
+			if(staticObject){
+				// 値の保存
+				staticObjectScript.Score = Score;
+				staticObjectScript.State = pc.State;
+				DontDestroyOnLoad(staticObject);
+			}
 			FadeManager.Instance.LoadLevel(Next, 1.0f);
 		}
 		else{
-			Destroy(staticObject);
+			if(staticObject){
+				Destroy(staticObject);
+			}
 			GameOver();
 		}
 	}

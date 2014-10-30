@@ -122,8 +122,7 @@ public class PlayerController : MonoBehaviour {
 			transform.Translate(0f, -GoalPoleSpeed, 0f);
 			Jump = false;
 			Damage = false;
-			
-			transform.rotation = Quaternion.Euler(0, 180, 0);
+
 		}
 
 
@@ -261,8 +260,8 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(0, 180, 0);
 		GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
 		CameraCtrl cc = camera.GetComponent ("CameraCtrl") as CameraCtrl;
-		cc.CameraOffet.z = -8;
-		cc.CameraOffet.y = 10;
+		cc.CameraOffet.z = -15;
+		cc.CameraOffet.y = 0;
 		Speed = 0;
 		Velocity.x = 0;
 		Velocity.y = 0;

@@ -25,12 +25,8 @@ public class FieldRootController : MonoBehaviour {
 
 public static class GameObjectExtensions
 {
-	/// <summary>
-	/// すべての子オブジェクトを返します
-	/// </summary>
-	/// <param name="self">GameObject 型のインスタンス</param>
-	/// <param name="includeInactive">非アクティブなオブジェクトも取得する場合 true</param>
-	/// <returns>すべての子オブジェクトを管理する配列</returns>
+
+	// すべての子オブジェクトを返す
 	public static GameObject[] GetChildren( 
 	                                       this GameObject self, 
 	                                       bool includeInactive )
@@ -44,12 +40,7 @@ public static class GameObjectExtensions
 
 public static class ComponentExtensions
 {
-	/// <summary>
-	/// すべての子オブジェクトを返します
-	/// </summary>
-	/// <param name="self">Component 型のインスタンス</param>
-	/// <param name="includeInactive">非アクティブなオブジェクトも取得する場合 true</param>
-	/// <returns>すべての子オブジェクトを管理する配列</returns>
+	// すべての子オブジェクトを返す
 	public static GameObject[] GetChildren( 
 	                                       this Component self, 
 	                                       bool includeInactive )
