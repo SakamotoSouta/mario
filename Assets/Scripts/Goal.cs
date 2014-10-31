@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Goal : MonoBehaviour {
-	GameObject Player;
-	PlayerController Pc;
+	private GameObject Player;
+	 private PlayerController Pc;
 
 	// Use this for initialization
 	void Start () {

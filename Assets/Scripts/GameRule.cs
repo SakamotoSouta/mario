@@ -72,7 +72,7 @@ public class GameRule : MonoBehaviour {
 
 	// 初期化
 	public void SceneInit (){
-		CameraCtrl CameraController = Camera.main.GetComponent ("CameraCtrl") as CameraCtrl;
+		var CameraController = Camera.main.GetComponent ("CameraCtrl") as CameraCtrl;
 		CameraController.InitCamera ();
 	}
 
@@ -134,10 +134,10 @@ public class GameRule : MonoBehaviour {
 		else{
 			notActiveObject.SetActive (true);
 			activeObjectFlag = true;
-			GameObject Delete = GameObject.Find("DeleteObject");
+			var Delete = GameObject.Find("DeleteObject");
 			Destroy(Delete);
-			GameObject OutPipe = GameObject.Find("OutPipe");
-			PipeActionController PipeAction = OutPipe.GetComponent("PipeActionController") as PipeActionController;
+			var OutPipe = GameObject.Find("OutPipe");
+			var PipeAction = OutPipe.GetComponent("PipeActionController") as PipeActionController;
 			PipeAction.SetPipeAction(new Vector3(0, 180, 0));
 		}
 	}

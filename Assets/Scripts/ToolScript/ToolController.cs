@@ -40,14 +40,14 @@ public class ToolController : MonoBehaviour {
 		if(Prefab != null){
 			if(Input.GetButton("Fire1")){
 				// マウスのポジションを取得
-				Vector2 clickPosition = Input.mousePosition;
-				Ray ray = Camera.main.ScreenPointToRay(clickPosition);
+				var clickPosition = Input.mousePosition;
+				var ray = Camera.main.ScreenPointToRay(clickPosition);
 				RaycastHit hit;
 				if(Physics.Raycast(ray, out hit, RayCastMaxDistance)){
 					// あたった
 					if(hit.collider.tag == "GridCollider"){
 						if(!deleteFlag){
-							GameObject fieldObject =  (GameObject)Instantiate(Prefab, hit.collider.transform.position, Prefab.transform.rotation);
+							var fieldObject =  (GameObject)Instantiate(Prefab, hit.collider.transform.position, Prefab.transform.rotation);
 							fieldObject.transform.parent = Parent.transform;
 						}
 					}

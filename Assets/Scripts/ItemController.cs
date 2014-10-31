@@ -33,13 +33,13 @@ public class ItemController : MonoBehaviour {
 	// 生成
 	public void GenerateItem(ITEM_TYPE Item, Vector3 position){
 		position.y += 1;
-		GameObject root = GameObject.Find ("ItemRoot");
+		var root = GameObject.Find ("ItemRoot");
 		switch(Item){
 			// アイテムの種類判断
 		case ITEM_TYPE.ITEM_PAWERUP:
 			SE.SEPlay(SEController.SE_LABEL.SE_PAWERUPITEM_GENERATE);
-			GameObject Player = GameObject.FindGameObjectWithTag("Player");
-			PlayerController pc = Player.GetComponent("PlayerController") as PlayerController;
+			var Player = GameObject.FindGameObjectWithTag("Player");
+			var pc = Player.GetComponent("PlayerController") as PlayerController;
 			if(pc.State == PlayerController.PLAYER_STATE.PLAYER_NORMAL){
 				ItemObject = ItemMushroomPrefab; 
 			}
@@ -55,21 +55,21 @@ public class ItemController : MonoBehaviour {
 			break;
 
 		}
-		GameObject item = Instantiate (ItemObject, position, ItemObject.transform.rotation) as GameObject;
+		var item = Instantiate (ItemObject, position, ItemObject.transform.rotation) as GameObject;
 		item.transform.parent = root.transform;
 
 	}
 
 	public void GetItem(ITEM_TYPE Item){
-		GameObject Player = GameObject.FindGameObjectWithTag ("Player");
-		PlayerController pc = Player.GetComponent ("PlayerController") as PlayerController;
+		var Player = GameObject.FindGameObjectWithTag ("Player");
+		var pc = Player.GetComponent ("PlayerController") as PlayerController;
 		switch(Item){
 		case ITEM_TYPE.ITEM_PAWERUP:
 			pc.PlayerPawerUp();
 			break;
 		case ITEM_TYPE.ITEM_COIN:
-			GameObject GameRule = GameObject.Find("GameRule");
-			GameRule Rule = GameRule.GetComponent("GameRule") as GameRule;
+			var GameRule = GameObject.Find("GameRule");
+			var Rule = GameRule.GetComponent("GameRule") as GameRule;
 			SE.SEPlay(SEController.SE_LABEL.SE_COIN);
 			Rule.GetCoin();
 			break;

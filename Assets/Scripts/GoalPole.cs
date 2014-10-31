@@ -3,8 +3,8 @@ using System.Collections;
 
 public class GoalPole : MonoBehaviour {
 	public int GoleScore;
-	GameObject RuleObject;
-	GameRule Rule;
+	private GameObject RuleObject;
+	private GameRule Rule;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +17,7 @@ public class GoalPole : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if(other.tag == "Player"){
-			PlayerController PlayerController= other.GetComponent("PlayerController") as PlayerController;
+			var PlayerController= other.GetComponent("PlayerController") as PlayerController;
 			if(!PlayerController.HitGoalPole){
 				RuleObject = GameObject.Find ("GameRule");
 				Rule = RuleObject.GetComponent ("GameRule") as GameRule;

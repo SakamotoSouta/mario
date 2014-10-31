@@ -64,14 +64,14 @@ public class Grid : MonoBehaviour {
 		colors = new Color[resolution];
 
 
-		for (int i = 0; i < vertices.Length; i += 4) {
+		for (var i = 0; i < vertices.Length; i += 4) {
 			vertices [i] = new Vector3 (startPosition.x + (diff * (float)i), startPosition.y, 0);
 			vertices [i + 1] = new Vector3 (startPosition.x + (diff * (float)i), endPosition.y, 0);
 			vertices [i + 2] = new Vector3 (startPosition.x, endPosition.y - (diff * (float)i), 0);
 			vertices [i + 3] = new Vector3 (endPosition.x, endPosition.y - (diff * (float)i), 0);
 		}
 
-		for (int i = 0; i < resolution; i++) {
+		for (var i = 0; i < resolution; i++) {
 			uvs [i] = Vector2.zero;
 			lines [i] = i;
 			colors [i] = color;
@@ -109,8 +109,8 @@ public class Grid : MonoBehaviour {
 	
 	//頂点配列データーをすべて指定の方向へ回転移動させる
 	Vector3[] RotationVertices(Vector3[] vertices,Vector3 rotDirection){
-		Vector3[] ret= new Vector3[vertices.Length];
-		for (int i = 0; i < vertices.Length; i++) {
+		var ret= new Vector3[vertices.Length];
+		for (var i = 0; i < vertices.Length; i++) {
 			ret[i] = Quaternion.LookRotation(rotDirection) * vertices[i];
 		}
 		return ret;

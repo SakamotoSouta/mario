@@ -10,7 +10,7 @@ public class Fireball : MonoBehaviour {
 	void Start () {
 		effect = transform.Find ("fx_fumefx_fireball").GetComponent<ParticleSystem> ();
 		effect.Play();
-		Rigidbody Rb = gameObject.GetComponent("Rigidbody") as Rigidbody;
+		var Rb = gameObject.GetComponent("Rigidbody") as Rigidbody;
 		Rb.AddForce (100f, -200f, 0);
 	}
 	

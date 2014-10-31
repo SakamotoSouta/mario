@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 		Item = GameObject.Find ("ItemRoot");
 		ItemController = Item.GetComponent("ItemController") as ItemController;
 		// ゲーム管理者取得
-		GameObject GameRule = GameObject.Find ("GameRule");
+		var GameRule = GameObject.Find ("GameRule");
 		rule = GameRule.GetComponent ("GameRule") as GameRule;
 
 		// エフェクトの初期化
@@ -159,8 +159,8 @@ public class PlayerController : MonoBehaviour {
 			if(State == PLAYER_STATE.PLAYER_FIRE){
 				// ファイアーボール
 				if(Input.GetKeyDown(KeyCode.Q)){
-					GameObject Fb = Instantiate(FireBallPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.rotation) as GameObject;
-					Fireball FireBall = Fb.GetComponent("Fireball") as Fireball;
+					var Fb = Instantiate(FireBallPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), transform.rotation) as GameObject;
+					var FireBall = Fb.GetComponent("Fireball") as Fireball;
 					FireBall.GenerateFireBall(new Vector3(0f, 0f, 1f));
 					//　SEの再生
 					SE.SEPlay(SEController.SE_LABEL.SE_FIREBALL);
@@ -217,16 +217,16 @@ public class PlayerController : MonoBehaviour {
 			if (Jump || !Ground) {
 				if(!blockHit){
 					RaycastHit hit;
-					GameObject head = GameObject.Find("Character1_Spine1");
-					Vector3 fromPos = head.transform.position;
-					Vector3 direction = new Vector3(0, 1, 0);
-					float length = 1.0f * transform.localScale.y;
+					var head = GameObject.Find("Character1_Spine1");
+					var fromPos = head.transform.position;
+					var direction = new Vector3(0, 1, 0);
+					var length = 1.0f * transform.localScale.y;
 					// 上方向にレイを飛ばしてブロックにあたっていないか判定
 					Debug.DrawRay(fromPos, direction.normalized * length, Color.green, 1, false);
 					if (Physics.Raycast(fromPos, direction, out hit, length)) {
 						if(hit.collider.tag == "Block"){
-							GameObject block = hit.collider.gameObject;
-							Block b = block.GetComponent("Block")as Block;
+							var block = hit.collider.gameObject;
+							var b = block.GetComponent("Block")as Block;
 							b.HitBlock();
 							Velocity.y = 0;
 							blockHit = true;
@@ -258,8 +258,8 @@ public class PlayerController : MonoBehaviour {
 		PlayerControllFlag = false;
 		Goal = true;
 		transform.rotation = Quaternion.Euler(0, 180, 0);
-		GameObject camera = GameObject.FindGameObjectWithTag("MainCamera");
-		CameraCtrl cc = camera.GetComponent ("CameraCtrl") as CameraCtrl;
+		var camera = GameObject.FindGameObjectWithTag("MainCamera");
+		var cc = camera.GetComponent ("CameraCtrl") as CameraCtrl;
 		cc.CameraOffet.z = -15;
 		cc.CameraOffet.y = 0;
 		Speed = 0;
@@ -274,8 +274,8 @@ public class PlayerController : MonoBehaviour {
 	// 無敵時間
 	IEnumerator StateInvincible(){
 		// BGMの変更
-		GameObject BGMController = GameObject.Find ("BGMController");
-		BGMController bgm = BGMController.GetComponent ("BGMController") as BGMController;
+		var BGMController = GameObject.Find ("BGMController");
+		var bgm = BGMController.GetComponent ("BGMController") as BGMController;
 		bgm.StartInbisible ();
 		Invincible = true;
 		InvinsibleEffect.Play ();

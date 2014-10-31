@@ -118,7 +118,7 @@ public class GameUIController : MonoBehaviour {
 	}
 
 	void ClearUI(){
-		GameObject clearLabel = NGUITools.AddChild (Parent, labelPrefab);
+		var clearLabel = NGUITools.AddChild (Parent, labelPrefab);
 		clearLabel.transform.localScale = new Vector2 (60f, 60f);
 		Text = clearLabel.GetComponent ("UILabel") as UILabel;
 		Text.pivot = UIWidget.Pivot.Center;

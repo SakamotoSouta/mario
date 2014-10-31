@@ -12,7 +12,7 @@ public class PlayerHitManager : MonoBehaviour {
 	//止まっているときのあたり判定
 	void OnCollisionEnter(Collision other){
 		if(other.gameObject.tag == "ItemShoot"){
-			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
+			var Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
 			// 甲羅が待機状態かつ自分が無敵でない
 			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !PlayerController.Invincible){
 				if(PlayerController.Velocity.x > 5f || PlayerController.Velocity.x < -5f){
@@ -51,10 +51,9 @@ public class PlayerHitManager : MonoBehaviour {
 	}
 	// キャラクターコントローラーのあたり判定動いているとき
 	void OnControllerColliderHit(ControllerColliderHit other){
-		
 		// 甲羅にあたった場合
 		if(other.gameObject.tag == "ItemShoot"){
-			ItemShoot Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
+			var Shoot = other.collider.GetComponent("ItemShoot") as ItemShoot;
 			// 甲羅が待機状態かつ自分が無敵でない
 			if(Shoot.State == ItemShoot.ITEM_SHOOT_STATE.STAY && !PlayerController.Invincible){
 				if(PlayerController.Velocity.x > 5f || PlayerController.Velocity.x < -5f){

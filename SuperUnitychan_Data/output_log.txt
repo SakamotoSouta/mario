@@ -10,51 +10,10 @@ Platform assembly: C:\Users\ssakamoto\Documents\mario\SuperUnitychan_Data\Manage
 Loading C:\Users\ssakamoto\Documents\mario\SuperUnitychan_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\ssakamoto\Documents\mario\SuperUnitychan_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\ssakamoto\Documents\mario\SuperUnitychan_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.074 seconds
+Platform assembly: C:\Users\ssakamoto\Documents\mario\SuperUnitychan_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\ssakamoto\Documents\mario\SuperUnitychan_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+- Completed reload, in  0.045 seconds
 desktop: 1366x768 60Hz; virtual: 3286x1080 at 0,0
 <RI> Initializing input.
 XInput1_3.dll not found.
 <RI> Input initialized.
-ReadPixels was called to read pixels from system frame buffer, while not inside drawing frame.
- 
-(Filename:  Line: 1235)
-
-Platform assembly: C:\Users\ssakamoto\Documents\mario\SuperUnitychan_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 8.686094 ms
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 3766.
-Total: 3.189021 ms (FindLiveObjects: 0.362223 ms CreateObjectMapping: 0.087669 ms MarkObjects: 1.191446 ms  DeleteObjects: 0.096222 ms)
-
-gole
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-UnloadTime: 9.345110 ms
-Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 1989.
-Total: 0.811261 ms (FindLiveObjects: 0.051746 ms CreateObjectMapping: 0.026514 ms MarkObjects: 0.308766 ms  DeleteObjects: 0.022665 ms)
-
-gole
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-UnloadTime: 19.991575 ms
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 172 unused Assets to reduce memory usage. Loaded Objects now: 299.
-Total: 10.083670 ms (FindLiveObjects: 0.039771 ms CreateObjectMapping: 0.052601 ms MarkObjects: 0.720598 ms  DeleteObjects: 7.580607 ms)
-
-UnloadTime: 0.447754 ms
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 3699.
-Total: 2.089948 ms (FindLiveObjects: 0.273699 ms CreateObjectMapping: 0.124875 ms MarkObjects: 0.991303 ms  DeleteObjects: 0.023948 ms)
-
-UnloadTime: 4.062292 ms
-Unloading 1 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 3699.
-Total: 0.951959 ms (FindLiveObjects: 0.099643 ms CreateObjectMapping: 0.036350 ms MarkObjects: 0.389165 ms  DeleteObjects: 0.007270 ms)
-

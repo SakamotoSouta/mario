@@ -12,11 +12,9 @@ public class ToolChangeObject : MonoBehaviour
 	void Start()
 	{
 		if(Application.loadedLevelName != "FieldCreateTool"){
-			if(!Parent){
-				Parent = GameObject.Find("FieldObjectRoot");
-			}
-			//GameObject obj = (GameObject)Instantiate(Prefab, transform.position, transform.rotation);
-			//obj.transform.parent = Parent.transform;
+			Parent = GameObject.FindGameObjectWithTag("FieldRoot");
+			var obj = (GameObject)Instantiate(Prefab, transform.position, transform.rotation);
+			obj.transform.parent = Parent.transform;
 			Destroy(this.gameObject);
 		}
 	}

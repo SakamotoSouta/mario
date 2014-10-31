@@ -37,8 +37,8 @@ public class ColliderController : MonoBehaviour {
 		_parentObject = GameObject.Find ("ColliderRoot");
 
 
-		for(int i = 0; i < _numBlock.y; i++){
-			for(int j = 0; j < _numBlock.x; j++){
+		for(var i = 0; i < _numBlock.y; i++){
+			for(var j = 0; j < _numBlock.x; j++){
 				_colliderObjects[(i * (int)_numBlock.x) + j] = (GameObject)Instantiate(_colliderPrefab, transform.position, transform.rotation);
 				_colliderObjects[(i * (int)_numBlock.x) + j].transform.localScale = new Vector3 (_blockSize, _blockSize, 0);
 

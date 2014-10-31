@@ -4,7 +4,7 @@ using System.Collections;
 public class AttackArea : MonoBehaviour {
 	private GameObject Player;
 	private PlayerController pc;
-	GameObject GameRuleObject;
+	private GameObject GameRuleObject;
 	private RaycastHit hit;
 	private GameObject leg ;
 	private Vector3 fromPos;
@@ -37,7 +37,7 @@ public class AttackArea : MonoBehaviour {
 
 			if (Physics.Raycast(fromPos, direction, out hit, length)) {
 				if(hit.collider.tag == "Enemy"){
-					enemyController ec = hit.collider.GetComponent("enemyController")as enemyController;
+					var ec = hit.collider.GetComponent("enemyController")as enemyController;
 					ec.SetState(enemyController.ENEMY_STATE.DEAD);
 					// SEの再生
 					se.SEPlay(SEController.SE_LABEL.SE_TREAD);
@@ -46,7 +46,7 @@ public class AttackArea : MonoBehaviour {
 			}
 			if (Physics.Raycast(fromPos, direction, out hit, length)) {
 				if(hit.collider.tag == "ItemShoot"){
-					ItemShoot Item = hit.collider.GetComponent("ItemShoot") as ItemShoot;
+					var Item = hit.collider.GetComponent("ItemShoot") as ItemShoot;
 					Item.SetState(ItemShoot.ITEM_SHOOT_STATE.STAY);
 					// SEの再生
 					se.SEPlay(SEController.SE_LABEL.SE_TREAD);
@@ -59,7 +59,7 @@ public class AttackArea : MonoBehaviour {
 	// 触れた瞬間
 	void OnTriggerEnter(Collider other){
 		if(other.collider.tag == "ItemShoot" && pc.Jump){
-			ItemShoot Item = other.collider.GetComponent("ItemShoot") as ItemShoot;
+			var Item = other.collider.GetComponent("ItemShoot") as ItemShoot;
 			Item.SetState(ItemShoot.ITEM_SHOOT_STATE.STAY);
 			// SEの再生
 			se.SEPlay(SEController.SE_LABEL.SE_TREAD);

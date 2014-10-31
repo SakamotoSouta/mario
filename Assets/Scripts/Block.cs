@@ -16,7 +16,7 @@ public class Block : MonoBehaviour {
 	private bool Move = false;
 	private float count = 0;
 
-	GameObject SEControllerObject;
+	private GameObject SEControllerObject;
 	private SEController se;
 
 	// Use this for initialization
@@ -72,8 +72,8 @@ public class Block : MonoBehaviour {
 			Rule.GetCoin();
 			se.SEPlay(SEController.SE_LABEL.SE_COIN);
 		}
-		GameObject Root= GameObject.Find ("ItemRoot");
-		ItemController ItemCtrl = Root.GetComponent ("ItemController") as ItemController;
+		var Root= GameObject.Find ("ItemRoot");
+		var ItemCtrl = Root.GetComponent ("ItemController") as ItemController;
 		ItemCtrl.GenerateItem (ItemType, transform.position);
 		if (BlockLife == 0) {
 			gameObject.renderer.material.color = new Color(1, 1, 1, 0);
@@ -83,8 +83,8 @@ public class Block : MonoBehaviour {
 	}
 
 	void HitBreakBlock(){
-		GameObject Player = GameObject.FindGameObjectWithTag ("Player");
-		PlayerController pc = Player.GetComponent ("PlayerController") as PlayerController;
+		var Player = GameObject.FindGameObjectWithTag ("Player");
+		var pc = Player.GetComponent ("PlayerController") as PlayerController;
 		if (pc.State != PlayerController.PLAYER_STATE.PLAYER_NORMAL) {
 			Destroy (gameObject);
 			se.SEPlay(SEController.SE_LABEL.SE_BREAK);
